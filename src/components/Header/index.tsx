@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+import React, { useState, FormEvent } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
@@ -9,6 +11,12 @@ const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
+  const [searchCode, setSearchCode] = useState('');
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchCode(event.target.value);
+  };
+
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
@@ -62,9 +70,11 @@ const Header = (props: {
         </div>
 
         <div className="hidden sm:block">
-          <form action="https://formbold.com/s/unique_form_id" method="POST">
+          <form>
+
             <div className="relative">
-              <button className="absolute left-0 top-1/2 -translate-y-1/2">
+              <button type="submit" className="absolute left-0 top-1/2 -translate-y-1/2">
+                <Link to={{pathname: '/chart', state: { searchCode } }}>
                 <svg
                   className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
                   width="20"
@@ -86,6 +96,7 @@ const Header = (props: {
                     fill=""
                   />
                 </svg>
+               </Link>
               </button>
 
               <input
