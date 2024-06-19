@@ -15,12 +15,19 @@ const Chart: React.FC = () => {
 
   const defaultCode = "HK.00700"; // Default ticker to show
   const searchCode = location.state?.searchCode || defaultCode; // Use search term from state or default
-  console.log("Default search term:", defaultCode); // Print the constant
+  console.log("Current Search Code:", searchCode); // Print the constant
 
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await axios.get(`https://9jjj44tcdg.execute-api.us-west-1.amazonaws.com/dev/?code=${searchCode}&months_back_to=3`);
+        const response = await axios.get(`https://9jjj44tcdg.execute-api.us-west-1.amazonaws.com/dev/ticker_details_dash`,
+          {
+            params: {
+              code: searchCode,
+              months_back_to: "1"
+            }
+          }
+        );
       console.log("response data:", response.data); // Print the constant
 
       setChartData(response.data);
@@ -30,7 +37,7 @@ const Chart: React.FC = () => {
     }
   };
 
-      fetchData();
+  fetchData();
   }, [searchCode]);
 
   return (
