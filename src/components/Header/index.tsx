@@ -74,7 +74,7 @@ const Header = (props: {
 
             <div className="relative">
               <button type="submit" className="absolute left-0 top-1/2 -translate-y-1/2">
-                <Link to={{pathname: '/chart', state: { searchCode } }}>
+                <Link to={{pathname: '/chart', search: searchCode}}>
                 <svg
                   className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
                   width="20"

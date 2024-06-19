@@ -9,12 +9,13 @@ import ChartTwo from '../components/Charts/ChartTwo';
 import ChartFour from '../components/Charts/ChartFour';
 import DefaultLayout from '../layout/DefaultLayout';
 
+
 const Chart: React.FC = () => {
-  const [chartData, setChartData] = useState({});
+  const [chartData, setChartData] = useState<(string | number)[][] | null>(null);
   const location = useLocation();
 
   const defaultCode = "HK.00700"; // Default ticker to show
-  const searchCode = location.state?.searchCode || defaultCode; // Use search term from state or default
+  const searchCode = location.search.substring(1) || defaultCode; // Use search term from state or default
   console.log("Current Search Code:", searchCode); // Print the constant
 
   useEffect(() => {
@@ -24,13 +25,13 @@ const Chart: React.FC = () => {
           {
             params: {
               code: searchCode,
-              months_back_to: "1"
+              months_back_to: "6"
             }
           }
         );
-      console.log("response data:", response.data); // Print the constant
+       const data = response.data;
 
-      setChartData(response.data);
+      setChartData(data); // Assign data to chartData
     } catch (error) {
       console.error(error);
       // Handle errors gracefully
@@ -42,14 +43,18 @@ const Chart: React.FC = () => {
 
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Chart" />
+      {chartData ? ( // Check if chartData has data
+//       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
+      <div className="grid grid-cols-14 gap-4 md:gap-6 2xl:gap-7.5">
 
-      <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
+        <ChartFour chartData={chartData}/>
         <ChartOne />
         <ChartTwo />
         <ChartThree />
-        <ChartFour />
       </div>
+      ) : (
+      <div>Loading data...</div>
+    )}
     </DefaultLayout>
   );
 };

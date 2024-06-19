@@ -108,7 +108,6 @@ const ECommerce: React.FC = () => {
           <TableOne />
         </div>
         <ChatCard />
-        <ChartFour/>
       </div>
     </DefaultLayout>
   );
