@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
@@ -12,9 +12,15 @@ const Header = (props: {
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
   const [searchCode, setSearchCode] = useState('');
+  const navigate = useNavigate();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchCode(event.target.value);
+  };
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    navigate(`/chart?${searchCode}`);
   };
 
   return (
@@ -70,11 +76,9 @@ const Header = (props: {
         </div>
 
         <div className="hidden sm:block">
-          <form>
-
+          <form onSubmit={handleSubmit}>
             <div className="relative">
               <button type="submit" className="absolute left-0 top-1/2 -translate-y-1/2">
-                <Link to={{pathname: '/chart', search: searchCode}}>
                 <svg
                   className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
                   width="20"
@@ -96,12 +100,12 @@ const Header = (props: {
                     fill=""
                   />
                 </svg>
-               </Link>
               </button>
-
               <input
                 type="text"
                 placeholder="Type to search..."
+                value={searchCode}
+                onChange={handleSearchChange}
                 className="w-full bg-transparent pl-9 pr-4 text-black focus:outline-none dark:text-white xl:w-125"
               />
             </div>
