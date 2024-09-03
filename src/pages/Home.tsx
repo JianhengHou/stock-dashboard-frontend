@@ -1,10 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PricingTableOne from '../components/PricingTables/PricingTableOne';
-import alphahoodLogo from "../../assets/images/logo/alphahood-logo.svg"
+import alphahoodLogo from "../images/logo/alphahood-logo.svg"
+import favicon from "../images/favicon.png"
+import cover-EN-test from "../images/tutorial/cover-EN-test.jpg"
+import cover-CN-test from "../images/tutorial/cover-CN-test.jpg"
+import aboutImage01 from "../images/about/about-image-01.jpg"
+import neural_network_stock from "../images/about/nueral_network_stock.jpg"
+import capital-history-cover-EN-test2 from "../images/tutorial/capital-history-cover-EN-test2.jpg"
+import capital-history-cover-CN-test2 from "../images/tutorial/capital-history-cover-CN-test2.jpg"
+import heatmap-cover-EN from "../images/tutorial/heatmap-cover-EN.jpg"
+import heatmap-cover-CN from "../images/tutorial/heatmap-cover-CN.jpg"
+import strategy-cover-EN from "../images/tutorial/strategy-cover-EN.jpg"
+import strategy-cover-CN from "../images/tutorial/strategy-cover-CN.jpg"
+import icon-star from "../images/testimonials/icon-star.svg"
+import author01 from "../images/testimonials/author-01.jpg"
+import author02 from "../images/testimonials/author-02.jpg"
+import author03 from "../images/testimonials/author-03.jpg"
+import team01 from "../images/team/team-01.png"
+import team02 from "../images/team/team-02.png"
+import team03 from "../images/team/team-03.png"
+import team04 from "../images/team/team-04.png"
+import blogfooter01 from "../images/blog/blog-footer-01.jpg"
+import blogfooter02 from "../images/blog/blog-footer-02.jpg"
+import shape1 from "../images/footer/shape-1.svg"
+import shape3 from "../images/footer/shape-3.svg"
+import wowMin from '../js/wow.min.js'
+import swiperBundle from "../css/swiper-bundle.min.css"
+import animate from "../css/animate.css"
+import tailwind from "../css/tailwind.css"
 import Swiper from 'swiper/bundle';
 import 'swiper/css';
-
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
@@ -20,7 +46,7 @@ const Home: React.FC = () => {
     };
     useEffect(() => {
     const wowScript = document.createElement('script');
-    wowScript.src = '../../assets/js/wow.min.js';
+    wowScript.src = wowMin;
     wowScript.onload = () => {
       // @ts-ignore
       new WOW().init();
@@ -153,12 +179,12 @@ const Home: React.FC = () => {
         </title>
         <link
           rel="shortcut icon"
-          href="../../assets/images/favicon.png"
+          href={favicon}
           type="image/x-icon"
         />
-        <link rel="stylesheet" href="../../assets/css/swiper-bundle.min.css" />
-        <link rel="stylesheet" href="../../assets/css/animate.css" />
-        <link rel="stylesheet" href="../../assets/css/tailwind.css" />
+        <link rel="stylesheet" href={swiperBundle} />
+        <link rel="stylesheet" href={animate} />
+        <link rel="stylesheet" href={tailwind} />
    <div className="ud-header fixed top-0 z-40 flex w-full items-center bg-primary h-17">
    <div className="container">
       <div className="relative flex items-center justify-between">
@@ -526,7 +552,7 @@ const Home: React.FC = () => {
             >
               <div className="mt-16">
                 <img
-                  src={language === 'en'?"../../assets/images/tutorial/cover-EN-test.jpg":"../../assets/images/tutorial/cover-CN-test.jpg"}
+                  src={language === 'en'?cover-EN-test:cover-CN-test}
 
                   alt="hero"
                   className="mx-auto max-w-full rounded-t-xl rounded-tr-xl"
@@ -1976,7 +2002,7 @@ const Home: React.FC = () => {
                     className="mb-4 sm:mb-8 sm:h-[400px] md:h-[540px] lg:h-[400px] xl:h-[500px]"
                   >
                     <img
-                      src="../../assets/images/about/about-image-01.jpg"
+                      src={aboutImage01}
                       alt="about image"
                       className="h-full w-full rounded-xl object-cover object-center"
                     />
@@ -1988,7 +2014,7 @@ const Home: React.FC = () => {
                     className="mb-4 sm:mb-8 sm:h-[220px] md:h-[346px] lg:mb-4 lg:h-[225px] xl:mb-8 xl:h-[310px]"
                   >
                     <img
-                      src="../../assets/images/about/nueral_network_stock.jpg"
+                      src={neural_network_stock}
                       alt="about image"
                       className="h-full w-full rounded-xl object-cover object-left"
                     />
@@ -2258,8 +2284,8 @@ const Home: React.FC = () => {
           <img
             src={
               language === "en"
-                ? "../../assets/images/tutorial/capital-history-cover-EN-test2.jpg"
-                : "../../assets/images/tutorial/capital-history-cover-CN-test2.jpg"
+                ? {capital-history-cover-EN-test2}
+                : {capital-history-cover-CN-test2}
             }
             alt="about image"
             className="max-w-full h-auto"
@@ -2312,7 +2338,7 @@ const Home: React.FC = () => {
       <div className="w-full px-4 lg:w-1/2 flex justify-center items-center">
         <div className="overflow-hidden rounded-xl">
           <img
-            src={language === 'en'?"../../assets/images/tutorial/heatmap-cover-EN.jpg":"../../assets/images/tutorial/heatmap-cover-CN.jpg"}
+            src={language === 'en'?heatmap-cover-EN:heatmap-cover-CN}
 
             alt="about image"
             className="max-w-full h-auto"
@@ -2332,8 +2358,8 @@ const Home: React.FC = () => {
           <img
             src={
               language === "en"
-                ? "../../assets/images/tutorial/strategy-cover-EN.jpg"
-                : "../../assets/images/tutorial/strategy-cover-CN.jpg"
+                ? strategy-cover-EN
+                : strategy-cover-CN
             }
             alt="about image"
             className="max-w-full h-auto"
@@ -2428,23 +2454,23 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                   </div>
@@ -2459,7 +2485,7 @@ const Home: React.FC = () => {
                   <a href="#" className="flex items-center gap-4">
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
                       <img
-                        src="../../assets/images/testimonials/author-01.jpg"
+                        src={author01}
                         alt="author"
                         className="h-[50px] w-[50px] overflow-hidden rounded-full"
                       />
@@ -2488,19 +2514,19 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                   </div>
@@ -2515,7 +2541,7 @@ const Home: React.FC = () => {
                   <a href="#" className="flex items-center gap-4">
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
                       <img
-                        src="../../assets/images/testimonials/author-02.jpg"
+                        src={author02}
                         alt="author"
                         className="h-[50px] w-[50px] overflow-hidden rounded-full"
                       />
@@ -2544,23 +2570,23 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                   </div>
@@ -2576,7 +2602,7 @@ const Home: React.FC = () => {
                   <a href="#" className="flex items-center gap-4">
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
                       <img
-                        src="../../assets/images/testimonials/author-03.jpg"
+                        src={author03}
                         alt="author"
                         className="h-[50px] w-[50px] overflow-hidden rounded-full"
                       />
@@ -2605,19 +2631,19 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                     <img
-                      src="../../assets/images/testimonials/icon-star.svg"
+                      src={icon-star}
                       alt="star icon"
                     />
                   </div>
@@ -2632,7 +2658,7 @@ const Home: React.FC = () => {
                   <a href="#" className="flex items-center gap-4">
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
                       <img
-                        src="../../assets/images/testimonials/author-01.jpg"
+                        src={author01}
                         alt="author"
                         className="h-[50px] w-[50px] overflow-hidden rounded-full"
                       />
@@ -3481,7 +3507,7 @@ const Home: React.FC = () => {
             >
               <div className="relative z-10 mx-auto mb-5 h-[120px] w-[120px]">
                 <img
-                  src="../../assets/images/team/team-01.png"
+                  src={team01}
                   alt="team image"
                   className="h-[120px] w-[120px] rounded-full"
                 />
@@ -4794,7 +4820,7 @@ const Home: React.FC = () => {
                 >
                   <div className="overflow-hidden rounded">
                     <img
-                      src="../../assets/images/blog/blog-footer-01.jpg"
+                      src={blogfooter01}
                       alt="blog"
                     />
                   </div>
@@ -4810,7 +4836,7 @@ const Home: React.FC = () => {
                 >
                   <div className="overflow-hidden rounded">
                     <img
-                      src="../../assets/images/blog/blog-footer-02.jpg"
+                      src={blogfooter02}
                       alt="blog"
                     />
                   </div>
@@ -4878,11 +4904,11 @@ const Home: React.FC = () => {
 
       <div>
         <span className="absolute left-0 top-0 z-[-1]">
-          <img src="../../assets/images/footer/shape-1.svg" alt="" />
+          <img src={shap1} alt="" />
         </span>
 
         <span className="absolute bottom-0 right-0 z-[-1]">
-          <img src="../../assets/images/footer/shape-3.svg" alt="" />
+          <img src={shape3} alt="" />
         </span>
 
         <span className="absolute right-0 top-0 z-[-1]">
