@@ -4903,7 +4903,7 @@ const Home: React.FC = () => {
 
       <div>
         <span className="absolute left-0 top-0 z-[-1]">
-          <img src={shap1} alt="" />
+          <img src={shape1} alt="" />
         </span>
 
         <span className="absolute bottom-0 right-0 z-[-1]">
