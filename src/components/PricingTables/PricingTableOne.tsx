@@ -247,7 +247,7 @@ const PricingTableOne: React.FC  = ({ language }) => {
 
         <button
                       type="submit"
-                      className="mt-9 flex block w-full rounded-md bg-primary py-3 px-9 justify-center font-medium bg-secondary text-white transition hover:bg-opacity-90"
+                      className="mt-9 flex block w-full rounded-md bg-meta-3 py-3 px-9 justify-center font-medium text-white transition hover:bg-opacity-90"
                       disabled={loading['trial']}
                     >
                       {loading['trial'] ? (

@@ -25,9 +25,6 @@ import blogfooter01 from "../images/blog/blog-footer-01.jpg";
 import blogfooter02 from "../images/blog/blog-footer-02.jpg";
 import shape1 from "../images/footer/shape-1.svg";
 import shape3 from "../images/footer/shape-3.svg";
-import swiperBundle from "../css/swiper-bundle.min.css";
-import animate from "../css/animate.css";
-import tailwind from "../css/tailwind.css";
 import Swiper from 'swiper/bundle';
 import 'swiper/css';
 
@@ -44,18 +41,19 @@ const Home: React.FC = () => {
 
     };
     useEffect(() => {
-    const wowScript = document.createElement('script');
-    wowScript.src = '../js/wow.min.js';
-    wowScript.onload = () => {
-      // @ts-ignore
-      new WOW().init();
-    };
-    document.body.appendChild(wowScript);
+      const wowScript = document.createElement('script');
+      wowScript.src = '/wow.min.js'; // Absolute path from the public folder
+      wowScript.onload = () => {
+        // @ts-ignore
+        new WOW().init();
+      };
+      document.body.appendChild(wowScript);
 
-    return () => {
-      document.body.removeChild(wowScript);
-    };
+      return () => {
+        document.body.removeChild(wowScript);
+      };
     }, []);
+
     // Function to toggle the menu
     const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -181,14 +179,14 @@ const Home: React.FC = () => {
           href={favicon}
           type="image/x-icon"
         />
-        <link rel="stylesheet" href={swiperBundle} />
-        <link rel="stylesheet" href={animate} />
-        <link rel="stylesheet" href={tailwind} />
+        <link rel="stylesheet" href="/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="/animate.css" />
+        <link rel="stylesheet" href="/tailwind.css" />
    <div className="ud-header fixed top-0 z-40 flex w-full items-center bg-primary h-17">
    <div className="container">
       <div className="relative flex items-center justify-between">
          {/* Logo */}
-         <div className="w-80 max-w-full px-4">
+         <div className="w-75 max-w-full px-4">
             <a href="/" className="block py-4">
             <img
                src={alphahoodLogo}
@@ -199,8 +197,8 @@ const Home: React.FC = () => {
          </div>
          {
          language  === 'cn'?
-          <div className="relative flex items-center justify-between w-25"></div>
-         : <></>
+          <div className="relative flex items-center justify-between w-22"></div>
+         : <div className="relative flex items-center justify-between w-2"></div>
          }
          {/* Navigation and Sign-In button for Desktop */}
          <div className="flex w-full items-center justify-between ">
@@ -222,7 +220,7 @@ const Home: React.FC = () => {
                </button>
                <nav
                   id="navbarCollapse"
-                  className={`absolute -right-4 top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6 ${
+                  className={`absolute top-full w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6 ${
             isMenuOpen ? '' : 'hidden'}`}
                >
                   <ul className="blcok lg:flex 2xl:ml-25">
@@ -353,7 +351,7 @@ const Home: React.FC = () => {
                     : '美港股资金分析策略工具'}
                 </h1>
                 <p
-                  className="mx-auto mb-9 max-w-[600px] text-lg font-medium text-white sm:text-sm sm:leading-[1.44]"
+className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-[1.44]"
                 >
                 {language === 'en'
                     ? '"The dynamics of capital flow in the market often imply the timing and direction of decisions made by the smart money."'
@@ -1714,7 +1712,7 @@ const Home: React.FC = () => {
               <h2 className="mb-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white">
                 {language === 'en'
                    ? 'Main Features Of ALPHAHOOD'
-                   : 'ALPHAHOOD工具主要特点'
+                   : 'AlphaHood工具主要特点'
                 }
               </h2>
               </div>
@@ -1905,7 +1903,7 @@ const Home: React.FC = () => {
                 <h4 className="mt-4 mb-3 text-l font-bold text-dark dark:text-white ">
                    {language === 'en'
                         ? 'Stock-targeting strategies'
-                        : '可选选股策略'
+                        : '灵活选股策略'
                    }
                 </h4>
             </div>
@@ -1937,7 +1935,7 @@ const Home: React.FC = () => {
               </h4>
               <p className="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
                 {language === 'en'
-                        ? 'We will continuously add new features including AI strategy, community, and custom features for investor elites.'
+                        ? 'We keep adding new features such as AI strategy, community, and custom features for investors.'
                         : '我们将持续推出更多功能，包括AI策略、高信噪比社区以及为精英投资者定制的功能。'
                 }
               </p>
@@ -1968,9 +1966,9 @@ const Home: React.FC = () => {
         <div className="wow fadeInUp" data-wow-delay=".2s">
           <div className="-mx-4 flex flex-wrap items-center">
             <div className="w-full px-4 lg:w-1/2">
-              <div className="mb-12 max-w-[580px] lg:mb-0">
+              <div className="mb-12 max-w-[600px] lg:mb-0">
                 <h2
-                  className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]"
+                  className="mb-10 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]"
                 >
                    {language === 'en'
                         ? 'Simple & Practical Tools to Lock in Opportunities'
@@ -1978,17 +1976,17 @@ const Home: React.FC = () => {
                    }
                 </h2>
                 <p
-                  className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6"
+                  className="mb-10 text-xl leading-relaxed text-body-color dark:text-dark-6"
                 >
                   {language === 'en'
-                        ? "We track capital historical records of individual stocks on a daily base, outline the dynamic pattern of smart capital flow for investors, and inform  "
-                        : '该工具旨在帮助投资者追踪个股和行业的历史和最新资金流向动态。我们认为，聪明资金的流动动能往往是其在复杂决策下最终行动的体现。'
+                        ? "This tool is designed to help investors track the capital flow dynamics and technical patterns of stocks and industry history to date. We believe that the liquidity of smart funds is often a reflection of their final actions under complex decisions. Tracking a single valuable Financial and technical signals can often effectively improve investors' decision-making success rates and excess returns."
+                        : '该工具旨在帮助投资者追踪个股及行业历史至今资金流动态和技术面形态。我们认为，聪明资金的流动动能往往是其在复杂决策下最终行动的体现。追踪稀疏但有价值的资金和技术面信号往往能有效提高个人投资者的决策成功率和超额回报。'
                   }
                   <br />
                   <br />
                  {language === 'en'
-                        ? 'As senior practitioners from hedge fund & IBD from HK and Wall Street, and senior data/AI practitioners from Silicon Valley,  providing trustworthy and effective products is how we build our trust with customers.'
-                        : '作为来自香港和华尔街的对冲基金和IBD的资深从业者，以及来自硅谷的资深数据/人工智能从业者，提供值得信赖和有效的产品是我们与客户建立信任的方式。'
+                        ? 'As senior practitioners from global hedge fund & IBD from Wall Street & HK and senior data/AI experts from Silicon Valley,  providing trustworthy and effective products is how we build our trust with customers.'
+                        : '作为来自华尔街和香港的全球对冲基金和IBD的资深从业者，以及来自硅谷的资深数据/人工智能从业者，提供值得信赖和有效的产品是我们与客户建立信任的方式。'
                  }
                 </p>
               </div>
@@ -2189,7 +2187,7 @@ const Home: React.FC = () => {
                 </p>
                 <a
                   href="#pricing"
-                  className="ud-button-scroll inline-flex items-center justify-center rounded-md bg-secondary px-7 py-[14px] text-center text-base font-medium text-white shadow-1 transition duration-300 ease-in-out hover:bg-[#0BB489] hover:text-body-color"
+                  className="ud-button-scroll inline-flex items-center justify-center rounded-md bg-meta-3 px-7 py-[14px] text-center text-base font-medium text-white shadow-1 transition duration-300 ease-in-out hover:bg-[#0BB489] hover:text-body-color"
                 >
                   {language === 'en'
                         ? 'Try It Out First'
@@ -2293,7 +2291,7 @@ const Home: React.FC = () => {
       </div>
       {/* Text Container */}
       <div className="w-full px-4 lg:w-1/2 flex justify-center items-center">
-        <div className="text-center">
+        <div className="text-center max-w-[600px]">
           <h2
             className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]"
           >
@@ -2303,8 +2301,8 @@ const Home: React.FC = () => {
           </h2>
           <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
             {language === "en"
-              ? "We track the capital history of individual stocks every day, outline smart capital flow dynamics for investors, and provide reference signals for buying/selling decisions on the target stocks."
-              : "我们每天追踪个股的资金历史记录，为投资者勾勒出聪明资金流向动态，为个股的买入/卖出决策提供参考信号。"}
+              ? "We monitor the capital history of individual stocks every day, track the dynamics of smart money buying and selling individual stocks for investors, timely reflect low-frequency but high-value market signals, and provide effective reference for investors to make buying/selling decisions on individual stocks."
+              : "我们每天监控个股的资金历史记录，为投资者追踪聪明资金买卖个股的动态，及时反映低频但高价值的市场信号，为投资者个股的买入/卖出决策提供有效参考。"}
           </p>
         </div>
       </div>
@@ -2317,7 +2315,7 @@ const Home: React.FC = () => {
     <div className="-mx-4 flex flex-wrap items-center">
       {/* Text Container */}
       <div className="w-full px-4 lg:w-1/2 flex justify-center items-center">
-        <div className="text-center">
+        <div className="text-center max-w-[600px]">
           <h2
             className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]"
           >
@@ -2328,8 +2326,8 @@ const Home: React.FC = () => {
           </h2>
           <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
             {language === "en"
-              ? "The industry capital heat map insightfully displays the dynamics of capital flow direction and flow scale in different historical time dimensions of industry sectors and individual stocks up to now. Provide investors with a top-down approach to focus on industries and individual stocks of interest."
-              : "行业资金热力图洞察地展示了行业板块以及个股截止目前不同的历史时间维度下资金流动方向和流动规模的动态。为投资者提供从上至下的方式的全局视角来关注感兴趣的行业和个股。"}
+              ? "The capital heat map displays the dynamics of capital flow direction and flow scale in different historical time dimensions of industry sectors and individual stocks up to now. Provide investors with a top-down approach to focus on industries and individual stocks of interest."
+              : "资金热力图展示了行业板块及个股截止目前不同历史时间维度下资金流动方向和流动规模的动态。以从上至下的方式为投资者提供全局视角来锁定感兴趣的行业和个股。"}
           </p>
         </div>
       </div>
@@ -2367,7 +2365,7 @@ const Home: React.FC = () => {
       </div>
       {/* Text Container */}
       <div className="w-full px-4 lg:w-1/2 flex justify-center items-center">
-        <div className="text-center">
+        <div className="text-center max-w-[600px]">
           <h2
             className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]"
           >
@@ -3747,7 +3745,6 @@ const Home: React.FC = () => {
                 </p>
                 <div className="flex items-center justify-center gap-5">
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -3765,7 +3762,6 @@ const Home: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -3783,7 +3779,6 @@ const Home: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -3951,7 +3946,6 @@ const Home: React.FC = () => {
                 </p>
                 <div className="flex items-center justify-center gap-5">
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -3969,7 +3963,6 @@ const Home: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -3987,7 +3980,6 @@ const Home: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -4155,7 +4147,6 @@ const Home: React.FC = () => {
                 </p>
                 <div className="flex items-center justify-center gap-5">
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -4173,7 +4164,6 @@ const Home: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -4191,7 +4181,6 @@ const Home: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -4359,7 +4348,6 @@ const Home: React.FC = () => {
                 </p>
                 <div className="flex items-center justify-center gap-5">
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -4377,7 +4365,6 @@ const Home: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -4395,7 +4382,6 @@ const Home: React.FC = () => {
                     </svg>
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="text-dark-6 hover:text-primary"
                   >
                     <svg
@@ -4599,7 +4585,6 @@ const Home: React.FC = () => {
           <div className="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-4/12 xl:w-3/12">
             <div className="mb-10 w-full">
               <a
-                href="javascript:void(0)"
                 className="mb-6 inline-block max-w-[160px]"
               >
                 <img
@@ -4614,8 +4599,7 @@ const Home: React.FC = () => {
               </p>
               <div className="-mx-3 flex items-center">
                 <a
-                  href="javascript:void(0)"
-                  className="px-3 text-gray-7 hover:text-white"
+                    className="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="22"
@@ -4631,8 +4615,7 @@ const Home: React.FC = () => {
                   </svg>
                 </a>
                 <a
-                  href="javascript:void(0)"
-                  className="px-3 text-gray-7 hover:text-white"
+                    className="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="22"
@@ -4648,8 +4631,7 @@ const Home: React.FC = () => {
                   </svg>
                 </a>
                 <a
-                  href="javascript:void(0)"
-                  className="px-3 text-gray-7 hover:text-white"
+                    className="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="22"
@@ -4671,8 +4653,7 @@ const Home: React.FC = () => {
                   </svg>
                 </a>
                 <a
-                  href="javascript:void(0)"
-                  className="px-3 text-gray-7 hover:text-white"
+                    className="px-3 text-gray-7 hover:text-white"
                 >
                   <svg
                     width="22"
@@ -4696,7 +4677,6 @@ const Home: React.FC = () => {
               <ul>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     Home
@@ -4704,7 +4684,6 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     Features
@@ -4712,7 +4691,6 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     About
@@ -4720,7 +4698,6 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     Testimonial
@@ -4735,7 +4712,6 @@ const Home: React.FC = () => {
               <ul>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     How it works
@@ -4743,7 +4719,6 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     Privacy policy
@@ -4751,7 +4726,6 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     Terms of Service
@@ -4759,7 +4733,6 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     Refund policy
@@ -4776,7 +4749,6 @@ const Home: React.FC = () => {
               <ul>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     LineIcons
@@ -4784,7 +4756,6 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     Ecommerce HTML
@@ -4792,7 +4763,6 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     TailAdmin
@@ -4800,7 +4770,6 @@ const Home: React.FC = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
                     PlainAdmin
@@ -4862,19 +4831,16 @@ const Home: React.FC = () => {
                   className="-mx-3 flex items-center justify-center md:justify-start"
                 >
                   <a
-                    href="javascript:void(0)"
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     Privacy policy
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     Legal notice
                   </a>
                   <a
-                    href="javascript:void(0)"
                     className="px-3 text-base text-gray-7 hover:text-white hover:underline"
                   >
                     Terms of service
