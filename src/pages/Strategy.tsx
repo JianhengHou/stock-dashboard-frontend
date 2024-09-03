@@ -125,14 +125,10 @@ const Strategy: React.FC = () => {
   setIsError(false);
   setWarningMessage(null); // Reset warning message
 
-  console.log(dropdownStrategy, numberValue, strategy,  tag, market)
-
-
   const [p1, p2, p3] = dropdownStrategy.split('|');
-  console.log(p1, p2, p3)
   try {
     let data;
-    if ((strategy === 'Capital Flow' | strategy === '资金流') && (tag === 'Consecutive Multi-day'|tag === '连续多日')) {
+    if ((strategy === 'Capital Flow' | strategy === '资金流') && (tag === 'Consecutive Multi-day'| tag === '连续多日')) {
       if (language === 'en')
       {
       const type_str = p2.split('_').slice(0, -1).join(' ');
@@ -261,11 +257,11 @@ const Strategy: React.FC = () => {
         <div className="px-4 md:px-6 xl:px-7.5">
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-6 xl:grid-cols-6 2xl:gap-7.5 bg-">
             {[
-              { strategy: language === 'en'?' Capital Flow':'资金流' , tag: language === 'en'?'Continuous Multi-day':'连续多日'},
+              { strategy: language === 'en'?'Capital Flow':'资金流' , tag: language === 'en'?'Consecutive Multi-day':'连续多日'},
               { strategy: language === 'en'?'Capital Flow':'资金流', tag: language === 'en'?'In-window Multi-day':'窗口期内多日'},
-              { strategy: language === 'en'?'Turnover Rate':'换手率', tag: language === 'en'?'Continuous Multi-day':'连续多日'},
+              { strategy: language === 'en'?'Turnover Rate':'换手率', tag: language === 'en'?'Consecutive Multi-day':'连续多日'},
               { strategy: language === 'en'?'Turnover Rate':'换手率', tag: language === 'en'?'In-window Multi-day':'窗口期内多日'},
-              { strategy: language === 'en'?'Price Gap':'价格跳空', tag: language === 'en'?'Continuous Multi-day':'连续多日'},
+              { strategy: language === 'en'?'Price Gap':'价格跳空', tag: language === 'en'?'Consecutive Multi-day':'连续多日'},
               { strategy: language === 'en'?'Price Gap':'价格跳空', tag: language === 'en'?'In-window Multi-day':'窗口期内多日'},
               // Add more cards here as needed
             ].map((card, index) => (

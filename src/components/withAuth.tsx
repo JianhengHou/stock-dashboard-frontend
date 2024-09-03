@@ -20,7 +20,6 @@ const withAuth = (WrappedComponent) => {
 //           startDate, setStartDate,
 //           endDate, setEndDate } = useStripeStatus(); // Use the context
         const [stripeCustomerId, setStripeCustomerId] = useState(null)
-        console.log("initially, stripeCustomerId, status is", stripeCustomerId, status)
         const navigate = useNavigate();
 
         useEffect(() => {
@@ -30,9 +29,7 @@ const withAuth = (WrappedComponent) => {
                     const currentTime = new Date().getTime();
                     const cognito_data = getSessionVariableWithExpiration('session_cognito_status')
                     const expirationTime = new Date().getTime() + 60 * 1000 * 30; // Calculate expiration timestamp (30mins)
-                    console.log('current_time: ', currentTime, 'saved_time: ', cognito_data.expiration)
 
-                    console.log("auth cognito data", cognito_data)
                     const record = {
                                      stripeCustomerId:attributes['custom:stripe_customer_id'],
                                      preferredName: attributes['preferred_username'],
@@ -40,7 +37,7 @@ const withAuth = (WrappedComponent) => {
                                      expiration: cognito_data?cognito_data.expiration:expirationTime
                                     }
                     setSessionVariableWithExpiration('session_cognito_status', record);
-                    console.log("reset session cognito data", record)
+//                     console.log("reset session cognito data", record)
 //                     setStripeCustomerId(attributes['custom:stripe_customer_id']);
 //                     setPreferredName(attributes['preferred_username']);
 //                     setEmail(attributes['email']);
@@ -48,9 +45,7 @@ const withAuth = (WrappedComponent) => {
                     if (attributes['custom:exempt'] === 'Y') {setIsExemptUser(true)}
 
                     setIsAuthenticated(true);
-                    console.log("attribute received:", attributes)
                 } catch (error) {
-                    console.error("Cognito Account Authentication Error:", error)
                     navigate('/auth/signin');
                 }
             };
@@ -60,24 +55,22 @@ const withAuth = (WrappedComponent) => {
         useEffect(() => {
             const checkStripe = async () => {
 
-               console.log("with auth stripeCustomerId", stripeCustomerId)
+//                console.log("with auth stripeCustomerId", stripeCustomerId)
                 if (stripeCustomerId && !isExemptUser) {
-                console.log("Secondly, status is", status)
+//                 console.log("Secondly, status is", status)
                     // Retrieving the variable
                     const userSession = getSessionVariableWithExpiration('session_stripe_status');
-                    console.log("auth stripe session info", userSession)
+//                     console.log("auth stripe session info", userSession)
                     if (userSession) {
                        const status = userSession.status
-                       console.log("auth stripe status", status)
+//                        console.log("auth stripe status", status)
                       if (status === 'Active') {
                         setActiveStripeStatus(true)
                         }
                         else {
-                            console.log("current stripe status:", status)
                             navigate('/settings')
                         }
                     } else {
-                        console.log("current stripe status:", status)
                         navigate('/auth/signin');
                     }
 //                     if (status === 'Active') {

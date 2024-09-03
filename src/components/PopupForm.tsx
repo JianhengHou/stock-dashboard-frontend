@@ -18,15 +18,15 @@ const PopupForm: React.FC<PopupFormProps> = ({ show, onClose, onSubmit, strategy
 
   useEffect(() => {
     // Set default option for
-    if ((strategy === 'Capital Flow' | strategy === '资金流') && (tag === 'Continuous Multi-day' | tag === '连续多日')) {
+    if ((strategy === 'Capital Flow' | strategy === '资金流') && (tag === 'Consecutive Multi-day' | tag === '连续多日')) {
       setDropdownStrategy('in_flow|in_flow_count|');
     } else if ((strategy === 'Capital Flow' | strategy === '资金流') && (tag === 'In-window Multi-day' | tag === '窗口期内多日')) {
       setDropdownStrategy('in_flow|in_flow_count|10');
-    } else if ((strategy === 'Turnover Rate' | strategy === '换手率') && (tag === 'Continuous Multi-day'| tag === '连续多日')) {
+    } else if ((strategy === 'Turnover Rate' | strategy === '换手率') && (tag === 'Consecutive Multi-day' | tag === '连续多日')) {
       setDropdownStrategy('95|turnover_rate_95_percentile_count|');
     } else if ((strategy === 'Turnover Rate' | strategy === '换手率') && (tag === 'In-window Multi-day' | tag === '窗口期内多日')) {
       setDropdownStrategy('95|turnover_rate_95_percentile_count|7');
-    } else if ((strategy === 'Price Gap' | strategy === '价格跳空') && (tag === 'Continuous Multi-day'| tag === '连续多日')) {
+    } else if ((strategy === 'Price Gap' | strategy === '价格跳空') && (tag === 'Consecutive Multi-day' | tag === '连续多日')) {
       setDropdownStrategy('price_gap|jump_up_count|');
     } else if ((strategy === 'Price Gap' | strategy === '价格跳空') && (tag === 'In-window Multi-day' | tag === '窗口期内多日')) {
       setDropdownStrategy('price_gap|price_jump_up_count|7');
@@ -39,7 +39,7 @@ const PopupForm: React.FC<PopupFormProps> = ({ show, onClose, onSubmit, strategy
 
   const getOptions = (strategy: string, tag: string) => {
     switch (strategy + ':' + tag) {
-      case 'Capital Flow:Continuous Multi-day' :
+      case 'Capital Flow:Consecutive Multi-day' :
         return (
           <>
             <option value="in_flow|in_flow_count|">In flow</option>
@@ -67,7 +67,7 @@ const PopupForm: React.FC<PopupFormProps> = ({ show, onClose, onSubmit, strategy
             <option value="mid_sml_in_flow|mid_sml_out_flow_count|28">Middle Small Out Flow Past 20 Days</option>
           </>
         );
-      case 'Turnover Rate:Continuous Multi-day':
+      case 'Turnover Rate:Consecutive Multi-day':
         return (
           <>
             <option value="95|turnover_rate_95_percentile_count">Turnover Rate 95 Percentile </option>
@@ -83,7 +83,7 @@ const PopupForm: React.FC<PopupFormProps> = ({ show, onClose, onSubmit, strategy
             <option value="98|turnover_rate_98_percentile_count|14">Turnover Rate 98 Percentile Past 10 Days</option>
           </>
         );
-      case 'Price Gap:Continuous Multi-day':
+      case 'Price Gap:Consecutive Multi-day':
         return (
           <>
             <option value="price_gap|jump_up_count|">Price Jump Up</option>
