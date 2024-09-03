@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PricingTableOne from '../components/PricingTables/PricingTableOne';
-import alphahoodLogo from "../images/logo/alphahood-logo.svg";
-import favicon from "../images/favicon.png";
+import alphahoodLogo from "../images/home_logo/alphahood-logo.svg";
+import favicon from "../images/favicon.ico";
 import coverENtest from "../images/tutorial/cover-EN-test.jpg";
 import coverCNtest from "../images/tutorial/cover-CN-test.jpg";
 import aboutImage01 from "../images/about/about-image-01.jpg";
@@ -25,7 +25,6 @@ import blogfooter01 from "../images/blog/blog-footer-01.jpg";
 import blogfooter02 from "../images/blog/blog-footer-02.jpg";
 import shape1 from "../images/footer/shape-1.svg";
 import shape3 from "../images/footer/shape-3.svg";
-import wowMin from '../js/wow.min.js';
 import swiperBundle from "../css/swiper-bundle.min.css";
 import animate from "../css/animate.css";
 import tailwind from "../css/tailwind.css";
@@ -46,7 +45,7 @@ const Home: React.FC = () => {
     };
     useEffect(() => {
     const wowScript = document.createElement('script');
-    wowScript.src = wowMin;
+    wowScript.src = '../js/wow.min.js';
     wowScript.onload = () => {
       // @ts-ignore
       new WOW().init();
