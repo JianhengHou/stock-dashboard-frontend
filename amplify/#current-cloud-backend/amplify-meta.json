@@ -1,0 +1,157 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-alphahoodamplify-dev-e3405-authRole",
+      "UnauthRoleArn": "arn:aws:iam::997055217713:role/amplify-alphahoodamplify-dev-e3405-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::997055217713:role/amplify-alphahoodamplify-dev-e3405-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-alphahoodamplify-dev-e3405-deployment",
+      "UnauthRoleName": "amplify-alphahoodamplify-dev-e3405-unauthRole",
+      "StackName": "amplify-alphahoodamplify-dev-e3405",
+      "StackId": "arn:aws:cloudformation:us-west-1:997055217713:stack/amplify-alphahoodamplify-dev-e3405/72e422c0-4cb5-11ef-8657-065ce34af205",
+      "AmplifyAppId": "d2am3nkipv891h"
+    }
+  },
+  "auth": {
+    "alphahoodamplifyc9912c83": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": "8",
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-alphahoodamplify-dev-e3405-deployment/amplify-cfn-templates/auth/alphahoodamplifyc9912c83-cloudformation-template.json",
+        "logicalId": "authalphahoodamplifyc9912c83"
+      },
+      "lastPushTimeStamp": "2024-08-14T09:30:06.593Z",
+      "output": {
+        "UserPoolId": "us-west-1_9rxmYl1VB",
+        "AppClientIDWeb": "5mg8hh3jqpda2nsqvee9jrl7tg",
+        "AppClientID": "5b2ubnq078i0ssdugjiujvdp5o",
+        "IdentityPoolId": "us-west-1:94447db4-b326-4a52-a376-9c8c8e3b5580",
+        "UserPoolArn": "arn:aws:cognito-idp:us-west-1:997055217713:userpool/us-west-1_9rxmYl1VB",
+        "IdentityPoolName": "alphahoodamplifyc9912c83_identitypool_c9912c83__dev",
+        "UserPoolName": "alphahoodamplifyc9912c83_userpool_c9912c83",
+        "HostedUIDomain": "alpha-hood-dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:5173/auth/signin/\"],\"LogoutURLs\":[\"http://localhost:5173/auth/signin/\"]}"
+      },
+      "lastPushDirHash": "sSTSbLisvroiirqem5b1NCzmSBc="
+    },
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "alphahoodamplifyc9912c83",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ],
+      "lastPushTimeStamp": "2024-08-14T09:30:06.266Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-alphahoodamplify-dev-e3405-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
+        "logicalId": "authuserPoolGroups"
+      },
+      "output": {
+        "adminGroupRole": "arn:aws:iam::997055217713:role/us-west-1_9rxmYl1VB-adminGroupRole"
+      },
+      "lastPushDirHash": "MK3+axNPUppOm7oy43ZzkrxFRJA="
+    }
+  },
+  "function": {
+    "AdminQueriese91d5e96": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true,
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "alphahoodamplifyc9912c83",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
+      "lastBuildTimeStamp": "2024-07-29T07:36:31.360Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-07-29T07:36:32.262Z",
+      "distZipFilename": "AdminQueriese91d5e96-65706b6e514e6f4b4a44-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-alphahoodamplify-dev-e3405-deployment",
+        "s3Key": "amplify-builds/AdminQueriese91d5e96-65706b6e514e6f4b4a44-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-alphahoodamplify-dev-e3405-deployment/amplify-cfn-templates/function/AdminQueriese91d5e96-cloudformation-template.json",
+        "logicalId": "functionAdminQueriese91d5e96"
+      },
+      "lastPushTimeStamp": "2024-08-14T09:30:06.268Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::997055217713:role/AdminQueriese91d5e96LambdaRole-dev",
+        "Region": "us-west-1",
+        "Arn": "arn:aws:lambda:us-west-1:997055217713:function:AdminQueriese91d5e96-dev",
+        "Name": "AdminQueriese91d5e96-dev",
+        "LambdaExecutionRole": "AdminQueriese91d5e96LambdaRole-dev"
+      },
+      "lastPushDirHash": "Vp7eatPy3HGcN8V7Q6+JVyrgY6s="
+    }
+  },
+  "api": {
+    "AdminQueries": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "alphahoodamplifyc9912c83",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "AdminQueriese91d5e96",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-alphahoodamplify-dev-e3405-deployment/amplify-cfn-templates/api/AdminQueries-cloudformation-template.json",
+        "logicalId": "apiAdminQueries"
+      },
+      "lastPushTimeStamp": "2024-08-14T09:30:06.269Z",
+      "output": {
+        "ApiName": "AdminQueries",
+        "RootUrl": "https://w2t18kf78g.execute-api.us-west-1.amazonaws.com/dev",
+        "ApiId": "w2t18kf78g"
+      },
+      "lastPushDirHash": "tkmRbumwTBEqcMzJkMA5OEm5S98="
+    }
+  }
+}

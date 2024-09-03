@@ -1,0 +1,87 @@
+{
+  "identityPoolName": "alphahoodamplifyc9912c83_identitypool_c9912c83",
+  "allowUnauthenticatedIdentities": false,
+  "resourceNameTruncated": "alphahc9912c83",
+  "userPoolName": "alphahoodamplifyc9912c83_userpool_c9912c83",
+  "autoVerifiedAttributes": [
+    "email"
+  ],
+  "mfaConfiguration": "OFF",
+  "mfaTypes": [
+    "SMS Text Message"
+  ],
+  "smsAuthenticationMessage": "Your authentication code is {####}",
+  "smsVerificationMessage": "Your verification code is {####}",
+  "emailVerificationSubject": "Alpha Hood Sign Up Account Verification Code",
+  "emailVerificationMessage": "Your verification code is {####}",
+  "defaultPasswordPolicy": false,
+  "passwordPolicyMinLength": "8",
+  "passwordPolicyCharacters": [],
+  "requiredAttributes": [
+    "email"
+  ],
+  "aliasAttributes": [],
+  "userpoolClientGenerateSecret": false,
+  "userpoolClientRefreshTokenValidity": "7",
+  "userpoolClientWriteAttributes": [
+    "phone_number",
+    "preferred_username",
+    "email"
+  ],
+  "userpoolClientReadAttributes": [
+    "address",
+    "birthdate",
+    "email",
+    "family_name",
+    "middle_name",
+    "gender",
+    "locale",
+    "given_name",
+    "name",
+    "nickname",
+    "phone_number",
+    "preferred_username",
+    "email_verified",
+    "phone_number_verified"
+  ],
+  "userpoolClientLambdaRole": "alphahc9912c83_userpoolclient_lambda_role",
+  "userpoolClientSetAttributes": true,
+  "sharedId": "c9912c83",
+  "resourceName": "alphahoodamplifyc9912c83",
+  "authSelections": "identityPoolAndUserPool",
+  "useDefault": "manual",
+  "usernameAttributes": [
+    "email"
+  ],
+  "userPoolGroupList": [
+    "admin"
+  ],
+  "serviceName": "Cognito",
+  "usernameCaseSensitive": false,
+  "useEnabledMfas": true,
+  "authRoleArn": {
+    "Fn::GetAtt": [
+      "AuthRole",
+      "Arn"
+    ]
+  },
+  "unauthRoleArn": {
+    "Fn::GetAtt": [
+      "UnauthRole",
+      "Arn"
+    ]
+  },
+  "breakCircularDependency": true,
+  "dependsOn": [],
+  "thirdPartyAuth": false,
+  "authProviders": [],
+  "userPoolGroups": false,
+  "adminQueries": false,
+  "triggers": "{}",
+  "hostedUI": false,
+  "adminQueryGroup": "admin",
+  "parentStack": {
+    "Ref": "AWS::StackId"
+  },
+  "permissions": []
+}
