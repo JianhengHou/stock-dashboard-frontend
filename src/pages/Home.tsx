@@ -13,7 +13,7 @@ import heatmapCoverEN from "../images/tutorial/heatmap-cover-EN.jpg";
 import heatmapCoverCN from "../images/tutorial/heatmap-cover-CN.jpg";
 import strategyCoverEN from "../images/tutorial/strategy-cover-EN.jpg";
 import strategyCoverCN from "../images/tutorial/strategy-cover-CN.jpg";
-import icon-star from "../images/testimonials/icon-star.svg";
+import iconStar from "../images/testimonials/icon-star.svg";
 import author01 from "../images/testimonials/author-01.jpg";
 import author02 from "../images/testimonials/author-02.jpg";
 import author03 from "../images/testimonials/author-03.jpg";
@@ -2454,23 +2454,23 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                   </div>
@@ -2514,19 +2514,19 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                   </div>
@@ -2570,23 +2570,23 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                   </div>
@@ -2631,19 +2631,19 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                     <img
-                      src={icon-star}
+                      src={iconStart}
                       alt="star icon"
                     />
                   </div>
