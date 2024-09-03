@@ -2453,23 +2453,23 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                   </div>
@@ -2513,19 +2513,19 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                   </div>
@@ -2569,23 +2569,23 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                   </div>
@@ -2630,19 +2630,19 @@ const Home: React.FC = () => {
                 >
                   <div className="mb-[18px] flex items-center gap-[2px]">
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                     <img
-                      src={iconStart}
+                      src={iconStar}
                       alt="star icon"
                     />
                   </div>
