@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import PricingTableOne from '../components/PricingTables/PricingTableOne';
 import alphahoodLogo from "../images/logo/alphahood-logo.svg"
 import favicon from "../images/favicon.png"
-import cover-EN-test from "../images/tutorial/cover-EN-test.jpg"
-import cover-CN-test from "../images/tutorial/cover-CN-test.jpg"
+import coverENtest from "../images/tutorial/cover-EN-test.jpg"
+import coverCNtest from "../images/tutorial/cover-CN-test.jpg"
 import aboutImage01 from "../images/about/about-image-01.jpg"
-import neural_network_stock from "../images/about/nueral_network_stock.jpg"
-import capital-history-cover-EN-test2 from "../images/tutorial/capital-history-cover-EN-test2.jpg"
-import capital-history-cover-CN-test2 from "../images/tutorial/capital-history-cover-CN-test2.jpg"
-import heatmap-cover-EN from "../images/tutorial/heatmap-cover-EN.jpg"
-import heatmap-cover-CN from "../images/tutorial/heatmap-cover-CN.jpg"
-import strategy-cover-EN from "../images/tutorial/strategy-cover-EN.jpg"
-import strategy-cover-CN from "../images/tutorial/strategy-cover-CN.jpg"
+import neuralNetworkStock from "../images/about/nueral_network_stock.jpg"
+import capitalHistoryCoverENTest2 from "../images/tutorial/capital-history-cover-EN-test2.jpg"
+import capitalHistoryCoverCNTest2 from "../images/tutorial/capital-history-cover-CN-test2.jpg"
+import heatmapCoverEN from "../images/tutorial/heatmap-cover-EN.jpg"
+import heatmapCoverCN from "../images/tutorial/heatmap-cover-CN.jpg"
+import strategyCoverEN from "../images/tutorial/strategy-cover-EN.jpg"
+import strategyCoverCN from "../images/tutorial/strategy-cover-CN.jpg"
 import icon-star from "../images/testimonials/icon-star.svg"
 import author01 from "../images/testimonials/author-01.jpg"
 import author02 from "../images/testimonials/author-02.jpg"
@@ -552,7 +552,7 @@ const Home: React.FC = () => {
             >
               <div className="mt-16">
                 <img
-                  src={language === 'en'?cover-EN-test:cover-CN-test}
+                  src={language === 'en'?coverENtest:coverCNtest}
 
                   alt="hero"
                   className="mx-auto max-w-full rounded-t-xl rounded-tr-xl"
@@ -2014,7 +2014,7 @@ const Home: React.FC = () => {
                     className="mb-4 sm:mb-8 sm:h-[220px] md:h-[346px] lg:mb-4 lg:h-[225px] xl:mb-8 xl:h-[310px]"
                   >
                     <img
-                      src={neural_network_stock}
+                      src={neuralNetworkStock}
                       alt="about image"
                       className="h-full w-full rounded-xl object-cover object-left"
                     />
@@ -2284,8 +2284,8 @@ const Home: React.FC = () => {
           <img
             src={
               language === "en"
-                ? {capital-history-cover-EN-test2}
-                : {capital-history-cover-CN-test2}
+                ? capitalHistoryCoverENTest2
+                : capitalHistoryCoverCNTest2
             }
             alt="about image"
             className="max-w-full h-auto"
@@ -2338,7 +2338,7 @@ const Home: React.FC = () => {
       <div className="w-full px-4 lg:w-1/2 flex justify-center items-center">
         <div className="overflow-hidden rounded-xl">
           <img
-            src={language === 'en'?heatmap-cover-EN:heatmap-cover-CN}
+            src={language === 'en'?heatmapCoverEN:heatmapCoverCN}
 
             alt="about image"
             className="max-w-full h-auto"
@@ -2358,8 +2358,8 @@ const Home: React.FC = () => {
           <img
             src={
               language === "en"
-                ? strategy-cover-EN
-                : strategy-cover-CN
+                ? strategyCoverEN
+                : strategyCoverCN
             }
             alt="about image"
             className="max-w-full h-auto"
