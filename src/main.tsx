@@ -8,7 +8,6 @@ import './css/style.css';
 import './css/satoshi.css';
 import 'jsvectormap/dist/jsvectormap.css';
 import 'flatpickr/dist/flatpickr.min.css';
-import { StripeStatusProvider } from './components/StripeStatusContext'; // Adjust the import path
 
 // Configure Amplify before rendering the app
 Amplify.configure(awsconfig);
