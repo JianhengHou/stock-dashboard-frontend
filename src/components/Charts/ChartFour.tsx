@@ -1,176 +1,485 @@
 import { ApexOptions } from 'apexcharts';
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import axios from 'axios';
+
+interface SeriesData {
+  name: string;
+  type?: 'line' | 'candlestick';
+  data: { x: Date; y: number[] | number }[];
+}
 
 interface CandleData {
-  series: {
-    name: string;
-    data: {
-      x: Date;
-      y: [number, number, number, number];
-    }[];
-  }[];
+  series: SeriesData[];
 }
 
-interface ChartFourProps {
-  chartData: (string | number)[][]; // Ensure this matches the actual type of chartData you receive
+interface BarData {
+  name: string;
+  data: { x: Date; y: number }[];
 }
 
-const CandleChart: React.FC<ChartFourProps> = ({ chartData }) => {
-  const [state, setState] = useState<CandleData>({ series: [] });
-  const [title, setTitle] = useState('CandleStick Chart');
+interface CandleChartProps {
+  tickerCode: string;
+}
 
-      // Function to generate formatted date categories
-  const generateDateCategories = (data: { x: Date; y: [number, number, number, number] }[]) => {
-  return data.map(item => {
-    const date = new Date(item.x);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-    });
-  });
-};
+const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
+    const [state, setState] = useState<CandleData>({ series: [] });
+    const [barSeries, setBarSeries] = useState<BarData[]>([]);
+    const [title, setTitle] = useState<string>('');
+    const [industry, setIndustry] = useState<string>('');
+    const [changeRate, setChangeRate] = useState<number | null>(null);
+    const [period, setPeriod] = useState<string>('6'); // Default period is 3 months
+
+    const [latestTradingDate, setLatestTradingDate] = useState<string>('');
+    const [latestOpen, setLatestOpen] = useState<number | null>(null);
+    const [latestClose, setLatestClose] = useState<number | null>(null);
+    const [latestHigh, setLatestHigh] = useState<number | null>(null);
+    const [latestLow, setLatestLow] = useState<number | null>(null);
+    const [latestPE, setLatestPE] = useState<number | null>(null);
+    const [latestTurnOverRate, setLatestTurnOverRate] = useState<number | null>(null);
+    const [latestVolume, setLatestVolume] = useState<number | null>(null);
+    const [latestNetFlow, setLatestNetFlow] = useState<number | null>(null);
+    const [latestMainFlow, setLatestMainFlow] = useState<number | null>(null);
+    const [latestMidSmlFlow, setLatestMidSmlFlow] = useState<number | null>(null);
+    const [latestMA5, setLatestMA5] = useState<number | null>(null);
+    const [latestMA10, setLatestMA10] = useState<number | null>(null);
+    const [latestMA20, setLatestMA20] = useState<number | null>(null);
+    const [latestMA50, setLatestMA50] = useState<number | null>(null);
+    const [latestMA120, setLatestMA120] = useState<number | null>(null);
+    const defaultLang = 'en';
+    const language = localStorage.getItem('language') || defaultLang;
+
+  const fetchChartData = async (tickerCode: string, months_back_to: number) => {
+    try {
+      const response = await axios.get(`https://9jjj44tcdg.execute-api.us-west-1.amazonaws.com/dev/ticker_details_dash`, {
+        params: {
+          code: tickerCode,
+          months_back_to: months_back_to,
+          market: tickerCode.split('.')[0]
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return null;
+    }
+  };
 
   const candleOptions: ApexOptions = {
-  chart: {
-    type: 'candlestick',
-    height: 350,
-    toolbar: {
-      show: false,
-    },
-  },
-  xaxis: {
-    type: 'datetime', // Set x-axis type to 'category' for discrete labels
-  },
-  yaxis: {
-    tooltip: {
-      enabled: true,
-    },
-  },
-  plotOptions: {
-    candlestick: {
-      colors: {
-        upward: '#3C50E0',
-        downward: '#80CAEE',
-      },
-      wick: {
-        useFillColor: true,
+    chart: {
+      type: 'candlestick',
+//       height: 350,
+      toolbar: {
+        show: false,
       },
     },
-  },
-  tooltip: {
-    enabled: true,
-  },
-  responsive: [
-    {
-      breakpoint: 1024,
-      options: {
-        chart: {
-          height: 300,
-        },
+    xaxis: {
+      type: 'datetime',
+    },
+    yaxis: {
+      tooltip: {
+        enabled: true,
+      },
+      labels: {
+        formatter: (value) => value.toFixed(2), // Round to 2 decimal places
       },
     },
-    {
-      breakpoint: 1366,
-      options: {
-        chart: {
-          height: 350,
-        },
-      },
-    },
+    stroke: {
+    width: [1, 1.5, 1.5,1.5,1.5,1.5, ], // Set stroke width for each series
+    colors: [
+    '#00000', // Color for candlestick series
+    '#F0933F', // MA5
+    '#4FACE1', // MA10
+    '#D675D3', // MA20
+    '#5EC284', // MA50
+    '#EC6B65', // MA120
   ],
-};
+    },
+    plotOptions: {
+      candlestick: {
+        colors: {
+          upward: '#4CAF50',
+          downward: '#F44336',
+        },
+        wick: {
+          useFillColor: true,
+        },
+        columnWidth: '10%',
+      },
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+    },
+    colors: [
+    '#FFFFFF', // Color for candlestick series
+    '#F0933F', // MA5
+    '#4FACE1', // MA10
+    '#D675D3', // MA20
+    '#5EC284', // MA50
+    '#EC6B65', // MA120
+  ],
+    legend: {
+    show:true
+  },
+    responsive: [
+    {
+        breakpoint: 1800,
+        options: {
+          chart: {
+            height: 440,
+          },
+        },
+      },
+      {
+        breakpoint: 2000,
+        options: {
+          chart: {
+            height: 440,
+          },
+        },
+      },
 
+    ],
+  };
 
-  // Effect hook to transform chartData into series for ApexCharts
   useEffect(() => {
-    if (Array.isArray(chartData) && chartData.length > 0) {
-      // Pull candle data
-      const price_data = chartData
-        .map(data => {
-          const [entry_key, code, name, industry, time_key, open, close, high, low, pe_ratio, turnover_rate, volume, turnover, change_rate, last_close, in_flow, main_in_flow, mid_sml_in_flow, super_in_flow, big_in_flow, mid_in_flow] = data;
-          return {
-            x: new Date(time_key).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-    }),
-            y: [open, high, low, close]
-          };
-        })
-        .filter(item => item.y.every(value => value !== null && value !== undefined)); // Filter out invalid data points
+    const fetchData = async () => {
+      try {
+        const data = await fetchChartData(tickerCode, parseInt(period)); // Ensure period is parsed to an integer if necessary
+        if (Array.isArray(data) && data.length > 0) {
+          const priceData = data.map((item: any) => ({
+            x: new Date(item[4]),
+            y: [item[5], item[7], item[8], item[6]]
+          })).filter((item: any) => item.y.every((value: any) => value !== null && value !== undefined));
+          const ma5 = data.map((item: any) => ({ x: new Date(item[4]), y: item[22].toFixed(2) }));
+          const ma10 = data.map((item: any) => ({ x: new Date(item[4]), y: item[23].toFixed(2) }));
+          const ma20 = data.map((item: any) => ({ x: new Date(item[4]), y: item[24].toFixed(2) }));
+          const ma50 = data.map((item: any) => ({ x: new Date(item[4]), y: item[25].toFixed(2) }));
+          const ma120 = data.map((item: any) => ({ x: new Date(item[4]), y: item[26].toFixed(2) }));
 
-      const tickerName = chartData[0][2]; // name of the ticker
-      const tickerCode = chartData[0][1]; // code of the ticker
-      const transformedData = {
-        series: [{
-          name: tickerName,
-          data: price_data
-        }]
-      };
+          const barVolume = data.map((item: any) => ({ x: new Date(item[4]), y: item[11].toFixed(0) }));
+          const barInFlow = data.map((item: any) => ({ x: new Date(item[4]), y: item[15] }));
+          const barMainInFlow = data.map((item: any) => ({ x: new Date(item[4]), y: item[16] }));
+          const barMidSmlInFlow = data.map((item: any) => ({ x: new Date(item[4]), y: item[17] }));
 
-      setTitle(`${tickerName} (${tickerCode})`); // Set the chart title to ticker name and code
-      setState(transformedData);
-    }
-  }, [chartData]);
+          const industry = data[0][3];
+          const tickerName = data[0][2];
+          const lastClose = data[data.length - 1][6];
+          const lastChangeRate = parseFloat(data[data.length - 1][13]).toFixed(2);
+
+          setTitle(`${tickerName} (${tickerCode})`);
+          setChangeRate(lastChangeRate);
+          setIndustry(industry);
+          setLatestTradingDate(data[data.length - 1][4].split(' ')[0])
+          setLatestOpen(data[data.length - 1][5])
+          setLatestClose(data[data.length - 1][6])
+          setLatestHigh(data[data.length - 1][7])
+          setLatestLow(data[data.length - 1][8])
+          setLatestPE(data[data.length - 1][9])
+          setLatestTurnOverRate(data[data.length - 1][10])
+          setLatestVolume(data[data.length - 1][11])
+          setLatestNetFlow(data[data.length - 1][15])
+          setLatestMainFlow(data[data.length - 1][16])
+          setLatestMidSmlFlow(data[data.length - 1][17])
+          setLatestMA5(data[data.length - 1][22])
+          setLatestMA10(data[data.length - 1][23])
+          setLatestMA20(data[data.length - 1][24])
+          setLatestMA50(data[data.length - 1][25])
+          setLatestMA120(data[data.length - 1][26])
+
+          setState({
+            series: [{
+                name: ' ',
+                type: 'candlestick',
+                data: priceData,
+              },
+            {
+              name: 'MA5',
+              type: 'line',
+              data: ma5,
+            },
+            {
+              name: 'MA10',
+              type: 'line',
+              data: ma10,
+            },
+            {
+              name: 'MA20',
+              type: 'line',
+              data: ma20,
+            },
+            {
+              name: 'MA50',
+              type: 'line',
+              data: ma50,
+            },
+            {
+              name: 'MA120',
+              type: 'line',
+              data: ma120,
+            },
+            ]
+          });
+          setBarSeries([
+            { name: language === 'en'?'Volume':'成交量', data: barVolume },
+            { name: language === 'en'?'Net Flow':'净流入', data: barInFlow },
+            { name:language === 'en'? 'Main Flow':'主力净流入', data: barMainInFlow },
+            { name:language === 'en'? 'Mid&Sml':'中小单净流入', data: barMidSmlInFlow }
+          ]);
+
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [tickerCode, period]);
+
+  const barOptions = (name: string): ApexOptions => ({
+    chart: {
+      type: 'bar',
+      stacked: false,
+      toolbar: {
+        show: false,
+      },
+    },
+    xaxis: {
+      type: 'datetime',
+      labels: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      }
+    },
+    yaxis: {
+      labels: {
+        show: false,
+        offsetX: 25, // Padding between the y-axis title and the left side of the chart
+      },
+      title: {
+        text: name,
+
+      },
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+    },
+    legend: { show: false },
+    grid: {
+      show: true,
+      padding: {
+      left: 40, // Adjust this value to add padding to the left side of the grid
+    },
+    },
+    plotOptions: {
+      bar: {
+        columnWidth: '80%',
+        barHeight: '100%',
+        borderRadius: 0,
+        padding: {
+          top: 10,
+          right: 0,
+          bottom: 0,
+          left: 0,
+        },
+        colors: {
+          ranges: [
+            {
+              from: -1000000000000000000000000,
+              to: -1,
+              color: '#F44336'
+            },
+            {
+              from: 0,
+              to: 1000000000000000000000000000,
+              color: name === 'Volume' | name === '成交量'? '#FEB019' : '#4CAF50'
+            }
+          ]
+        }
+      },
+    },
+    responsive: [
+      {
+        breakpoint: 1800,
+        options: {
+          chart: {
+            height: 90,
+          },
+        },
+      },
+      {
+        breakpoint: 2000,
+        options: {
+          chart: {
+            height: 90,
+          },
+        },
+      },
+    ],
+  });
+
+  const getChangeRateColor = (rate: number) => {
+    return rate >= 0 ? 'text-green-500' : 'text-red-500';
+  };
+
+  const getChangeRateArrow = (rate: number) => {
+    return rate >= 0 ? '▲' : '▼';
+  };
+
+  const getFormattedChangeRate = (rate: number) => {
+    return rate >= 0 ? `+${rate}%` : `${rate}%`;
+  };
+
+  const handlePeriodChange = (newPeriod: string) => {
+    setPeriod(newPeriod); // Update period state
+  };
+
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
-      <div className="mb-3 justify-between gap-4 sm:flex">
-        <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white">
-            {title}
-          </h5>
-        </div>
-        <div>
-          <div className="relative z-20 inline-block">
-            <select
-              name=""
-              id=""
-              className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
-            >
-              <option value="" className="dark:bg-boxdark">
-                Monthly
-              </option>
-              <option value="" className="dark:bg-boxdark">
-                Yearly
-              </option>
-            </select>
-            <span className="absolute right-3 top-1/2 z-10 -translate-y-1/2">
-              <svg
-                width="10"
-                height="6"
-                viewBox="0 0 10 6"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0.47072 1.08816C0.47072 1.02932 0.500141 0.955772 0.54427 0.911642C0.647241 0.808672 0.809051 0.808672 0.912022 0.896932L4.85431 4.60386C4.92785 4.67741 5.06025 4.67741 5.14851 4.60386L9.09079 0.896932C9.19376 0.793962 9.35557 0.808672 9.45854 0.911642C9.56151 1.01461 9.5468 1.17642 9.44383 1.27939L5.50155 4.98632C5.22206 5.23639 4.78076 5.23639 4.51598 4.98632L0.558981 1.27939C0.50014 1.22055 0.47072 1.16171 0.47072 1.08816Z"
-                  fill="#637381"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M1.22659 0.546578L5.00141 4.09604L8.76422 0.557869C9.08459 0.244537 9.54201 0.329403 9.79139 0.578788C10.112 0.899434 10.0277 1.36122 9.77668 1.61224L9.76644 1.62248L5.81552 5.33722C5.36257 5.74249 4.6445 5.7544 4.19352 5.32924C4.19327 5.32901 4.19377 5.32948 4.19352 5.32924L0.225953 1.61241C0.102762 1.48922 -4.20186e-08 1.31674 -3.20269e-08 1.08816C-2.40601e-08 0.905899 0.0780105 0.712197 0.211421 0.578787C0.494701 0.295506 0.935574 0.297138 1.21836 0.539529L1.22659 0.546578ZM4.51598 4.98632C4.78076 5.23639 5.22206 5.23639 5.50155 4.98632L9.44383 1.27939C9.5468 1.17642 9.56151 1.01461 9.45854 0.911642C9.35557 0.808672 9.19376 0.793962 9.09079 0.896932L5.14851 4.60386C5.06025 4.67741 4.92785 4.67741 4.85431 4.60386L0.912022 0.896932C0.809051 0.808672 0.647241 0.808672 0.54427 0.911642C0.500141 0.955772 0.47072 1.02932 0.47072 1.08816C0.47072 1.16171 0.50014 1.22055 0.558981 1.27939L4.51598 4.98632Z"
-                  fill="#637381"
-                />
-              </svg>
-            </span>
-          </div>
-        </div>
+  <div className="col-span-12 rounded-sm -mb-5 border border-stroke bg-white px-5 pt-4 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-4 xl:col-span-8">
+    {industry && (
+      <p className="text-gray-500 dark:text-gray-400">
+        {industry}
+      </p>
+    )}
+    <div className="flex justify-between items-center">
+      <h5 className="text-xl font-semibold text-black dark:text-white">
+        {title}
+        {latestClose !== null && changeRate !== null && (
+          <span className={`ml-4 ${getChangeRateColor(parseFloat(changeRate))}`}>
+            ${latestClose} {getChangeRateArrow(parseFloat(changeRate))} {getFormattedChangeRate(parseFloat(changeRate))}
+          </span>
+        )}
+      </h5>
+      <div className="flex w-full max-w-45 justify-end mb-1">
+  <div className="flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
+    <button
+      className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${
+        period === '3' ? 'bg-white dark:bg-boxdark' : ''
+      }`}
+      onClick={() => handlePeriodChange('3')}
+    >
+      {language === 'en'
+                        ? '3M'
+                        : '3月'
+      }
+    </button>
+    <button
+      className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${
+        period === '6' ? 'bg-white dark:bg-boxdark' : ''
+      }`}
+      onClick={() => handlePeriodChange('6')}
+    >
+      {language === 'en'
+                        ? '6M'
+                        : '6月'
+      }
+    </button>
+    <button
+      className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${
+        period === '12' ? 'bg-white dark:bg-boxdark' : ''
+      }`}
+      onClick={() => handlePeriodChange('12')}
+    >
+      {language === 'en'
+                        ? '12M'
+                        : '12月'
+      }
+    </button>
+  </div>
+</div>
+</div>
+  <div className="flex flex-col text-sm text-gray-700 dark:text-gray-300">
+  {/* First Row */}
+  <div className="flex flex-wrap gap-4 mb-1">
+    {[
+      { label: language === 'en'? 'Last Trading Date:':'最新交易日', value: latestTradingDate },
+      { label: language === 'en'? 'Open:':'开盘价', value: `$${latestOpen?.toFixed(2)}` },
+      { label: language === 'en'? 'Close:':'收盘价', value: `$${latestClose?.toFixed(2)}` },
+      { label: language === 'en'? 'High:':'最高价', value: `$${latestHigh?.toFixed(2)}` },
+      { label: language === 'en'? 'Low:':'最低价', value: `$${latestLow?.toFixed(2)}` },
+      { label: 'MA5:', value: `$${latestMA5?.toFixed(2)}`, color: '#F0933F' },
+      { label: 'MA10:', value: `$${latestMA10?.toFixed(2)}`, color: '#4FACE1' },
+      { label: 'MA20:', value: `$${latestMA20?.toFixed(2)}`, color: '#D675D3' },
+      { label: 'MA50:', value: `$${latestMA50?.toFixed(2)}`, color: '#5EC284' },
+      { label: 'MA120:', value: `$${latestMA120?.toFixed(2)}`, color: '#EC6B65' },
+    ].map((item, index) => (
+      <div key={index} className="flex items-center">
+        <span className="font-bold mr-1" style={{ color: item.color || 'inherit' }}>
+          {item.label}
+        </span>
+        <span className="font-bold" style={{ color: item.color || 'inherit' }}>
+          {item.value}
+        </span>
       </div>
+    ))}
+  </div>
 
-      <div>
-        <div id="candleChart" className="-ml-5">
+  {/* Second Row */}
+  <div className="flex flex-wrap gap-4">
+    {[
+      { label: language === 'en'? 'Volume:': '成交量:', value: latestVolume ? `${(latestVolume / 1e6).toFixed(2)} M` : '-' },
+      { label: language === 'en'? 'Turnover Rate:': '换手率:' , value: latestTurnOverRate ? `${latestTurnOverRate.toFixed(2)}%` : '-' },
+      { label: 'P/E:', value: latestPE?.toFixed(2) },
+      { label: language === 'en'? 'Net Flow:': '净流入:', value: latestNetFlow ? `$${(latestNetFlow / 1e6).toFixed(2)} M` : '-' },
+      { label: language === 'en'? 'Main Net Flow:': '主力净流入:', value: latestMainFlow ? `$${(latestMainFlow / 1e6).toFixed(2)} M` : '-' },
+      { label: language === 'en'? 'Mid/Small Flow:': '中小单净流入:', value: latestMidSmlFlow ? `$${(latestMidSmlFlow / 1e6).toFixed(2)} M` : '-' },
+    ].map((item, index) => (
+      <div key={index} className="flex items-center">
+        <span className="font-bold mr-1">{item.label}</span>
+        <span
+          className={`${
+            item.label.includes('Flow') | item.label.includes('流') ? (parseFloat(item.value.replace(/[^0-9.-]/g, '')) > 0 ? 'text-green-500' : 'text-red-500') : ''
+          }`}
+        >
+          {item.value}
+        </span>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+
+
+
+    <div id="candleChart" className="-ml-5 mb-5">
+      <ReactApexChart
+        options={candleOptions}
+        series={state.series}
+        type="candlestick"
+        height="100%"
+        width="100%"
+      />
+
+      {barSeries.map((series, index) => (
+        <div className="relative -mb-10" key={index}>
           <ReactApexChart
-            options={candleOptions}
-            series={state.series}
-            type="candlestick"
-            height={500}
+            options={barOptions(series.name)}
+            series={[series]}
+            type="bar"
+            height="100%"
+            width="100%"
           />
         </div>
-      </div>
+      ))}
     </div>
+  </div>
   );
 };
 

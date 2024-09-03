@@ -1,11 +1,17 @@
+// src/App.tsx
+
 import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { QueryClientProvider, queryClient } from './queryClient'; // Import from queryClient.ts
 
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
 import Calendar from './pages/Calendar';
+import HeatMap from './pages/HeatMap';
+import Dashboard from './pages/Dashboard';
+import Strategy from './pages/Strategy';
 import Chart from './pages/Chart';
 import ECommerce from './pages/Dashboard/ECommerce';
 import FormElements from './pages/Form/FormElements';
@@ -15,9 +21,98 @@ import Settings from './pages/Settings';
 import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
+import UnderMaintenance from './pages/Authentication/UnderMaintenance';
+import ResetPassword from './pages/Authentication/ResetPassword';
+import ComingSoon from './pages/ComingSoon';
+import Invoice from './pages/Invoice';
+import PricingTables from './pages/PricingTables';
+import Home from './pages/Home';
+import HomeCN from './pages/HomeCN';
+import Payment from './pages/Payment';
+
+import { Authenticator } from '@aws-amplify/ui-react';
+
+
+import React, { useCallback} from "react";
+import {loadStripe} from '@stripe/stripe-js';
+import {
+  EmbeddedCheckoutProvider,
+  EmbeddedCheckout
+} from '@stripe/react-stripe-js';
+import {
+  Navigate
+} from "react-router-dom";
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+// This is your test secret API key.
+const stripePromise = loadStripe("pk_test_51PjEmO07rXC94v6g6LgVQRZ8wdPZSifP3LqPMjPRTSAO3bqrkBnUFfHeZd8wz6kmIsykkUWKwefs00hw4IGF1AMn00vnoR0wRR");
+
+const CheckoutForm = () => {
+  const fetchClientSecret = useCallback(() => {
+    // Create a Checkout Session
+    return fetch("/create-checkout-session", {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => data.clientSecret);
+  }, []);
+
+  const options = {fetchClientSecret};
+
+  return (
+    <div id="checkout">
+      <EmbeddedCheckoutProvider
+        stripe={stripePromise}
+        options={options}
+      >
+        <EmbeddedCheckout />
+      </EmbeddedCheckoutProvider>
+    </div>
+  )
+}
+
+const Return = () => {
+  const [status, setStatus] = useState(null);
+  const [customerEmail, setCustomerEmail] = useState('');
+
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const sessionId = urlParams.get('session_id');
+
+    fetch(`/session-status?session_id=${sessionId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setStatus(data.status);
+        setCustomerEmail(data.customer_email);
+      });
+  }, []);
+
+  if (status === 'open') {
+    return (
+      <Navigate to="/checkout" />
+    )
+  }
+
+  if (status === 'complete') {
+    return (
+      <section id="success">
+        <p>
+          We appreciate your business! A confirmation email will be sent to {customerEmail}.
+
+          If you have any questions, please email <a href="mailto:orders@example.com">orders@example.com</a>.
+        </p>
+      </section>
+    )
+  }
+
+  return null;
+}
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -31,14 +126,43 @@ function App() {
   return loading ? (
     <Loader />
   ) : (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Routes>
         <Route
           index
           element={
             <>
-              <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <ECommerce />
+              <PageTitle title="Home | AlphaHood" />
+              <Home />
+            </>
+          }
+        />
+        <Route
+         path="/dashboard"
+          element={
+            <>
+              <PageTitle title="Dashboard | AlphaHood" />
+              <Dashboard />
+            </>
+          }
+
+        />
+
+        <Route
+         path="/heatmap"
+          element={
+            <>
+              <PageTitle title="Heatmap | AlphaHood" />
+              <HeatMap />
+            </>
+          }
+        />
+        <Route
+         path="/strategy"
+          element={
+            <>
+              <PageTitle title="Strategy | AlphaHood" />
+              <Strategy />
             </>
           }
         />
@@ -91,8 +215,26 @@ function App() {
           path="/settings"
           element={
             <>
-              <PageTitle title="Settings | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Settings | AlphaHood" />
               <Settings />
+            </>
+          }
+        />
+        <Route
+          path="pricing-tables"
+          element={
+            <>
+              <PageTitle title="Pricing Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PricingTables />
+            </>
+          }
+        />
+        <Route
+          path="coming-soon"
+          element={
+            <>
+              <PageTitle title="Coming Soon | AlphaHood" />
+              <ComingSoon />
             </>
           }
         />
@@ -118,7 +260,7 @@ function App() {
           path="/ui/buttons"
           element={
             <>
-              <PageTitle title="Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Buttons | AlphaHood" />
               <Buttons />
             </>
           }
@@ -127,7 +269,7 @@ function App() {
           path="/auth/signin"
           element={
             <>
-              <PageTitle title="Signin | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Signin | AlphaHood" />
               <SignIn />
             </>
           }
@@ -136,13 +278,40 @@ function App() {
           path="/auth/signup"
           element={
             <>
-              <PageTitle title="Signup | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Signup | AlphaHood" />
               <SignUp />
             </>
           }
         />
+      <Route
+          path="/auth/reset-password"
+          element={
+            <>
+              <PageTitle title="Reset Password | AlphaHood" />
+              <ResetPassword />
+            </>
+          }
+        />
+        <Route
+          path="/invoice"
+          element={
+            <>
+              <PageTitle title="Invoice | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Invoice />
+            </>
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            <>
+              <PageTitle title="Payment | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Payment />
+            </>
+          }
+        />
       </Routes>
-    </>
+    </QueryClientProvider>
   );
 }
 

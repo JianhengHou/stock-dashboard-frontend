@@ -1,0 +1,27 @@
+.custom-datepicker {
+  /* Customize the calendar appearance here */
+}
+
+/* Example: Change the calendar header background */
+.custom-datepicker .react-datepicker__header {
+  background-color: #f1f1f1;
+}
+
+/* Example: Style the selected date */
+.custom-datepicker .react-datepicker__day--selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Ensure the input box has enough padding on the right to accommodate the icon */
+.relative {
+  position: relative;
+}
+
+.pr-10 {
+  padding-right: 2.5rem; /* Adjust this value if needed */
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}

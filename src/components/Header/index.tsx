@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DropdownMessage from './DropdownMessage';
@@ -11,17 +11,55 @@ const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
-  const [searchCode, setSearchCode] = useState('');
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [codeDisplay, setCodeDisplay] = useState(sessionStorage.getItem('selectedSearchCode') || null);
+    const [filteredItems, setFilteredItems] = useState([]);
+    const [isDropdownVisible, setDropdownVisible] = useState(false);
+    const [data, setData] = useState([]);
+    const defaultLang = 'en';
+    const [language, setLanguage] = useState(localStorage.getItem('language') || defaultLang) ;
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchCode(event.target.value);
-  };
+    useEffect(() => {
+        // This code will run only once after the initial render
+        const fetchData = async () => {
+            const response = await axios.get(`https://9jjj44tcdg.execute-api.us-west-1.amazonaws.com/dev/fetch_all_tickers`);
+            setData(response.data);
+        };
+        fetchData();
+    }, []);
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-    navigate(`/chart?${searchCode}`);
-  };
+    // Function to handle language switch
+    const handleLanguageSwitch = (lang) => {
+          setLanguage(lang)
+          localStorage.setItem('language', lang); // Store the selected code
+          window.location.reload(); // Reload the page
+
+    };
+    const handleSearchChange = (e) => {
+        const query = e.target.value;
+        setCodeDisplay(query);
+
+        if (query.length > 0) {
+            const matches = data.filter(item =>
+                item[1].toLowerCase().includes(query.toLowerCase()) ||
+                item[0].toLowerCase().includes(query.toLowerCase())
+                // name || code
+            );
+            setFilteredItems(matches);
+            setDropdownVisible(true);
+        } else {
+            setFilteredItems([]);
+            setDropdownVisible(false);
+        }
+    };
+
+    const handleItemClick = (item) => {
+        setCodeDisplay(item)
+        setFilteredItems([]);
+        setDropdownVisible(false);
+        sessionStorage.setItem('selectedSearchCode', item); // Store the selected code
+        navigate(`/dashboard?code=${item}`);
+    };
 
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
@@ -70,50 +108,82 @@ const Header = (props: {
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          <Link className="block flex-shrink-0 lg:hidden" to="/">
-            <img src={LogoIcon} alt="Logo" />
-          </Link>
+
         </div>
 
-        <div className="hidden sm:block">
-          <form onSubmit={handleSubmit}>
+        <div className="sm:block ml-3">
+          <form>
             <div className="relative">
-              <button type="submit" className="absolute left-0 top-1/2 -translate-y-1/2">
-                <svg
-                  className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M9.16666 3.33332C5.945 3.33332 3.33332 5.945 3.33332 9.16666C3.33332 12.3883 5.945 15 9.16666 15C12.3883 15 15 12.3883 15 9.16666C15 5.945 12.3883 3.33332 9.16666 3.33332ZM1.66666 9.16666C1.66666 5.02452 5.02452 1.66666 9.16666 1.66666C13.3088 1.66666 16.6667 5.02452 16.6667 9.16666C16.6667 13.3088 13.3088 16.6667 9.16666 16.6667C5.02452 16.6667 1.66666 13.3088 1.66666 9.16666Z"
-                    fill=""
-                  />
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M13.2857 13.2857C13.6112 12.9603 14.1388 12.9603 14.4642 13.2857L18.0892 16.9107C18.4147 17.2362 18.4147 17.7638 18.0892 18.0892C17.7638 18.4147 17.2362 18.4147 16.9107 18.0892L13.2857 14.4642C12.9603 14.1388 12.9603 13.6112 13.2857 13.2857Z"
-                    fill=""
-                  />
-                </svg>
-              </button>
-              <input
-                type="text"
-                placeholder="Type to search..."
-                value={searchCode}
-                onChange={handleSearchChange}
-                className="w-full bg-transparent pl-9 pr-4 text-black focus:outline-none dark:text-white xl:w-125"
-              />
+                <button type="submit" className="absolute left-0 top-1/2 -translate-y-1/2">
+                    <svg
+                        className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M9.16666 3.33332C5.945 3.33332 3.33332 5.945 3.33332 9.16666C3.33332 12.3883 5.945 15 9.16666 15C12.3883 15 15 12.3883 15 9.16666C15 5.945 12.3883 3.33332 9.16666 3.33332ZM1.66666 9.16666C1.66666 5.02452 5.02452 1.66666 9.16666 1.66666C13.3088 1.66666 16.6667 5.02452 16.6667 9.16666C16.6667 13.3088 13.3088 16.6667 9.16666 16.6667C5.02452 16.6667 1.66666 13.3088 1.66666 9.16666Z"
+                            fill=""
+                        />
+                        <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M13.2857 13.2857C13.6112 12.9603 14.1388 12.9603 14.4642 13.2857L18.0892 16.9107C18.4147 17.2362 18.4147 17.7638 18.0892 18.0892C17.7638 18.4147 17.2362 18.4147 16.9107 18.0892L13.2857 14.4642C12.9603 14.1388 12.9603 13.6112 13.2857 13.2857Z"
+                            fill=""
+                        />
+                    </svg>
+                </button>
+                <input
+                    type="text"
+                    placeholder={language === 'en'?"Search Code/Name Here":'输入代码/名称搜索'}
+                    value={codeDisplay}
+                    onChange={handleSearchChange}
+                    className="w-full bg-transparent pl-9 pr-4 text-black focus:outline-none dark:text-white xl:w-125"
+                />
+                {isDropdownVisible && (
+                    <ul className="absolute left-0 right-0 mt-1 bg-white dark:bg-boxdark-2 dark:text-white shadow-lg max-h-60 overflow-y-auto">
+                        {filteredItems.map((item, index) => (
+                            <li
+                                key={index}
+                            className="flex justify-between p-2 cursor-pointer hover:bg-gray-200 items-center"
+                                onClick={() => handleItemClick(item[0])}
+                            >
+                                {/* Code on the left */}
+                            <span className="font-bold">{item[0].split('.')[1]}</span>
+
+                            {/* Name and Market Code on the right */}
+                            <div className="flex items-center ">
+                                <span className="ml-2 font-bold">{item[1]}</span>
+                                <span className="ml-3 font-bold">{item[0].split('.')[0]}</span>
+                            </div>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </div>
-          </form>
+        </form>
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">
+            <div className="text-right">
+              <select
+                value={language}
+                onChange={(e) => handleLanguageSwitch(e.target.value)}
+                className="px-2 py-1 rounded-xl text-boxdark dark:text-white dark:bg-boxdark"
+              >
+                <option value="en" className={language === 'en' ? 'text-boxdark-2' : 'text-boxdark'}>
+                  EN
+                </option>
+                <option value="cn" className={language === 'cn' ? 'text-boxdark-2' : 'text-boxdark'}>
+                  中
+                </option>
+              </select>
+            </div>
             {/* <!-- Dark Mode Toggler --> */}
             <DarkModeSwitcher />
             {/* <!-- Dark Mode Toggler --> */}
@@ -121,14 +191,12 @@ const Header = (props: {
             {/* <!-- Notification Menu Area --> */}
             <DropdownNotification />
             {/* <!-- Notification Menu Area --> */}
+            <DropdownUser />
 
-            {/* <!-- Chat Notification Area --> */}
-            <DropdownMessage />
-            {/* <!-- Chat Notification Area --> */}
           </ul>
 
           {/* <!-- User Area --> */}
-          <DropdownUser />
+
           {/* <!-- User Area --> */}
         </div>
       </div>

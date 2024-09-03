@@ -1,35 +1,52 @@
+import React, { useEffect, useRef } from 'react';
 import flatpickr from 'flatpickr';
-import { useEffect } from 'react';
+import 'flatpickr/dist/themes/material_green.css'; // Import the CSS for flatpickr
 
-const DatePickerOne = () => {
+interface DatePickerOneProps {
+  selectedDate: Date | null;
+  onChange: (date: Date | null) => void;
+}
+
+const DatePickerOne: React.FC<DatePickerOneProps> = ({ selectedDate, onChange }) => {
+  const datepickerRef = useRef(null);
+  const flatpickrInstance = useRef<flatpickr.Instance | null>(null);
+
   useEffect(() => {
-    // Init flatpickr
-    flatpickr('.form-datepicker', {
-      mode: 'single',
-      static: true,
-      monthSelectorType: 'static',
-      dateFormat: 'M j, Y',
-      prevArrow:
-        '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
-      nextArrow:
-        '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
-    });
+    if (datepickerRef.current) {
+      flatpickrInstance.current = flatpickr(datepickerRef.current, {
+        mode: 'single',
+        static: true,
+        dateFormat: 'Y-m-d',
+        monthSelectorType: 'static', // Enable month and year selectors
+        prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
+        nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
+        onChange: (selectedDates) => {
+          if (selectedDates.length > 0) {
+            onChange(selectedDates[0] as Date); // Pass the selected date to the parent component
+          } else {
+            onChange(null); // Handle no date selection
+          }
+        },
+      });
+    }
 
-    
-  }, []);
+    return () => {
+      // Clean up flatpickr instance
+      if (flatpickrInstance.current) {
+        flatpickrInstance.current.destroy();
+        flatpickrInstance.current = null;
+      }
+    };
+  }, [onChange]);
 
   return (
     <div>
-      <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-        Date picker
-      </label>
       <div className="relative">
         <input
+          ref={datepickerRef}
           className="form-datepicker w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-          placeholder="mm/dd/yyyy"
-          data-class="flatpickr-right"
+          defaultValue={selectedDate ? selectedDate.toISOString().split('T')[0] : ''}
         />
-
         <div className="pointer-events-none absolute inset-0 left-auto right-5 flex items-center">
           <svg
             width="18"
