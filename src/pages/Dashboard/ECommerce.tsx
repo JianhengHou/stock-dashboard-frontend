@@ -9,6 +9,8 @@ import MapOne from '../../components/Maps/MapOne';
 import TableOne from '../../components/Tables/TableOne';
 import DefaultLayout from '../../layout/DefaultLayout';
 
+import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+
 const ECommerce: React.FC = () => {
   return (
     <DefaultLayout>
