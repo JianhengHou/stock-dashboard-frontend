@@ -1936,7 +1936,7 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
               <p className="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
                 {language === 'en'
                         ? 'We keep adding new features such as AI strategy, community, and custom features for investors.'
-                        : '我们将持续推出更多功能，包括AI策略、高信噪比社区以及为精英投资者定制的功能。'
+                        : '我们将持续推出更多功能，包括AI策略、高信噪比社群以及为投资者定制的功能。'
                 }
               </p>
               <a
