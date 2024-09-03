@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PricingTableOne from '../components/PricingTables/PricingTableOne';
+import alphahoodLogo from "../../assets/images/logo/alphahood-logo.svg"
 import Swiper from 'swiper/bundle';
 import 'swiper/css';
 
@@ -165,7 +166,7 @@ const Home: React.FC = () => {
          <div className="w-80 max-w-full px-4">
             <a href="/" className="block py-4">
             <img
-               src="../../assets/images/logo/alphahood-logo.svg"
+               src={alphahoodLogo}
                alt="logo"
                className="w-full"
                />
@@ -4577,7 +4578,7 @@ const Home: React.FC = () => {
                 className="mb-6 inline-block max-w-[160px]"
               >
                 <img
-                  src="../../assets/images/logo/alphahood-logo.svg"
+                  src={alphahoodLogo}
                   alt="logo"
                   className="max-w-full"
                 />
