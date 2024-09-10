@@ -1,8 +1,8 @@
 import favicon from "../images/favicon.ico";
-import React, { useState, useEffect } from 'react';
-import HomeHeader from '../components/HomeComponents/HomeHeader.tsx';
-import tutorialMCDEN from "../images/tutorial/Tutorial_MCD_EN.jpg";
-import tutorialMCDCN from "../images/tutorial/Tutorial_MCD_CN.jpg";
+import React, { useState, useEffect } from "react";
+import HomeHeader from "../components/HomeComponents/HomeHeader.tsx";
+// import tutorialMCDEN from "../images/tutorial/Tutorial_MCD_EN.jpg";
+// import tutorialMCDCN from "../images/tutorial/Tutorial_MCD_CN.jpg";
 import tutorialHIMSEN from "../images/tutorial/Tutorial_HIMS_EN.jpg";
 import tutorialHIMSCN from "../images/tutorial/Tutorial_HIMS_CN.jpg";
 import tutorialAAPLEN from "../images/tutorial/Tutorial_AAPL_EN.jpg";
@@ -40,6 +40,13 @@ const TutorialCapitalFlowHistory: React.FC = () => {
       };
     }, []);
 
+// <div className="flex flex-col items-center lg:items-start">
+//           <img
+//             src={language === 'en'?tutorialMCDEN:tutorialMCDCN}
+//             alt="tutorial MCD"
+//             className="-mt-8 w-full rounded-xl object-cover object-center mb-8 lg:max-w-[1000px]" // Adjust margins as needed
+//           />
+//         </div>
 
 return (
 <>
@@ -149,13 +156,7 @@ return (
             </p>
           </div>
         </div>
-        <div className="flex flex-col items-center lg:items-start">
-          <img
-            src={language === 'en'?tutorialMCDEN:tutorialMCDCN}
-            alt="tutorial MCD"
-            className="-mt-8 w-full rounded-xl object-cover object-center mb-8 lg:max-w-[1000px]" // Adjust margins as needed
-          />
-        </div>
+
 
         {/* Section 3 */}
         <div className="flex flex-col items-center lg:flex-row lg:items-start lg:space-x-8 ">
