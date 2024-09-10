@@ -1,19 +1,19 @@
-import favicon from "../../images/favicon.ico";
+import favicon from "../images/favicon.ico";
 import React, { useState, useEffect } from 'react';
-import HomeHeader from '../../components/HomeComponents/HomeHeader.tsx';
-import tutorialAAPLEN from "../../images/tutorial/tutorial_strategy_AAPL_EN.jpg";
-import tutorialAAPLCN from "../../images/tutorial/tutorial_strategy_AAPL_CN.jpg";
-import tutorialTCOMEN from "../../images/tutorial/tutorial_strategy_TCOM_EN.jpg";
-import tutorialTCOMCN from "../../images/tutorial/tutorial_strategy_TCOM_CN.jpg";
-import tutorialTCOMDASHEN from "../../images/tutorial/tutorial_strategy_TCOM_dash_EN.jpg";
-import tutorialTCOMDASHCN from "../../images/tutorial/tutorial_strategy_TCOM_dash_CN.jpg";
-import tutorialM1EN from "../../images/tutorial/tutorial_strategy_M1_EN.jpg";
-import tutorialM1CN from "../../images/tutorial/tutorial_strategy_M1_CN.jpg";
-import tutorialM2EN from "../../images/tutorial/tutorial_strategy_M2_EN.jpg";
-import tutorialM2CN from "../../images/tutorial/tutorial_strategy_M2_CN.jpg";
-import tutorialMDASHEN from "../../images/tutorial/tutorial_strategy_M_dash_EN.jpg";
-import tutorialMDASHCN from "../../images/tutorial/tutorial_strategy_M_dash_CN.jpg";
-import PricingTableOne from '../../components/PricingTables/PricingTableOne';
+import HomeHeader from '../components/HomeComponents/HomeHeader.tsx';
+import tutorialAAPLEN from "../images/tutorial/tutorial_strategy_AAPL_EN.jpg";
+import tutorialAAPLCN from "../images/tutorial/tutorial_strategy_AAPL_CN.jpg";
+import tutorialTCOMEN from "../images/tutorial/tutorial_strategy_TCOM_EN.jpg";
+import tutorialTCOMCN from "../images/tutorial/tutorial_strategy_TCOM_CN.jpg";
+import tutorialTCOMDASHEN from "../images/tutorial/tutorial_strategy_TCOM_dash_EN.jpg";
+import tutorialTCOMDASHCN from "../images/tutorial/tutorial_strategy_TCOM_dash_CN.jpg";
+import tutorialM1EN from "../images/tutorial/tutorial_strategy_M1_EN.jpg";
+import tutorialM1CN from "../images/tutorial/tutorial_strategy_M1_CN.jpg";
+import tutorialM2EN from "../images/tutorial/tutorial_strategy_M2_EN.jpg";
+import tutorialM2CN from "../images/tutorial/tutorial_strategy_M2_CN.jpg";
+import tutorialMDASHEN from "../images/tutorial/tutorial_strategy_M_dash_EN.jpg";
+import tutorialMDASHCN from "../images/tutorial/tutorial_strategy_M_dash_CN.jpg";
+import PricingTableOne from '../components/PricingTables/PricingTableOne';
 
 const TutorialCapitalStrategy: React.FC = () => {
     const defaultLang = 'en'

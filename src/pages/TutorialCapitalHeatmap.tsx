@@ -1,14 +1,14 @@
-import favicon from "../../images/favicon.ico";
+import favicon from "../images/favicon.ico";
 import React, { useState, useEffect } from 'react';
-import HomeHeader from '../../components/HomeComponents/HomeHeader.tsx';
-import tutorialHeatmapEN from "../../images/tutorial/tutorial_heatmap_EN.jpg";
-import tutorialHeatmapCN from "../../images/tutorial/tutorial_heatmap_CN.jpg";
-import tutorialTreeMapEN from "../../images/tutorial/tutorial_treemap_EN.jpg";
-import tutorialTreeMapCN from "../../images/tutorial/tutorial_treemap_CN.jpg";
-import tutorialRoutersNewsCN from "../../images/tutorial/tutorial_routersnews_CN.jpg";
-import tutorialRoutersNewsEN from "../../images/tutorial/tutorial_routersnews_EN.jpg";
+import HomeHeader from '../components/HomeComponents/HomeHeader.tsx';
+import tutorialHeatmapEN from "../images/tutorial/tutorial_heatmap_EN.jpg";
+import tutorialHeatmapCN from "../images/tutorial/tutorial_heatmap_CN.jpg";
+import tutorialTreeMapEN from "../images/tutorial/tutorial_treemap_EN.jpg";
+import tutorialTreeMapCN from "../images/tutorial/tutorial_treemap_CN.jpg";
+import tutorialRoutersNewsCN from "../images/tutorial/tutorial_routersnews_CN.jpg";
+import tutorialRoutersNewsEN from "../images/tutorial/tutorial_routersnews_EN.jpg";
 
-import PricingTableOne from '../../components/PricingTables/PricingTableOne';
+import PricingTableOne from '../components/PricingTables/PricingTableOne';
 
 const TutorialCapitalHeatMap: React.FC = () => {
     const defaultLang = 'en'
