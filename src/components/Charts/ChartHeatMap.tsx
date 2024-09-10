@@ -88,12 +88,10 @@ const logBase2 = (value: number) => {
 };
 
 const ChartHeatMap: React.FC = () => {
-  const [industry_granularity, setIndustryGranularity] = useState<string>('day'); // State to manage granularity
-  const [individual_granularity, setIndividualGranularity] = useState<string>('day'); // State to manage granularity
-  const [individual_flow_granularity, setIndividualFlowGranularity] = useState<string>('day'); // State to manage granularity
-  const [market, setMarkt] = useState<string>('HK'); // State to manage granularity
-  const defaultLang = 'en';
-  const language = localStorage.getItem('language') || defaultLang;
+  const [industry_granularity, setIndustryGranularity] = useState<string>(sessionStorage.getItem('industry_granularity') || 'day'); // State to manage granularity
+  const [individual_granularity, setIndividualGranularity] = useState<string>(sessionStorage.getItem('individual_granularity') || 'day'); // State to manage granularity
+  const [market, setMarkt] = useState<string>(sessionStorage.getItem('heatmap_market') ||'US'); // State to manage granularity
+  const language = localStorage.getItem('language') || 'en';
   const { data: heatMap, isLoadingHeatMap, isErrorHeatMap } = useQuery(
     ['heatMap', industry_granularity, market],
     () => fetchIndustryHeatMapData(industry_granularity, market)
@@ -117,16 +115,21 @@ const ChartHeatMap: React.FC = () => {
     if (heatMap) {
     // Grouping the data by date and applying the log transformation
     const groupedData = heatMap.reduce((acc: any, [date, industry, in_flow, code]: [string, string, number, string]) => {
-      if (!acc[date]) {
-        acc[date] = [];
-      }
-      // Apply the log transformation based on the adjustedInFlow value
+      if (industry) {
 
-      acc[date].push({
-        x: industry,
-        y: logBase2(in_flow),
-        originalY: in_flow
-      });
+        if (!acc[date]) {
+          acc[date] = [];
+        }
+        // Apply the log transformation based on the adjustedInFlow value
+        acc[date].push({
+          x: industry,
+          y: logBase2(in_flow),
+          originalY: in_flow
+        });
+      }
+      else {
+      print(industry,date)
+      }
 
       return acc;
     }, {});
@@ -142,7 +145,6 @@ const ChartHeatMap: React.FC = () => {
 
     if (treeMap) {
         const groupedData: { [key: string]: NodeData[] } = {};
-
         treeMap.forEach(([industry, name, volume, in_flow, code]) => {
           if (!groupedData[industry]) {
             groupedData[industry] = [];
@@ -159,7 +161,6 @@ const ChartHeatMap: React.FC = () => {
           key: industry,
           data: groupedData[industry],
         }));
-
         setTreemapState(transformedData);
     }
 
@@ -224,7 +225,7 @@ const ChartHeatMap: React.FC = () => {
 const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
   const [tooltipContent, setTooltipContent] = useState<React.ReactNode>(null);
   const handleMouseEnter = (event: any, data: any) => {
-    const flowValue =
+    const flowValue = data.data.flow === undefined? '':
       data.data.flow > 0
         ? `$+${data.data.flow}M`
         : `$${data.data.flow}M`;
@@ -237,7 +238,9 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
       </div>
     );
   };
-
+  const handleOnclick = (event: any, data: any) => {
+        window.open(`/dashboard?code=${market}.${data.data.key}`, '_blank')
+  }
   return (
     <>
       <TreeMapRect
@@ -246,6 +249,7 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
         fill={fill}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={() => setTooltipContent(null)}  // Clear tooltip on mouse leave
+        onClick={handleOnclick}
         tooltip={
         tooltipContent && (
           <ChartTooltip
@@ -268,7 +272,7 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
       placement = 'middle'
     }) => {
       const key = data.data.key;
-      const flow = typeof data.data.flow === 'undefined'? '' : data.data.flow
+      const flow = typeof data.data.flow ===undefined? '' : data.data.flow
       const width = data.x1 - data.x0;
       const height = data.y1 - data.y0;
       const displayText = data.height === 0 ? data.data.flow >0? `${key}\n$+${flow}M`: `${key}\n$${flow}M`: key;
@@ -368,6 +372,7 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
     labels: {
       rotateAlways: true,
       rotate: -90, // Rotate the labels vertically
+      maxHeight: 250,  // Increase the max height to accommodate the label
     },
   },
   stroke: {
@@ -418,7 +423,7 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
       breakpoint: 1800,
       options: {
         chart: {
-          height: 760,
+          height: 750,
         },
       },
     },
@@ -426,7 +431,7 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
       breakpoint: 2000,
       options: {
         chart: {
-          height: 770,
+          height: 750,
         },
       },
     },
@@ -439,21 +444,40 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
   return (
   <div>
   <div className="flex items-center  bg-whiter dark:bg-meta-4 w-full">
+
     <button
       className={`flex-1 py-3 text-base font-medium  shadow-card hover:bg-white hover:shadow-card dark:hover:bg-boxdark ${market === 'US' ? 'bg-white dark:bg-boxdark text-primary dark:text-primary' : 'text-black dark:text-white '}`}
-      onClick={() => setMarkt('US')}
+      onClick={() => {
+      setMarkt('US');
+      sessionStorage.setItem('heatmap_market', 'US');
+      }
+      }
     >
       {language === 'en' ? 'US Market' : '美股'}
     </button>
     <button
       className={`flex-1 py-3 text-base font-medium shadow-card hover:bg-white hover:shadow-card  dark:hover:bg-boxdark ${market === 'HK' ? 'bg-white dark:bg-boxdark text-primary dark:text-primary' : 'text-black dark:text-white'}`}
-      onClick={() => setMarkt('HK')}
+      onClick={() => {
+      setMarkt('HK');
+      sessionStorage.setItem('heatmap_market', 'HK');
+      }}
     >
       {language === 'en' ? 'HK Market' : '港股'}
     </button>
   </div>
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
-      <div className="flex flex-wrap items-start justify-between sm:flex-nowrap mt-5">
+           <div className="flex flex-wrap items-start justify-end sm:flex-nowrap">
+           <a
+          href="/tutorialCapitalHeatMap"
+          className="text-s text-blue-600 dark:text-blue-400 hover:underline"
+          target="_blank" // Opens the link in a new tab
+          rel="noopener noreferrer"
+        >
+       {language === 'en' ? 'How to use this heatmap?' : '如何使用此热力图？'}
+      </a>
+              </div>
+
+      <div className="flex flex-wrap items-start justify-between sm:flex-nowrap">
       <h4 className="text-xl font-semibold text-black dark:text-white">
             {language === 'en'
                         ? 'Industry Capital Flow Heat Map ($M)'
@@ -465,33 +489,47 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
       <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
         <button
           className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${industry_granularity === 'day' ? 'bg-white dark:bg-boxdark' : ''}`}
-          onClick={() => setIndustryGranularity('day')}
+          onClick={() => {
+          setIndustryGranularity('day');
+          sessionStorage.setItem('industry_granularity', 'day');
+          }
+          }
         >
           {language === 'en'
-                        ? 'Day'
-                        : '日'
+                        ? 'Daily'
+                        : '按日'
       }
         </button>
         <button
           className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${industry_granularity === 'week' ? 'bg-white dark:bg-boxdark' : ''}`}
-          onClick={() => setIndustryGranularity('week')}
+          onClick={() => {
+          setIndustryGranularity('week');
+          sessionStorage.setItem('industry_granularity', 'week');
+          }
+          }
         >
           {language === 'en'
-                        ? 'Week'
-                        : '周'
+                        ? 'Weekly'
+                        : '按周'
       }
         </button>
         <button
           className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${industry_granularity === 'month' ? 'bg-white dark:bg-boxdark' : ''}`}
-          onClick={() => setIndustryGranularity('month')}
+          onClick={() => {
+          setIndustryGranularity('month');
+          sessionStorage.setItem('industry_granularity', 'month');
+          }
+          }
         >
           {language === 'en'
-                        ? 'Month'
-                        : '月'
+                        ? 'Monthly'
+                        : '按月'
       }
         </button>
       </div>
+
     </div>
+
       </div>
 
       <div className='mb-3'>
@@ -527,9 +565,16 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
       </h4>
       <div className="flex w-full max-w-45 justify-end">
           <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
+            <span className="mr-2 text-sm font-medium text-black dark:text-white">
+                {language === 'en' ? 'Latest:' : '近期:'}
+            </span>
             <button
               className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${individual_granularity === 'day' ? 'bg-white dark:bg-boxdark' : ''}`}
-              onClick={() => setIndividualGranularity('day')}
+              onClick={() => {
+              setIndividualGranularity('day');
+              sessionStorage.setItem('individual_granularity', 'day');
+              }
+              }
             >
               {language === 'en'
                         ? 'Day'
@@ -538,7 +583,12 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
             </button>
             <button
               className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${individual_granularity === 'week' ? 'bg-white dark:bg-boxdark' : ''}`}
-              onClick={() => setIndividualGranularity('week')}
+              onClick={() => {
+              setIndividualGranularity('week');
+              sessionStorage.setItem('individual_granularity', 'week');
+              }
+
+              }
             >
               {language === 'en'
                         ? 'Week'
@@ -547,7 +597,11 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
             </button>
             <button
               className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${individual_granularity === 'month' ? 'bg-white dark:bg-boxdark' : ''}`}
-              onClick={() => setIndividualGranularity('month')}
+              onClick={() => {
+              setIndividualGranularity('month');
+              sessionStorage.setItem('individual_granularity', 'month');
+              }
+              }
             >
               {language === 'en'
                         ? 'Month'

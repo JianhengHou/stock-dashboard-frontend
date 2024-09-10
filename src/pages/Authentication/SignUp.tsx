@@ -262,6 +262,9 @@ const SignUp: React.FC = () => {
           </div>
 
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
+            <Link to="/">
+              <img className="block xl:hidden mb-5" src={LogoDark} alt="Logo" />
+            </Link>
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium">
               {language === 'en'

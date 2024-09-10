@@ -28,7 +28,7 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
     const [title, setTitle] = useState<string>('');
     const [industry, setIndustry] = useState<string>('');
     const [changeRate, setChangeRate] = useState<number | null>(null);
-    const [period, setPeriod] = useState<string>('6'); // Default period is 3 months
+    const [period, setPeriod] = useState<string>(sessionStorage.getItem('dashboard_period') || '6'); // Default period is 3 months
 
     const [latestTradingDate, setLatestTradingDate] = useState<string>('');
     const [latestOpen, setLatestOpen] = useState<number | null>(null);
@@ -60,7 +60,6 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
       });
       return response.data;
     } catch (error) {
-      console.error('Error fetching data:', error);
       return null;
     }
   };
@@ -236,7 +235,6 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
 
     fetchData();
   }, [tickerCode, period]);
-
   const barOptions = (name: string): ApexOptions => ({
     chart: {
       type: 'bar',
@@ -277,8 +275,8 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
       enabled: false,
     },
     tooltip: {
-      shared: true,
-      intersect: false,
+      shared: false,
+      intersect: true,
     },
     legend: { show: false },
     grid: {
@@ -293,7 +291,7 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
         barHeight: '100%',
         borderRadius: 0,
         padding: {
-          top: 10,
+          top: 0,
           right: 0,
           bottom: 0,
           left: 0,
@@ -348,138 +346,146 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
 
   const handlePeriodChange = (newPeriod: string) => {
     setPeriod(newPeriod); // Update period state
+    sessionStorage.setItem('dashboard_period', newPeriod)
   };
 
   return (
   <div className="col-span-12 rounded-sm -mb-5 border border-stroke bg-white px-5 pt-4 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-4 xl:col-span-8">
-    {industry && (
-      <p className="text-gray-500 dark:text-gray-400">
-        {industry}
-      </p>
-    )}
-    <div className="flex justify-between items-center">
+   {industry && (
+   <div className="flex justify-between items-center">
+   <p className="text-gray-500 dark:text-gray-400">
+      {industry}
+   </p>
+   <a
+      href="/tutorialCapitalFlowHistory"
+      className="text-s text-blue-600 dark:text-blue-400 hover:underline"
+      target="_blank" // Opens the link in a new tab
+      rel="noopener noreferrer"
+    >
+      {language === 'en' ? 'How to use this dashboard?' : '如何使用此仪表盘？'}
+   </a>
+   </div>
+   )}
+   <div className="flex justify-between items-center">
       <h5 className="text-xl font-semibold text-black dark:text-white">
-        {title}
-        {latestClose !== null && changeRate !== null && (
-          <span className={`ml-4 ${getChangeRateColor(parseFloat(changeRate))}`}>
-            ${latestClose} {getChangeRateArrow(parseFloat(changeRate))} {getFormattedChangeRate(parseFloat(changeRate))}
-          </span>
-        )}
+         {title}
+         {latestClose !== null && changeRate !== null && (
+         <span className={`ml-4 ${getChangeRateColor(parseFloat(changeRate))}`}>
+         ${latestClose} {getChangeRateArrow(parseFloat(changeRate))} {getFormattedChangeRate(parseFloat(changeRate))}
+         </span>
+         )}
       </h5>
-      <div className="flex w-full max-w-45 justify-end mb-1">
-  <div className="flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
-    <button
-      className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${
-        period === '3' ? 'bg-white dark:bg-boxdark' : ''
-      }`}
-      onClick={() => handlePeriodChange('3')}
-    >
-      {language === 'en'
-                        ? '3M'
-                        : '3月'
-      }
-    </button>
-    <button
-      className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${
-        period === '6' ? 'bg-white dark:bg-boxdark' : ''
-      }`}
-      onClick={() => handlePeriodChange('6')}
-    >
-      {language === 'en'
-                        ? '6M'
-                        : '6月'
-      }
-    </button>
-    <button
-      className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${
-        period === '12' ? 'bg-white dark:bg-boxdark' : ''
-      }`}
-      onClick={() => handlePeriodChange('12')}
-    >
-      {language === 'en'
-                        ? '12M'
-                        : '12月'
-      }
-    </button>
-  </div>
-</div>
-</div>
-  <div className="flex flex-col text-sm text-gray-700 dark:text-gray-300">
-  {/* First Row */}
-  <div className="flex flex-wrap gap-4 mb-1">
-    {[
-      { label: language === 'en'? 'Last Trading Date:':'最新交易日', value: latestTradingDate },
-      { label: language === 'en'? 'Open:':'开盘价', value: `$${latestOpen?.toFixed(2)}` },
-      { label: language === 'en'? 'Close:':'收盘价', value: `$${latestClose?.toFixed(2)}` },
-      { label: language === 'en'? 'High:':'最高价', value: `$${latestHigh?.toFixed(2)}` },
-      { label: language === 'en'? 'Low:':'最低价', value: `$${latestLow?.toFixed(2)}` },
-      { label: 'MA5:', value: `$${latestMA5?.toFixed(2)}`, color: '#F0933F' },
-      { label: 'MA10:', value: `$${latestMA10?.toFixed(2)}`, color: '#4FACE1' },
-      { label: 'MA20:', value: `$${latestMA20?.toFixed(2)}`, color: '#D675D3' },
-      { label: 'MA50:', value: `$${latestMA50?.toFixed(2)}`, color: '#5EC284' },
-      { label: 'MA120:', value: `$${latestMA120?.toFixed(2)}`, color: '#EC6B65' },
-    ].map((item, index) => (
-      <div key={index} className="flex items-center">
-        <span className="font-bold mr-1" style={{ color: item.color || 'inherit' }}>
-          {item.label}
-        </span>
-        <span className="font-bold" style={{ color: item.color || 'inherit' }}>
-          {item.value}
-        </span>
-      </div>
-    ))}
-  </div>
 
-  {/* Second Row */}
-  <div className="flex flex-wrap gap-4">
-    {[
-      { label: language === 'en'? 'Volume:': '成交量:', value: latestVolume ? `${(latestVolume / 1e6).toFixed(2)} M` : '-' },
-      { label: language === 'en'? 'Turnover Rate:': '换手率:' , value: latestTurnOverRate ? `${latestTurnOverRate.toFixed(2)}%` : '-' },
-      { label: 'P/E:', value: latestPE?.toFixed(2) },
-      { label: language === 'en'? 'Net Flow:': '净流入:', value: latestNetFlow ? `$${(latestNetFlow / 1e6).toFixed(2)} M` : '-' },
-      { label: language === 'en'? 'Main Net Flow:': '主力净流入:', value: latestMainFlow ? `$${(latestMainFlow / 1e6).toFixed(2)} M` : '-' },
-      { label: language === 'en'? 'Mid/Small Flow:': '中小单净流入:', value: latestMidSmlFlow ? `$${(latestMidSmlFlow / 1e6).toFixed(2)} M` : '-' },
-    ].map((item, index) => (
-      <div key={index} className="flex items-center">
-        <span className="font-bold mr-1">{item.label}</span>
-        <span
-          className={`${
+      <div className="flex w-full max-w-50 justify-end mb-1">
+         <div className="flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
+            <span className="mr-2 text-sm font-medium text-black dark:text-white">
+                {language === 'en' ? 'Latest:' : '近期:'}
+            </span>
+            <button
+            className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${
+            period === '3' ? 'bg-white dark:bg-boxdark' : ''
+            }`}
+            onClick={() => handlePeriodChange('3')}
+            >
+            {language === 'en'
+            ? '3M'
+            : '3月'
+            }
+            </button>
+            <button
+            className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${
+            period === '6' ? 'bg-white dark:bg-boxdark' : ''
+            }`}
+            onClick={() => handlePeriodChange('6')}
+            >
+            {language === 'en'
+            ? '6M'
+            : '6月'
+            }
+            </button>
+            <button
+            className={`rounded py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark ${
+            period === '12' ? 'bg-white dark:bg-boxdark' : ''
+            }`}
+            onClick={() => handlePeriodChange('12')}
+            >
+            {language === 'en'
+            ? '12M'
+            : '12月'
+            }
+            </button>
+         </div>
+      </div>
+   </div>
+   <div className="flex flex-col text-sm text-gray-700 dark:text-gray-300">
+      {/* First Row */}
+      <div className="flex flex-wrap gap-4 mb-1">
+         {[
+         { label: language === 'en'? 'Last Trading Date:':'最新交易日', value: latestTradingDate },
+         { label: language === 'en'? 'Open:':'开盘价', value: `$${latestOpen?.toFixed(2)}` },
+         { label: language === 'en'? 'Close:':'收盘价', value: `$${latestClose?.toFixed(2)}` },
+         { label: language === 'en'? 'High:':'最高价', value: `$${latestHigh?.toFixed(2)}` },
+         { label: language === 'en'? 'Low:':'最低价', value: `$${latestLow?.toFixed(2)}` },
+         { label: 'MA5:', value: `$${latestMA5?.toFixed(2)}`, color: '#F0933F' },
+         { label: 'MA10:', value: `$${latestMA10?.toFixed(2)}`, color: '#4FACE1' },
+         { label: 'MA20:', value: `$${latestMA20?.toFixed(2)}`, color: '#D675D3' },
+         { label: 'MA50:', value: `$${latestMA50?.toFixed(2)}`, color: '#5EC284' },
+         { label: 'MA120:', value: `$${latestMA120?.toFixed(2)}`, color: '#EC6B65' },
+         ].map((item, index) => (
+         <div key={index} className="flex items-center">
+            <span className="font-bold mr-1" style={{ color: item.color || 'inherit' }}>
+            {item.label}
+            </span>
+            <span className="font-bold" style={{ color: item.color || 'inherit' }}>
+            {item.value}
+            </span>
+         </div>
+         ))}
+      </div>
+      {/* Second Row */}
+      <div className="flex flex-wrap gap-4">
+         {[
+         { label: language === 'en'? 'Volume:': '成交量:', value: latestVolume ? `${(latestVolume / 1e6).toFixed(2)} M` : '-' },
+         { label: language === 'en'? 'Turnover Rate:': '换手率:' , value: latestTurnOverRate ? `${latestTurnOverRate.toFixed(2)}%` : '-' },
+         { label: 'P/E:', value: latestPE?.toFixed(2) },
+         { label: language === 'en'? 'Net Flow:': '净流入:', value: latestNetFlow ? `$${(latestNetFlow / 1e6).toFixed(2)} M` : '-' },
+         { label: language === 'en'? 'Main Net Flow:': '主力净流入:', value: latestMainFlow ? `$${(latestMainFlow / 1e6).toFixed(2)} M` : '-' },
+         { label: language === 'en'? 'Mid/Small Flow:': '中小单净流入:', value: latestMidSmlFlow ? `$${(latestMidSmlFlow / 1e6).toFixed(2)} M` : '-' },
+         ].map((item, index) => (
+         <div key={index} className="flex items-center">
+            <span className="font-bold mr-1">{item.label}</span>
+            <span
+            className={`${
             item.label.includes('Flow') | item.label.includes('流') ? (parseFloat(item.value.replace(/[^0-9.-]/g, '')) > 0 ? 'text-green-500' : 'text-red-500') : ''
-          }`}
-        >
-          {item.value}
-        </span>
+            }`}
+            >
+            {item.value}
+            </span>
+         </div>
+         ))}
       </div>
-    ))}
-  </div>
-</div>
-
-
-
-
-
-    <div id="candleChart" className="-ml-5 mb-5">
+   </div>
+   <div id="candleChart" className="-ml-5 mb-5">
       <ReactApexChart
-        options={candleOptions}
-        series={state.series}
-        type="candlestick"
-        height="100%"
-        width="100%"
-      />
-
+         options={candleOptions}
+         series={state.series}
+         type="candlestick"
+         height="100%"
+         width="100%"
+         />
       {barSeries.map((series, index) => (
-        <div className="relative -mb-10" key={index}>
-          <ReactApexChart
+      <div className="relative -mb-10" key={index}>
+         <ReactApexChart
             options={barOptions(series.name)}
             series={[series]}
             type="bar"
             height="100%"
             width="100%"
-          />
-        </div>
+            />
+      </div>
       ))}
-    </div>
-  </div>
+   </div>
+</div>
   );
 };
 

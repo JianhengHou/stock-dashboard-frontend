@@ -29,7 +29,7 @@ const PopupForm: React.FC<PopupFormProps> = ({ show, onClose, onSubmit, strategy
     } else if ((strategy === 'Price Gap' | strategy === '价格跳空') && (tag === 'Consecutive Multi-day' | tag === '连续多日')) {
       setDropdownStrategy('price_gap|jump_up_count|');
     } else if ((strategy === 'Price Gap' | strategy === '价格跳空') && (tag === 'In-window Multi-day' | tag === '窗口期内多日')) {
-      setDropdownStrategy('price_gap|price_jump_up_count|7');
+      setDropdownStrategy('price_gap|jump_up_count|7');
     }
   }, [strategy, tag]);
 
@@ -153,10 +153,10 @@ const PopupForm: React.FC<PopupFormProps> = ({ show, onClose, onSubmit, strategy
       case '价格跳空:窗口期内多日':
         return (
           <>
-            <option value="price_gap|price_jump_up_count|7">5天内向上跳空</option>
-            <option value="price_gap|price_jump_up_count|14">10天内向上跳空</option>
-            <option value="price_gap|price_jump_down_count|7">10天内向上跳空</option>
-            <option value="price_gap|price_jump_down_count|14">10天内向下跳空</option>
+            <option value="price_gap|jump_up_count|7">5天内向上跳空</option>
+            <option value="price_gap|jump_up_count|14">10天内向上跳空</option>
+            <option value="price_gap|jump_down_count|7">10天内向上跳空</option>
+            <option value="price_gap|jump_down_count|14">10天内向下跳空</option>
           </>
         );
       default:

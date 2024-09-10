@@ -12,7 +12,7 @@ const Header = (props: {
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
     const navigate = useNavigate();
-    const [codeDisplay, setCodeDisplay] = useState(sessionStorage.getItem('selectedSearchCode') || null);
+    const [codeDisplay, setCodeDisplay] = useState(null);
     const [filteredItems, setFilteredItems] = useState([]);
     const [isDropdownVisible, setDropdownVisible] = useState(false);
     const [data, setData] = useState([]);
@@ -54,11 +54,22 @@ const Header = (props: {
     };
 
     const handleItemClick = (item) => {
-        setCodeDisplay(item)
+        setCodeDisplay(null)
         setFilteredItems([]);
         setDropdownVisible(false);
-        sessionStorage.setItem('selectedSearchCode', item); // Store the selected code
-        navigate(`/dashboard?code=${item}`);
+        const code = item
+        sessionStorage.setItem('selectedSearchCode', code); // Store the selected code
+        navigate(`/dashboard?code=${code}`);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setFilteredItems([]);
+        setDropdownVisible(false);
+        const code = codeDisplay.toUpperCase()
+        setCodeDisplay(null)
+        sessionStorage.setItem('selectedSearchCode', code); // Store the selected code
+        navigate(`/dashboard?code=${code}`);
     };
 
   return (
@@ -112,7 +123,7 @@ const Header = (props: {
         </div>
 
         <div className="sm:block ml-3">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="relative">
                 <button type="submit" className="absolute left-0 top-1/2 -translate-y-1/2">
                     <svg
@@ -143,6 +154,7 @@ const Header = (props: {
                     value={codeDisplay}
                     onChange={handleSearchChange}
                     className="w-full bg-transparent pl-9 pr-4 text-black focus:outline-none dark:text-white xl:w-125"
+
                 />
                 {isDropdownVisible && (
                     <ul className="absolute left-0 right-0 mt-1 bg-white dark:bg-boxdark-2 dark:text-white shadow-lg max-h-60 overflow-y-auto">

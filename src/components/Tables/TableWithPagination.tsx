@@ -58,16 +58,22 @@ const TableWithPagination: React.FC<StrategyDataProps> = ({ strategyData, displa
     pageNumbers.push(i);
   }
 
-  const navigate = useNavigate();
-  const handleNavigate = (searchCode: string) => {
-    navigate(`/dashboard?code=${searchCode}`);
-  };
-
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-      <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-        {language === 'en'? 'Top Tickers' : '股票列表'} {strategyData ? displaySelectedStrategy: ''}
-      </h4>
+      <div className="flex justify-between items-center mb-6">
+        <h4 className="text-xl font-semibold text-black dark:text-white">
+          {language === 'en' ? 'Top Tickers' : '股票列表'} {strategyData ? displaySelectedStrategy : ''}
+        </h4>
+
+        <a
+          href="/tutorialCapitalStrategy"
+          className="text-s text-blue-600 dark:text-blue-400 hover:underline"
+          target="_blank" // Opens the link in a new tab
+          rel="noopener noreferrer"
+        >
+          {language === 'en' ? 'How to use this strategy tool?' : '如何使用此策略工具？'}
+        </a>
+      </div>
       <div className="flex flex-col">
         <div className="grid grid-cols-3 rounded-sm bg-primary dark:bg-primary dark: text-white sm:grid-cols-5">
           <div className="p-2.5 xl:p-5">
@@ -128,7 +134,7 @@ const TableWithPagination: React.FC<StrategyDataProps> = ({ strategyData, displa
 
             {ticker && (
               <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-                <button className="hover:text-primary" onClick={() => handleNavigate(ticker.code)}>
+                <button className="hover:text-primary" onClick={() => window.open(`/dashboard?code=${ticker.code}`, '_blank')}>
                   <svg
                     className="fill-current"
                     width="24"

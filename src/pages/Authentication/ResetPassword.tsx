@@ -190,6 +190,9 @@ const ResetPassword: React.FC = () => {
             </div>
           </div>
           <div className="w-full xl:w-1/2">
+            <Link to="/">
+              <img className="block xl:hidden mb-5" src={LogoDark} alt="Logo" />
+            </Link>
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                 {language === 'en'? 'Reset Password':'重置密码'}

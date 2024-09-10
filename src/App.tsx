@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { QueryClientProvider, queryClient } from './queryClient'; // Import from queryClient.ts
-
 import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
@@ -27,9 +26,10 @@ import ComingSoon from './pages/ComingSoon';
 import Invoice from './pages/Invoice';
 import PricingTables from './pages/PricingTables';
 import Home from './pages/Home';
-import HomeCN from './pages/HomeCN';
 import Payment from './pages/Payment';
-
+import TutorialCapitalFlowHistory from './components/HomeComponents/TutorialCapitalFlowHistory';
+import TutorialCapitalHeatMap from './components/HomeComponents/TutorialCapitalHeatMap';
+import TutorialCapitalStrategy from './components/HomeComponents/TutorialCapitalStrategy';
 import { Authenticator } from '@aws-amplify/ui-react';
 
 
@@ -134,6 +134,33 @@ function App() {
             <>
               <PageTitle title="Home | AlphaHood" />
               <Home />
+            </>
+          }
+        />
+        <Route
+          path="/TutorialCapitalFlowHistory"
+          element={
+            <>
+              <PageTitle title="Tutorial: Capital Flow History | AlphaHood" />
+              <TutorialCapitalFlowHistory />
+            </>
+          }
+        />
+        <Route
+          path="/TutorialCapitalHeatMap"
+          element={
+            <>
+              <PageTitle title="Tutorial: Capital Flow HeatMap | AlphaHood" />
+              <TutorialCapitalHeatMap />
+            </>
+          }
+        />
+        <Route
+          path="/TutorialCapitalStrategy"
+          element={
+            <>
+              <PageTitle title="Tutorial: Stock Strategy | AlphaHood" />
+              <TutorialCapitalStrategy />
             </>
           }
         />
