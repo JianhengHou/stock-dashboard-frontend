@@ -6,7 +6,7 @@ import axios from 'axios';
 interface SeriesData {
   name: string;
   type?: 'line' | 'candlestick';
-  data: { x: Date; y: number[] | number }[];
+  data: { x: string; y: number[] | number }[];
 }
 
 interface CandleData {
@@ -15,7 +15,7 @@ interface CandleData {
 
 interface BarData {
   name: string;
-  data: { x: Date; y: number }[];
+  data: { x: string; y: number }[];
 }
 
 interface CandleChartProps {
@@ -73,7 +73,19 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
       },
     },
     xaxis: {
-      type: 'datetime',
+      type: 'category',
+      tooltip: {
+        enabled: true,
+      },
+      labels: {
+      show: false,  // Hide the labels on the x-axis
+    },
+    axisTicks: {
+      show: false,  // Hide the ticks on the x-axis
+    },
+    axisBorder: {
+      show: false,  // Hide the border on the x-axis
+    },
     },
     yaxis: {
       tooltip: {
@@ -148,7 +160,7 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
         const data = await fetchChartData(tickerCode, parseInt(period)); // Ensure period is parsed to an integer if necessary
         if (Array.isArray(data) && data.length > 0) {
           const priceData = data.map((item: any) => ({
-            x: new Date(item[4]),
+            x: item[4].split(' ')[0],
             y: [item[5], item[7], item[8], item[6]]
           })).filter((item: any) => item.y.every((value: any) => value !== null && value !== undefined));
           const ma5 = data.map((item: any) => ({ x: new Date(item[4]), y: item[22].toFixed(2) }));
@@ -157,10 +169,10 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
           const ma50 = data.map((item: any) => ({ x: new Date(item[4]), y: item[25].toFixed(2) }));
           const ma120 = data.map((item: any) => ({ x: new Date(item[4]), y: item[26].toFixed(2) }));
 
-          const barVolume = data.map((item: any) => ({ x: new Date(item[4]), y: item[11].toFixed(0) }));
-          const barInFlow = data.map((item: any) => ({ x: new Date(item[4]), y: item[15] }));
-          const barMainInFlow = data.map((item: any) => ({ x: new Date(item[4]), y: item[16] }));
-          const barMidSmlInFlow = data.map((item: any) => ({ x: new Date(item[4]), y: item[17] }));
+          const barVolume = data.map((item: any) => ({ x: item[4].split(' ')[0], y: item[11].toFixed(0) }));
+          const barInFlow = data.map((item: any) => ({ x: item[4].split(' ')[0], y: item[15] }));
+          const barMainInFlow = data.map((item: any) => ({ x: item[4].split(' ')[0], y: item[16] }));
+          const barMidSmlInFlow = data.map((item: any) => ({ x: item[4].split(' ')[0], y: item[17] }));
 
           const industry = data[0][3];
           const tickerName = data[0][2];
@@ -221,8 +233,8 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
             ]
           });
           setBarSeries([
-            { name: language === 'en'?'Volume':'成交量', data: barVolume },
-            { name: language === 'en'?'Net Flow':'净流入', data: barInFlow },
+            { name: language === 'en'?'Volume':'成交量', data: barVolume},
+            { name: language === 'en'?'Net Flow':'净流入', data: barInFlow},
             { name:language === 'en'? 'Main Flow':'主力净流入', data: barMainInFlow },
             { name:language === 'en'? 'Mid&Sml':'中小单净流入', data: barMidSmlInFlow }
           ]);
@@ -244,7 +256,7 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
       },
     },
     xaxis: {
-      type: 'datetime',
+      type: 'category',
       labels: {
         show: false,
       },
@@ -262,7 +274,6 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
       },
       title: {
         text: name,
-
       },
       axisBorder: {
         show: false,
@@ -277,6 +288,18 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
     tooltip: {
       shared: false,
       intersect: true,
+      y: {
+      formatter: (value: number) => {
+        // Check value and format accordingly
+        if (value >= 1000000) {
+          return (value / 1000000).toFixed(2) + 'M'; // Format as millions (M)
+        } else if (value >= 1000) {
+          return (value / 1000).toFixed(2) + 'K'; // Format as thousands (K)
+        } else {
+          return value.toString(); // Return the value as-is for smaller numbers
+        }
+      },
+    },
     },
     legend: { show: false },
     grid: {
@@ -317,7 +340,7 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
         breakpoint: 1800,
         options: {
           chart: {
-            height: 90,
+            height: 95,
           },
         },
       },
@@ -325,7 +348,7 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
         breakpoint: 2000,
         options: {
           chart: {
-            height: 90,
+            height: 95,
           },
         },
       },

@@ -69,12 +69,12 @@ export const StripeStatusProvider = ({ children }: { children: ReactNode }) => {
                 'expiration': expirationTime
                 }
 
-          console.log('stripeStatusContext cognify data to save', record)
+//           console.log('stripeStatusContext cognify data to save', record)
           await setSessionVariableWithExpiration('session_cognito_status', record);
-          console.log("stripeStatusContext cognify data saved: ", getSessionVariableWithExpiration('session_cognify_status'))
-          console.log("stripeCustomerId: ", stripeCustomerId)
+//           console.log("stripeStatusContext cognify data saved: ", getSessionVariableWithExpiration('session_cognify_status'))
+//           console.log("stripeCustomerId: ", stripeCustomerId)
 
-          console.log("variable assigned", attributes)
+//           console.log("variable assigned", attributes)
       } else {
         console.error('User is not authenticated');
         }
