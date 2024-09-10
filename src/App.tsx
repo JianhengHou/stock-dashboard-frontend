@@ -28,7 +28,7 @@ import PricingTables from './pages/PricingTables';
 import Home from './pages/Home';
 import Payment from './pages/Payment';
 import TutorialCapitalFlowHistory from './components/HomeComponents/TutorialCapitalFlowHistory';
-import TutorialCapitalHeatMap from './components/HomeComponents/TutorialCapitalHeatMap';
+import TutorialCapitalHeatMap from './components/HomeComponents/TutorialCapitalHeatmap';
 import TutorialCapitalStrategy from './components/HomeComponents/TutorialCapitalStrategy';
 import { Authenticator } from '@aws-amplify/ui-react';
 
