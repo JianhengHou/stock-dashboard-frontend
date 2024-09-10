@@ -1,12 +1,12 @@
 import favicon from "../../images/favicon.ico";
 import React, { useState, useEffect } from 'react';
 import HomeHeader from '../../components/HomeComponents/HomeHeader.tsx'
-import tutorialMCDEN from "../../images/tutorial/tutorial_MCD_EN.jpg";
-import tutorialMCDCN from "../../images/tutorial/tutorial_MCD_CN.jpg";
-import tutorialHIMSEN from "../../images/tutorial/tutorial_HIMS_EN.jpg";
-import tutorialHIMSCN from "../../images/tutorial/tutorial_HIMS_CN.jpg";
-import tutorialAAPLEN from "../../images/tutorial/tutorial_AAPL_EN.jpg";
-import tutorialAAPLCN from "../../images/tutorial/tutorial_AAPL_CN.jpg";
+import tutorialMCDEN from "../../images/tutorial/Tutorial_MCD_EN.jpg";
+import tutorialMCDCN from "../../images/tutorial/Tutorial_MCD_CN.jpg";
+import tutorialHIMSEN from "../../images/tutorial/Tutorial_HIMS_EN.jpg";
+import tutorialHIMSCN from "../../images/tutorial/Tutorial_HIMS_CN.jpg";
+import tutorialAAPLEN from "../../images/tutorial/Tutorial_AAPL_EN.jpg";
+import tutorialAAPLCN from "../../images/tutorial/Tutorial_AAPL_CN.jpg";
 import PricingTableOne from '../../components/PricingTables/PricingTableOne';
 
 const TutorialCapitalFlowHistory: React.FC = () => {
