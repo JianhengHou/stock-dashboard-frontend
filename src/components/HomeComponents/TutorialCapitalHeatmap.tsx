@@ -1,6 +1,6 @@
 import favicon from "../../images/favicon.ico";
 import React, { useState, useEffect } from 'react';
-import HomeHeader from '../../components/HomeComponents/HomeHeader.tsx'
+import HomeHeader from '../../components/HomeComponents/HomeHeader.tsx';
 import tutorialHeatmapEN from "../../images/tutorial/tutorial_heatmap_EN.jpg";
 import tutorialHeatmapCN from "../../images/tutorial/tutorial_heatmap_CN.jpg";
 import tutorialTreeMapEN from "../../images/tutorial/tutorial_treemap_EN.jpg";

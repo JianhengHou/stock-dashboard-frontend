@@ -1,6 +1,6 @@
 import favicon from "../../images/favicon.ico";
 import React, { useState, useEffect } from 'react';
-import HomeHeader from '../../components/HomeComponents/HomeHeader.tsx'
+import HomeHeader from '../../components/HomeComponents/HomeHeader.tsx';
 import tutorialAAPLEN from "../../images/tutorial/tutorial_strategy_AAPL_EN.jpg";
 import tutorialAAPLCN from "../../images/tutorial/tutorial_strategy_AAPL_CN.jpg";
 import tutorialTCOMEN from "../../images/tutorial/tutorial_strategy_TCOM_EN.jpg";
