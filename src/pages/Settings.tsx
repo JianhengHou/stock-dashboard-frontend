@@ -23,7 +23,7 @@ const Settings = () => {
   }
 
   const {stripeCustomerId, preferredName, cognifyEmail} = cognito_data
-  const {planName, status, startDate, endDate} = stripe_data
+  const { planName = "", status = "", startDate = "", endDate = "" } = stripe_data || {};
 
   const defaultLang = 'en';
   const language = localStorage.getItem('language') || defaultLang;

@@ -10,7 +10,7 @@ import VerificationModal from './VerificationModal';
 import { signUp, signIn } from '@aws-amplify/auth';
 import {fetchAndStoreUserData} from '../../components/sessionOperation.tsx'
 
-const SignUp: React.FC = () => {
+const SignUpAdmin: React.FC = () => {
 //     const {reFetchUserInfo, reFetchUserStripe} = useStripeStatus(); // Use the hook at the top level of your component
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -26,48 +26,9 @@ const SignUp: React.FC = () => {
     const defaultLang = 'en';
     const language = localStorage.getItem('language') || defaultLang;
 
-  useEffect(() => {
-    const query = new URLSearchParams(location.search);
-    const sessionId = query.get('session_id');
-
-    if (sessionId) {
-      const confirmSubscription = async () => {
-        try {
-          const response = await fetch('https://9jjj44tcdg.execute-api.us-west-1.amazonaws.com/dev/stripe-customer-retrieval', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ session_id: sessionId}),
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.error);
-          }
-          setEmail(data['email'])
-          setStripeCustomerID(data['stripe_customer_id'])
-
-          if (data['account_status'] === 'Active') {
-             setActiveStripeStatus(true)
-          }
-        } catch (error) {
-          setError(error.message);
-        }
-      };
-
-      confirmSubscription();
-    }
-  }, [location.search]);
-
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    if (!stripeActiveStatus) {
-      setError(language === 'en' ? "You haven't had an active paid plan/subscription": '您还没有支付一个有效的套餐');
-      return;
-    }
     if (password !== retypePassword) {
       setError(language === 'en' ? 'Passwords do not match': '两次密码不匹配');
       return;
@@ -79,7 +40,7 @@ const SignUp: React.FC = () => {
         options: {
           userAttributes: {
             preferred_username: username,
-            "custom:stripe_customer_id": stripeCustomerID || '',
+            "custom:stripe_customer_id": '',
             "custom:exempt": 'N',
           },
         },
@@ -101,11 +62,12 @@ const SignUp: React.FC = () => {
         setTimeout(() => {
             setIsModalOpen(false);
         }, 2000);
-        await signIn({ username: email, password});
-        await fetchAndStoreUserData();
-        // Only navigate after successful auto sign-in followed by successful signup
-        console.log(stripeCustomerId, preferredName, accountEmail)
-        navigate('/dashboard');
+//         await signIn({ username: email, password});
+//         await fetchAndStoreUserData();
+//         // Only navigate after successful auto sign-in followed by successful signup
+//         console.log(stripeCustomerId, preferredName, accountEmail)
+//         navigate('/dashboard');
+        setError('Admin Sign up Successfully!');
   } catch (error) {
     setError(language === 'en'
     ? `Error signing in: ${error.message}`
@@ -477,7 +439,7 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default SignUpAdmin;
 
 // button for google signup
 // <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">

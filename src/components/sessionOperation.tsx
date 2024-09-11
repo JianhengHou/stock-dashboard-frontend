@@ -24,10 +24,11 @@ export async function fetchAndStoreUserData() {
     try {
         // Fetch user attributes
         const attributes = await fetchUserAttributes();
-
+        console.log("check====>", attributes)
         // Calculate expiration timestamp (30 minutes from now)
         const expirationTime = new Date().getTime() + 60 * 1000 * 180;
-
+        console.log("custom:stripe_customer_id====>", attributes['custom:stripe_customer_id'])
+        console.log("custom:exempt====>", attributes['custom:exempt'])
         // Prepare the Cognito data record
         const cognitoRecord = {
             stripeCustomerId: attributes['custom:stripe_customer_id'],
@@ -36,12 +37,10 @@ export async function fetchAndStoreUserData() {
             expiration: expirationTime
         };
 
-        console.log('stripeStatusContext cognify data to save', cognitoRecord);
-
         // Save the Cognito data to session storage
         await setSessionVariableWithExpiration('session_cognito_status', cognitoRecord);
         console.log("stripeStatusContext cognify data saved: ", getSessionVariableWithExpiration('session_cognito_status'));
-        if (attributes['custom:exempt'] === 'Y') {return;}
+        if (attributes['email_verified'] && attributes['custom:exempt'] === 'Y') {return;}
         // Check if Stripe customer ID exists in attributes
         if (attributes['custom:stripe_customer_id']) {
             // Fetch Stripe customer data
@@ -61,10 +60,10 @@ export async function fetchAndStoreUserData() {
 
             // Prepare the Stripe data record
             const stripeRecord = {
-                planName: data.plan,
-                status: data.account_status,
-                startDate: data.start_date,
-                endDate: data.end_date,
+                planName: data.plan || null,
+                status: data.account_status || null,
+                startDate: data.start_date || null,
+                endDate: data.end_date || null,
                 expiration: expirationTime
             };
 

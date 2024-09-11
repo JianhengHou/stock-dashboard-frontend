@@ -7,6 +7,7 @@ import Loader from './common/Loader';
 import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
+import SignUpAdmin from './pages/Authentication/SignUpAdmin';
 import Calendar from './pages/Calendar';
 import HeatMap from './pages/HeatMap';
 import Dashboard from './pages/Dashboard';
@@ -307,6 +308,15 @@ function App() {
             <>
               <PageTitle title="Signup | AlphaHood" />
               <SignUp />
+            </>
+          }
+        />
+      <Route
+          path="/auth/signupadmin"
+          element={
+            <>
+              <PageTitle title="Signup Admin | AlphaHood" />
+              <SignUpAdmin />
             </>
           }
         />
