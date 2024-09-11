@@ -19,8 +19,6 @@ const SignUpAdmin: React.FC = () => {
     const [retypePassword, setRetypePassword] = useState('');
     const [stripeActiveStatus, setActiveStripeStatus] = useState(false);
     const [error, setError] = useState('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [user, setUser] = useState<any>(null); // Store user info
     const navigate = useNavigate();
     const location = useLocation();
     const defaultLang = 'en';
@@ -45,35 +43,10 @@ const SignUpAdmin: React.FC = () => {
           },
         },
       });
-      setUser(user);
-      setIsModalOpen(true);
+      setError(`Sign Up Done. Waiting for Admin to activate the account.`);
     } catch (error) {
       setError(`Error signing up: ${error.message}`);
     }
-  };
-
-  const handleCloseModal = async () => {
-    setIsModalOpen(false);
-  };
-
-  const handleModalSuccess = async () => {
-    setError('');
-    try {
-        setTimeout(() => {
-            setIsModalOpen(false);
-        }, 2000);
-//         await signIn({ username: email, password});
-//         await fetchAndStoreUserData();
-//         // Only navigate after successful auto sign-in followed by successful signup
-//         console.log(stripeCustomerId, preferredName, accountEmail)
-//         navigate('/dashboard');
-        setError('Admin Sign up Successfully!');
-  } catch (error) {
-    setError(language === 'en'
-    ? `Error signing in: ${error.message}`
-    : `登录错误: ${error.message}`
-    );
-  }
   };
 
   return (
@@ -426,13 +399,6 @@ const SignUpAdmin: React.FC = () => {
                 </div>
               </form>
             </div>
-                      {isModalOpen && (
-        <VerificationModal
-          email={email}
-          onClose={handleCloseModal}
-          onSuccess={handleModalSuccess}
-        />
-      )}
           </div>
         </div>
       </div>
