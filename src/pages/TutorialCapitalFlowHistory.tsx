@@ -1,8 +1,8 @@
 import favicon from "../images/favicon.ico";
 import React, { useState, useEffect } from "react";
 import HomeHeader from "../components/HomeComponents/HomeHeader.tsx";
-// import tutorialMCDEN from "../images/tutorial/Tutorial_MCD_EN.jpg";
-// import tutorialMCDCN from "../images/tutorial/Tutorial_MCD_CN.jpg";
+import tutorialMCDEN from "../images/tutorial/Tutorial_MCD_EN.jpg";
+import tutorialMCDCN from "../images/tutorial/Tutorial_MCD_CN.jpg";
 import tutorialHIMSEN from "../images/tutorial/Tutorial_HIMS_EN.jpg";
 import tutorialHIMSCN from "../images/tutorial/Tutorial_HIMS_CN.jpg";
 import tutorialAAPLEN from "../images/tutorial/Tutorial_AAPL_EN.jpg";
