@@ -40,13 +40,6 @@ const TutorialCapitalFlowHistory: React.FC = () => {
       };
     }, []);
 
-// <div className="flex flex-col items-center lg:items-start">
-//           <img
-//             src={language === 'en'?tutorialMCDEN:tutorialMCDCN}
-//             alt="tutorial MCD"
-//             className="-mt-8 w-full rounded-xl object-cover object-center mb-8 lg:max-w-[1000px]" // Adjust margins as needed
-//           />
-//         </div>
 
 return (
 <>
@@ -156,7 +149,13 @@ return (
             </p>
           </div>
         </div>
-
+        <div className="flex flex-col items-center lg:items-start">
+          <img
+            src={language === 'en'?tutorialMCDEN:tutorialMCDCN}
+            alt="tutorial MCD"
+            className="-mt-8 w-full rounded-xl object-cover object-center mb-8 lg:max-w-[1000px]" // Adjust margins as needed
+          />
+        </div>
 
         {/* Section 3 */}
         <div className="flex flex-col items-center lg:flex-row lg:items-start lg:space-x-8 ">
