@@ -24,11 +24,8 @@ export async function fetchAndStoreUserData() {
     try {
         // Fetch user attributes
         const attributes = await fetchUserAttributes();
-        console.log("check====>", attributes)
         // Calculate expiration timestamp (30 minutes from now)
         const expirationTime = new Date().getTime() + 60 * 1000 * 180;
-        console.log("custom:stripe_customer_id====>", attributes['custom:stripe_customer_id'])
-        console.log("custom:exempt====>", attributes['custom:exempt'])
         // Prepare the Cognito data record
         const cognitoRecord = {
             stripeCustomerId: attributes['custom:stripe_customer_id'],
@@ -39,7 +36,7 @@ export async function fetchAndStoreUserData() {
 
         // Save the Cognito data to session storage
         await setSessionVariableWithExpiration('session_cognito_status', cognitoRecord);
-        console.log("stripeStatusContext cognify data saved: ", getSessionVariableWithExpiration('session_cognito_status'));
+//         console.log("stripeStatusContext cognify data saved: ", getSessionVariableWithExpiration('session_cognito_status'));
         if (attributes['email_verified'] && attributes['custom:exempt'] === 'Y') {return;}
         // Check if Stripe customer ID exists in attributes
         if (attributes['custom:stripe_customer_id']) {
@@ -67,11 +64,11 @@ export async function fetchAndStoreUserData() {
                 expiration: expirationTime
             };
 
-            console.log('stripeStatusContext stripe data to save', stripeRecord);
+//             console.log('stripeStatusContext stripe data to save', stripeRecord);
 
             // Save the Stripe data to session storage
             await setSessionVariableWithExpiration('session_stripe_status', stripeRecord);
-            console.log("stripeStatusContext stripe data saved: ", getSessionVariableWithExpiration('session_stripe_status'));
+//             console.log("stripeStatusContext stripe data saved: ", getSessionVariableWithExpiration('session_stripe_status'));
         }
     } catch (error) {
         console.error('Error fetching user or Stripe info:', error);
