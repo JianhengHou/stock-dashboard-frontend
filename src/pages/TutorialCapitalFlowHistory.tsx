@@ -5,7 +5,7 @@ import tutorialHIMSEN from "../images/tutorial/Tutorial_HIMS_EN.jpg";
 import tutorialHIMSCN from "../images/tutorial/Tutorial_HIMS_CN.jpg";
 import tutorialAAPLEN from "../images/tutorial/Tutorial_AAPL_EN.jpg";
 import tutorialAAPLCN from "../images/tutorial/Tutorial_AAPL_CN.jpg";
-import tutorialMCDEN from "../images/tutorial/Tutorial_MCD_EN.jpg";
+// import tutorialMCDEN from "../images/tutorial/Tutorial_MCD_EN.jpg";
 import tutorialMCDCN from "../images/tutorial/Tutorial_MCD_CN.jpg";
 import PricingTableOne from '../components/PricingTables/PricingTableOne';
 
@@ -151,7 +151,7 @@ return (
         </div>
         <div className="flex flex-col items-center lg:items-start">
           <img
-            src={language === 'en'?tutorialMCDEN:tutorialMCDCN}
+            src={language === 'en'?tutorialMCDCN:tutorialMCDCN}
             alt="tutorial MCD"
             className="-mt-8 w-full rounded-xl object-cover object-center mb-8 lg:max-w-[1000px]" // Adjust margins as needed
           />
