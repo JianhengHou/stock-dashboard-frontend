@@ -6,8 +6,11 @@ import axios from 'axios';
 interface SeriesData {
   name: string;
   type?: 'line' | 'candlestick';
-  data: { x: string; y: number[] | number }[];
-}
+  data: { x: string;
+          y: number[];
+          change_rate: number;
+          turnover_rate: number;
+  }[];}
 
 interface CandleData {
   series: SeriesData[];
@@ -95,6 +98,47 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
         formatter: (value) => value.toFixed(2), // Round to 2 decimal places
       },
     },
+    tooltip: {
+    shared: true,
+    intersect: false,
+    custom: function({ series, seriesIndex, dataPointIndex, w }) {
+      // Retrieve the x value
+    const x = w.config.series[seriesIndex].data[dataPointIndex].x;
+
+    // Ensure x is a Date object or convert it if necessary
+    const date = x instanceof Date ? x : new Date(x);
+    const formattedDate = date instanceof Date ? date.toISOString().split('T')[0] : x;
+
+    let content = `<div><strong>Date:</strong> ${formattedDate}<br/>`;
+
+    // Find the corresponding MA values for the date
+    w.config.series.forEach((serie) => {
+      if (serie.type === 'line' && serie.name !== ' ') {
+        const maData = serie.data.find((item) => item.x.getTime() === date.getTime());
+        if (maData) {
+          content += `<strong>${serie.name}:</strong> ${maData.y}<br/>`;
+        }
+      }
+    });
+      if (w.config.series[seriesIndex].type === 'candlestick') {
+      const candlestickData = w.config.series[seriesIndex].data[dataPointIndex];
+      const changeRate = candlestickData.change_rate !== undefined ? candlestickData.change_rate.toFixed(2) : 'N/A';
+      const turnoverRate = candlestickData.turnover_rate !== undefined ? candlestickData.turnover_rate.toFixed(2) : 'N/A';
+
+      content += `
+        <div>
+          <strong>Open:</strong> ${candlestickData.y[0]}<br/>
+        <strong>High:</strong> ${candlestickData.y[1]}<br/>
+        <strong>Low:</strong> ${candlestickData.y[2]}<br/>
+        <strong>Close:</strong> ${candlestickData.y[3]}<br/>
+          <strong>Change Rate:</strong> ${changeRate}%<br/>
+          <strong>Turnover Rate:</strong> ${turnoverRate}%
+        </div>
+      `;
+    }
+    return content
+    }
+  },
     stroke: {
     width: [1, 1.5, 1.5,1.5,1.5,1.5, ], // Set stroke width for each series
     colors: [
@@ -118,10 +162,10 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
         columnWidth: '10%',
       },
     },
-    tooltip: {
-      shared: true,
-      intersect: false,
-    },
+//     tooltip: {
+//       shared: true,
+//       intersect: false,
+//     },
     colors: [
     '#FFFFFF', // Color for candlestick series
     '#F0933F', // MA5
@@ -161,8 +205,10 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
         if (Array.isArray(data) && data.length > 0) {
           const priceData = data.map((item: any) => ({
             x: item[4].split(' ')[0],
-            y: [item[5], item[7], item[8], item[6]]
-          })).filter((item: any) => item.y.every((value: any) => value !== null && value !== undefined));
+            y: [item[5], item[7], item[8], item[6]],
+            change_rate: item[13],
+            turnover_rate: item[10]
+          }));
           const ma5 = data.map((item: any) => ({ x: new Date(item[4]), y: item[22].toFixed(2) }));
           const ma10 = data.map((item: any) => ({ x: new Date(item[4]), y: item[23].toFixed(2) }));
           const ma20 = data.map((item: any) => ({ x: new Date(item[4]), y: item[24].toFixed(2) }));

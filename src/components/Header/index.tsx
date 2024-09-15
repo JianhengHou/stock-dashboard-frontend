@@ -18,6 +18,7 @@ const Header = (props: {
     const [data, setData] = useState([]);
     const defaultLang = 'en';
     const [language, setLanguage] = useState(localStorage.getItem('language') || defaultLang) ;
+    const [latestUpdate, setLatestUpdate] = useState('');
 
     useEffect(() => {
         // This code will run only once after the initial render
@@ -27,6 +28,20 @@ const Header = (props: {
         };
         fetchData();
     }, []);
+
+    useEffect(() => {
+    // Function to fetch the latest update timestamp
+      const fetchLatestUpdate = async () => {
+        try {
+          const response = await axios.get(`https://9jjj44tcdg.execute-api.us-west-1.amazonaws.com/dev/latest_update`);
+          setLatestUpdate(response.data); // Assume API returns { timestamp: "2024-09-14T12:34:56" }
+        } catch (error) {
+          console.error('Error fetching the latest update:', error);
+        }
+      };
+    fetchLatestUpdate();
+    }, []);
+
 
     // Function to handle language switch
     const handleLanguageSwitch = (lang) => {
@@ -181,6 +196,13 @@ const Header = (props: {
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
+          <div className="flex items-center">
+            {latestUpdate && (
+              <span className="hidden sm:block text-gray-500 text-sm">
+              {language === 'en' ? `Latest Update: ${latestUpdate}` : `最近更新: ${latestUpdate}`}
+              </span>
+            )}
+          </div>
           <ul className="flex items-center gap-2 2xsm:gap-4">
             <div className="text-right">
               <select

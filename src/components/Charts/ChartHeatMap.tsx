@@ -113,6 +113,7 @@ const ChartHeatMap: React.FC = () => {
 
   useEffect(() => {
     if (heatMap) {
+    console.log(heatMap)
     // Grouping the data by date and applying the log transformation
     const groupedData = heatMap.reduce((acc: any, [date, industry, in_flow, code]: [string, string, number, string]) => {
       if (industry) {
