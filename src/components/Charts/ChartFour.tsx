@@ -49,6 +49,8 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
     const [latestMA20, setLatestMA20] = useState<number | null>(null);
     const [latestMA50, setLatestMA50] = useState<number | null>(null);
     const [latestMA120, setLatestMA120] = useState<number | null>(null);
+    const [latestUpdate, setLatestUpdate] = useState('');
+
     const defaultLang = 'en';
     const language = localStorage.getItem('language') || defaultLang;
 
@@ -209,11 +211,11 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
             change_rate: item[13],
             turnover_rate: item[10]
           }));
-          const ma5 = data.map((item: any) => ({ x: new Date(item[4]), y: item[22].toFixed(2) }));
-          const ma10 = data.map((item: any) => ({ x: new Date(item[4]), y: item[23].toFixed(2) }));
-          const ma20 = data.map((item: any) => ({ x: new Date(item[4]), y: item[24].toFixed(2) }));
-          const ma50 = data.map((item: any) => ({ x: new Date(item[4]), y: item[25].toFixed(2) }));
-          const ma120 = data.map((item: any) => ({ x: new Date(item[4]), y: item[26].toFixed(2) }));
+          const ma5 = data.map((item: any) => ({ x: new Date(item[4]), y: item[23].toFixed(2) }));
+          const ma10 = data.map((item: any) => ({ x: new Date(item[4]), y: item[24].toFixed(2) }));
+          const ma20 = data.map((item: any) => ({ x: new Date(item[4]), y: item[25].toFixed(2) }));
+          const ma50 = data.map((item: any) => ({ x: new Date(item[4]), y: item[26].toFixed(2) }));
+          const ma120 = data.map((item: any) => ({ x: new Date(item[4]), y: item[27].toFixed(2) }));
 
           const barVolume = data.map((item: any) => ({ x: item[4].split(' ')[0], y: item[11].toFixed(0) }));
           const barInFlow = data.map((item: any) => ({ x: item[4].split(' ')[0], y: item[15] }));
@@ -239,12 +241,12 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
           setLatestNetFlow(data[data.length - 1][15])
           setLatestMainFlow(data[data.length - 1][16])
           setLatestMidSmlFlow(data[data.length - 1][17])
-          setLatestMA5(data[data.length - 1][22])
-          setLatestMA10(data[data.length - 1][23])
-          setLatestMA20(data[data.length - 1][24])
-          setLatestMA50(data[data.length - 1][25])
-          setLatestMA120(data[data.length - 1][26])
-
+          setLatestMA5(data[data.length - 1][23])
+          setLatestMA10(data[data.length - 1][24])
+          setLatestMA20(data[data.length - 1][25])
+          setLatestMA50(data[data.length - 1][26])
+          setLatestMA120(data[data.length - 1][27])
+          setLatestUpdate(data[data.length - 1][22])
           setState({
             series: [{
                 name: ' ',
@@ -443,7 +445,20 @@ const CandleChart: React.FC<CandleChartProps> = ({ tickerCode }) => {
          ${latestClose} {getChangeRateArrow(parseFloat(changeRate))} {getFormattedChangeRate(parseFloat(changeRate))}
          </span>
          )}
+         {latestUpdate && (
+    <span className="ml-8 text-gray-500 text-sm dark:text-gray-500">
+      <span className="text-gray-500 text-sm dark:text-gray-500">
+  {language === 'en'
+    ? `Latest Update: ${latestUpdate}${tickerCode.split('.')[0] === 'HK' ? ' (HK)' : tickerCode.split('.')[0] === 'US' ? ' (New York)' : ''}`
+    : `最近更新: ${latestUpdate}${tickerCode.split('.')[0] === 'HK' ? ' (香港)' : tickerCode.split('.')[0] === 'US' ? ' (纽约)' : ''}`}
+</span>
+    </span>
+  )}
       </h5>
+
+
+
+
 
       <div className="flex w-full max-w-50 justify-end mb-1">
          <div className="flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">

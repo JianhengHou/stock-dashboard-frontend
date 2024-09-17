@@ -196,13 +196,6 @@ const Header = (props: {
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
-          <div className="flex items-center">
-            {latestUpdate && (
-              <span className="hidden sm:block text-gray-500 text-sm">
-              {language === 'en' ? `Latest Update: ${latestUpdate}` : `最近更新: ${latestUpdate}`}
-              </span>
-            )}
-          </div>
           <ul className="flex items-center gap-2 2xsm:gap-4">
             <div className="text-right">
               <select

@@ -276,7 +276,7 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
       const flow = typeof data.data.flow ===undefined? '' : data.data.flow
       const width = data.x1 - data.x0;
       const height = data.y1 - data.y0;
-      const displayText = data.height === 0 ? data.data.flow >0? `${key}\n$+${flow}M`: `${key}\n$${flow}M`: key;
+      const displayText = data.height === 0 ? data.data.flow >0? `\n${key}`: `\n${key}`: key;
       const text = wrapText({
         key: displayText,
         fontFamily,
@@ -439,7 +439,9 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
   ],
 }};
 
-
+   const handleRankOnclick = (event: any, code: any) => {
+        window.open(`/dashboard?code=${code}`, '_blank')
+  }
    if (isLoadingTreeMap || isLoadingHeatMap || isLoadingTopIndividual) return <div>Loading...</div>;
    if (isErrorTreeMap || isErrorHeatMap || isErrorTopIndividual) return <div>Error loading data</div>;
   return (
@@ -467,16 +469,24 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
     </button>
   </div>
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
-           <div className="flex flex-wrap items-start justify-end sm:flex-nowrap">
-           <a
-          href="/tutorialCapitalHeatMap"
-          className="text-s text-blue-600 dark:text-blue-400 hover:underline"
-          target="_blank" // Opens the link in a new tab
-          rel="noopener noreferrer"
-        >
-       {language === 'en' ? 'How to use this heatmap?' : '如何使用此热力图？'}
-      </a>
-              </div>
+<div className="flex items-start justify-between">
+  <div className="flex flex-wrap items-start">
+    <span className="text-gray-500 text-sm">
+      {language === 'en' ? 'Intraday data has ~10 minutes lag' : '盘中数据存在~10分钟滞后'}
+    </span>
+  </div>
+
+  <div className="flex flex-wrap items-start">
+    <a
+      href="/tutorialCapitalHeatMap"
+      className="text-s text-blue-600 dark:text-blue-400 hover:underline"
+      target="_blank" // Opens the link in a new tab
+      rel="noopener noreferrer"
+    >
+      {language === 'en' ? 'How to use this heatmap?' : '如何使用此热力图？'}
+    </a>
+  </div>
+</div>
 
       <div className="flex flex-wrap items-start justify-between sm:flex-nowrap">
       <h4 className="text-xl font-semibold text-black dark:text-white">
@@ -636,7 +646,11 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
     <table className="min-w-full table-auto">
       <tbody>
         {inFlowItems.map((item, index) => (
-          <tr key={index} className="border-b">
+            <tr
+                key={index}
+                className="border-b cursor-pointer"
+                onClick={(event) => handleRankOnclick(event, item.code)}
+              >
             <td className="px-2 py-1">
               <span
                 className="flex h-4 w-4 items-center justify-center rounded-full border"
@@ -679,7 +693,11 @@ const CustomTreeMapRect: React.FC<TreeMapRectProps> = ({ id, data, fill}) => {
       <table className="min-w-full table-auto">
         <tbody>
           {outFlowItems.map((item, index) => (
-            <tr key={index} className="border-b">
+            <tr
+                key={index}
+                className="border-b cursor-pointer"
+                onClick={(event) => handleRankOnclick(event, item.code)}
+              >
               <td className="px-2 py-1">
                 <span
                   className="flex h-4 w-4 items-center justify-center rounded-full border"
