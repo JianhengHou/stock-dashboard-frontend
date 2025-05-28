@@ -2776,9 +2776,9 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                 {language === 'en' ? 'How is this platform different from MOOC?' : '这个平台和Coursera或LinkedIn Learning有什么不同？'}
                  </h3>
                 <p className="text-base text-body-color dark:text-dark-6">
-{language === 'en'
-  ? 'Unlike general MOOC platforms, our platform is purpose-built for AI-powered manufacturing. We integrate real job tasks, production workflows, and skill ontologies specific to the auto sector—delivering learning that’s actionable and directly tied to industry performance.'
-  : '不同于通用的MOOC平台，我们专注于AI赋能下的制造业。平台内容与实际工作任务、生产流程、技能本体紧密结合，帮助用户实现可转化的学习成果，提升行业表现。'}
+                {language === 'en'
+                  ? 'Unlike general MOOC platforms, our platform is purpose-built for AI-powered manufacturing. We integrate real job tasks, production workflows, and skill ontologies specific to the auto sector—delivering learning that’s actionable and directly tied to industry performance.'
+                  : '不同于通用的MOOC平台，我们专注于AI赋能下的制造业。平台内容与实际工作任务、生产流程、技能本体紧密结合，帮助用户实现可转化的学习成果，提升行业表现。'}
 
                 </p>
               </div>
