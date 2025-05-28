@@ -71,7 +71,7 @@ const PricingTableOne: React.FC  = ({ language }) => {
                       </span>
                       <h4 className="mb-4">
                         <span className="text-[28px] font-bold text-black text-white lg:text-[32px]">
-                          $39.99
+                          $19.99
                         </span>
                         <span className="font-medium ml-2">
                         {language === 'en'
@@ -82,7 +82,7 @@ const PricingTableOne: React.FC  = ({ language }) => {
                       </h4>
                       <p className="mb-6 text-base font-medium whitespace-nowrap">
                         {language === 'en'
-                        ?  'Best suited for one-time or returning users'
+                        ?  'Best suited for one-time or returning learners'
                         : '适合临时使用或者回头按需使用的用户'
                         }
                       </p>
@@ -124,8 +124,8 @@ const PricingTableOne: React.FC  = ({ language }) => {
           </li>
           <li className="font-medium">
           {language === 'en'
-                        ? 'No Proprietary Stock Info/News'
-                        : '不支持个股相关私有消息/新闻'
+                        ? 'Limited Proprietary Custom Content'
+                        : '有限私有定制的内容'
           }</li>
         </ul>
 
@@ -142,7 +142,7 @@ const PricingTableOne: React.FC  = ({ language }) => {
                           </span>
                         </>
                       ) : (
-                        language === 'en' ? 'Buy Now': '立即购买'
+                        language === 'en' ? 'Enroll Now': '立即购买'
                       )}
                     </button>
                       {error['monthly'] && <p className="text-red-500 mt-2">{error['monthly']}</p>}
@@ -193,14 +193,14 @@ const PricingTableOne: React.FC  = ({ language }) => {
                       </span>
                       <span className="font-medium ml-2" >
                       {language === 'en'
-                        ? "then $39.99 Per Month"
-                        : '试用后订阅，$39.99每月'
+                        ? "then $19.99 Per Month"
+                        : '试用后订阅，$19.99每月'
                         }
                         </span>
                       </h4>
                       <p className="mb-6 font-medium ">
                         {language === 'en'
-                        ? 'Best suited for new users or professionals'
+                        ? 'Best for new learners or professionals'
                         : '适合新用户或专业人士'
                         }
                       </p>
@@ -240,8 +240,8 @@ const PricingTableOne: React.FC  = ({ language }) => {
           </li>
           <li className="font-medium">
           {language === 'en'
-                        ? 'Proprietary Stock Info/News'
-                        : '个股相关私有消息/新闻'
+                        ? 'Proprietary Custom Content'
+                        : '支持所有有限私有定制的内容'
           }</li>
         </ul>
 
@@ -280,7 +280,7 @@ const PricingTableOne: React.FC  = ({ language }) => {
                       </span>
                       <h4 className="mb-4">
                         <span className="text-[28px] font-bold text-black text-white lg:text-[32px]">
-                          $31.99
+                          $14.99
                         </span>
                         <span className="font-medium ml-2">
                         {language === 'en'
@@ -291,7 +291,7 @@ const PricingTableOne: React.FC  = ({ language }) => {
                       </h4>
                       <p className="mb-6 font-medium">
                       {language === 'en'
-                        ? 'Best suited for long-termism users'
+                        ? 'Best suited for long-termism learners'
                         : '适合秉承长期主义的用户'
                         }
                       </p>
@@ -331,8 +331,8 @@ const PricingTableOne: React.FC  = ({ language }) => {
           </li>
           <li className="font-medium">
           {language === 'en'
-                        ? 'Proprietary Stock Info/News'
-                        : '支持个股相关私有消息/新闻'
+                        ? 'Proprietary Custom Content'
+                        : '支持所有有限私有定制的内容'
           }</li>
         </ul>
 
@@ -349,7 +349,7 @@ const PricingTableOne: React.FC  = ({ language }) => {
                           </span>
                         </>
                       ) : (
-                        language === 'en' ? 'Buy Now': '立即购买'
+                        language === 'en' ? 'Enroll Now': '立即购买'
                       )}
                     </button>
                     {error['yearly'] && <p className="text-red-500 mt-2">{error['yearly']}</p>}

@@ -4,16 +4,18 @@ import HomeHeader from '../components/HomeComponents/HomeHeader.tsx'
 import { useNavigate } from 'react-router-dom';
 import PricingTableOne from '../components/PricingTables/PricingTableOne';
 import favicon from "../images/favicon.ico";
-import coverEN from "../images/tutorial/cover-EN.jpg";
-import coverCN from "../images/tutorial/cover-CN.jpg";
+import coverEN from "../images/manufacturing-cover.jpg";
+import coverCN from "../images/manufacturing-cover.jpg";
 import aboutImage01 from "../images/about/about-image-01.jpg";
 import neuralNetworkStock from "../images/about/nueral_network_stock.jpg";
-import capitalHistoryCoverEN from "../images/tutorial/capital-history-cover-EN.jpg";
-import capitalHistoryCoverCN from "../images/tutorial/capital-history-cover-CN.jpg";
-import heatmapCoverEN from "../images/tutorial/heatmap-cover-EN.jpg";
-import heatmapCoverCN from "../images/tutorial/heatmap-cover-CN.jpg";
-import strategyCoverEN from "../images/tutorial/strategy-cover-EN.jpg";
-import strategyCoverCN from "../images/tutorial/strategy-cover-CN.jpg";
+import capitalHistoryCoverEN from "../images/career-pathways.jpg";
+import capitalHistoryCoverCN from "../images/career-pathways.jpg";
+import heatmapCoverEN from "../images/Custom-Microlearning.jpg";
+import heatmapCoverCN from "../images/Custom-Microlearning.jpg";
+import strategyCoverEN from "../images/Public-Learning-Certifications.jpg";
+import strategyCoverCN from "../images/Public-Learning-Certifications.jpg";
+import engagementEN from "../images/engagement.jpg";
+import engagementCN from "../images/engagement.jpg";
 import iconStar from "../images/testimonials/icon-star.svg";
 import userMale from "../images/user/user_male.png";
 import userFemale from "../images/user/user_female.png";
@@ -180,16 +182,16 @@ const Home: React.FC = () => {
                 <h1
                   className="mb-6 text-3xl font-bold leading-snug text-white sm:text-3xl sm:leading-snug lg:text-5xl lg:leading-[1.2]"
                 >
-                  {language === 'en'
-                    ? 'US/HK Stock Market Capital-flow Analysis & Strategy Tools'
-                    : '美港股资金分析策略工具'}
+                    {language === 'en'
+                    ? 'SmartManuLearn.ai'
+                    : 'SmartManuLearn.ai'}
                 </h1>
                 <p
 className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-[1.44]"
                 >
                 {language === 'en'
-                    ? '"The dynamics of capital flow in the market often imply the timing and direction of decisions made by the smart money."'
-                    : '"股票市场特定交易资金流动的动态往往反应聪明资金复杂分析决策后行动的时机和方向"'
+                    ? '"At the intersection of AI, Auto manufacturing, and workforce growth, we deliver adaptive learning journeys for the next generation of industrial talent"'
+                    : '"我们立足于人工智能、制造业与劳动力成长的交汇点，打造适应性学习旅程，赋能新一代工业人才"'
                     }
                 </p>
                 <ul className="mb-10 flex flex-wrap items-center justify-center gap-5">
@@ -211,7 +213,7 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                     >
                       {language === 'en'
                         ? 'Try It Now'
-                        : '立即试用'
+                        : '立即体验'
                       }
                     </a>
                   </li>
@@ -229,8 +231,8 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                   >
                   <p className="text-center text-base font-medium text-white">
                     {language === 'en'
-                        ? 'Quantitative Hedge Funds | IBDs | MEGA7 High-techs'
-                        : '量化对冲基金 | 投行 | MEGA7高科技'
+                        ? 'Tier 1 AI Automotive OEMs | MEGA 7 High Tech | Coursera + LinkedIn DNA'
+                        : '头部AI汽车OEMs | MEGA 7 大科技 | Coursera和LinkedIn的基因'
                     }
                   </p>
                   {/*
@@ -1553,15 +1555,15 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
               <div className="flex justify-center">
               <h2 className="mb-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-dark dark:text-white">
                 {language === 'en'
-                   ? 'Main Features Of ALPHAHOOD'
-                   : 'AlphaHood工具主要特点'
+                   ? 'Main Features Of SmartManuLearn.ai'
+                   : 'SmartManuLearn.ai工具主要特点'
                 }
               </h2>
               </div>
               <p className="text-base text-body-color dark:text-dark-6">
               {language === 'en'
-                   ? 'The main functions of the tool include, but are not limited to, those described below, and we are committed to continuously developing more functions and services that are more intelligent and more useful.'
-                   : '该工具的主要功能包括但不限于以下所述，我们致力于不断开发更多更智能、更实用的功能和服务。'
+                   ? 'The main functions of the platform include, but are not limited to, those described below, and we are committed to continuously developing more functions and experience that are more intelligent and more useful.'
+                   : '该平台的主要功能包括但不限于以下所述，我们致力于不断开发更多更智能、更实用的功能和体验。'
                    }
               </p>
             </div>
@@ -1589,27 +1591,26 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
               </div>
               <h4 className="mb-3 text-xl font-bold text-dark dark:text-white">
                 {language === 'en'
-                   ? 'Stock Daily Capital Flow'
-                   : '个股每日资金流'
+                   ? 'AI-Powered Career Pathways in Auto'
+                   : '汽车行业AI智能职业成长路径'
                    }
               </h4>
               <p className="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
                 {language === 'en'
-                   ? 'We monitor the daily "smart" capital flow of different scales for stocks in the US/HK Market.'
-                   : '我们每日监控美港市场股票历史截止当日不同规模的“聪明”资金流向和流量。'
-                   }
-              </p>
+                    ? 'Based on your resume, interests, and experience, we help you discover high-potential roles and generate personalized learning paths with targeted courses and certifications.'
+                    : '平台根据你的简历、兴趣和经验，推荐潜力岗位，并生成专属学习路径，精准匹配成长所需的课程和技能认证。'}
+                </p>
                 <a
                   className="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   <span className="number text-5xl font-extrabold text-primary dark:text-primary">
-                    1000+
+                    56+
                   </span>
                 </a>
                   <h4 className="mt-4 mb-3 text-l font-bold text-dark dark:text-white ">
                      {language === 'en'
-                        ? 'Stocks with historical records'
-                        : '个股资金流历史记录'
+                        ? 'Growing AI-Enabled Role Learning Paths in Auto OEMs'
+                        : '持续更新的汽车制造AI岗位学习路径'
                      }
                   </h4>
             </div>
@@ -1647,27 +1648,27 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
               </div>
               <h4 className="mb-3 text-xl font-bold text-dark dark:text-white">
                 {language === 'en'
-                        ? 'Industry-level Capital Flow'
-                        : '行业级别资金流'
-                }
+                    ? 'Custom Microlearning, Built on Experience with AI'
+                    : '基于经验的任务定制微培训'
+                    }
               </h4>
               <p className="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
                 {language === 'en'
-                        ? 'We provide a global heatmap of where the hot money flows between industries and sectors.'
-                        : '我们复盘当日及历史资金在行业间及跨行业流动的全局热力图。'
+                        ? 'When new AI-enabled workflows launch, the system updates microlearning—drawn from voice/notes/video of experts. You upskill exactly what needed in time.'
+                        : '每当出现和AI相关的新任务模式、新工具或新流程，系统会自动推送由前线技师的语音、笔记、视频萃取出的定制微培训内容，员工能及时提升所需技能。'
                 }
               </p>
               <a
                   className="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   <span className="number text-5xl font-extrabold text-primary dark:text-primary">
-                    101+
+                    4+
                   </span>
                 </a>
                 <h4 className="mt-4 mb-3 text-l font-bold text-dark dark:text-white ">
                    {language === 'en'
-                        ?  'Industries and sectors'
-                        : '产业和行业覆盖'
+                        ?  'Major Smart Auto OEMs with Private Microlearning Modules'
+                        : '主要智能汽车制造厂专属微学习模块'
                    }
                   </h4>
             </div>
@@ -1725,27 +1726,26 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
               </div>
               <h4 className="mb-3 text-xl font-bold text-dark dark:text-white">
                 {language === 'en'
-                        ?  'Diversified Stock Strategies'
-                        :  '多元化选股策略'
+                        ?  'Trusted Public Learning & Certifications'
+                        :  '行业认可的通用课程与认证'
                 }
               </h4>
               <p className="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
-                {language === 'en'
-                        ? 'We provide mixed of strategies based on capital flows and momentum patterns of tickers.'
-                        : '我们提供基于个股历史交易资金流动和近期股价动量的混合选股策略。'
-                }
+              {language === 'en'
+                ? 'Access open courses, industry-validated training, and certification pathways accepted across automotive manufacturing—bridging classroom learning to real factory needs.'
+                : '平台聚合行业认可的公开课、培训与认证路径，打通高校课程与智能制造一线技能的实际落地。'}
               </p>
               <a
                   className="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   <span className="number text-5xl font-extrabold text-primary dark:text-primary">
-                    30+
+                    80+
                   </span>
                 </a>
                 <h4 className="mt-4 mb-3 text-l font-bold text-dark dark:text-white ">
                    {language === 'en'
-                        ? 'Stock-targeting strategies'
-                        : '灵活选股策略'
+                        ? 'Online Courses and industry-validated training Modules'
+                        : '在线课程和行业验证的训练模块'
                    }
                 </h4>
             </div>
@@ -1771,27 +1771,26 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
               </div>
               <h4 className="mb-3 text-xl font-bold text-dark dark:text-white">
                 {language === 'en'
-                        ? 'Upcoming AI Strategies'
-                        : '即将推出的AI智能策略'
+                        ? 'Asynchronous Learning with Interaction'
+                        : '沉浸式异步互动学习'
                 }
               </h4>
               <p className="mb-8 text-body-color dark:text-dark-6 lg:mb-9">
-                {language === 'en'
-                        ? 'We keep adding new features such as AI strategy, community, and custom features for investors.'
-                        : '我们将持续推出更多功能，包括AI策略、高信噪比社群以及为投资者定制的功能。'
-                }
-              </p>
+              {language === 'en'
+                ? 'Instructors and learners can annotate lessons with voice, video, and notes. Highlight concepts, ask questions, and engage with peers through shared learning interactions.'
+                : '老师和学习者都可在课程中添加语音、视频与笔记，重点标注、提出问题，构建富有互动性的协同学习体验。'}
+            </p>
               <a
                   className="text-base font-medium text-dark hover:text-primary dark:text-white dark:hover:text-primary"
                 >
                   <span className="number text-5xl font-extrabold text-primary dark:text-primary">
-                    x+
+                    infinite+
                   </span>
                 </a>
                 <h4 className="mt-4 mb-3 text-l font-bold text-dark dark:text-white ">
                    {language === 'en'
-                        ? 'Excess returns and confidence'
-                        : '超额收益和决策信心'
+                        ? 'Engagement, Insight and Peer Connection'
+                        : '互动洞察和共同成长'
                    }
                 </h4>
             </div>
@@ -1813,24 +1812,22 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                   className="mb-10 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]"
                 >
                    {language === 'en'
-                        ? 'Simple & Practical Tools to Lock in Opportunities'
-                        : '简洁且实用的交易买卖策略工具'
+                        ? 'AI-driven Learning & Development Platform toward Smart Auto Manufacturing'
+                        : '面向智能汽车制造的AI驱动的学习发展平台'
                    }
                 </h2>
                 <p
                   className="mb-10 text-xl leading-relaxed text-body-color dark:text-dark-6"
                 >
-                  {language === 'en'
-                        ? "This tool is designed to help investors track the capital flow dynamics and technical patterns of stocks and industry history to date. We believe that the liquidity of smart funds is often a reflection of their final actions under complex decisions. Tracking a single valuable Financial and technical signals can often effectively improve investors' decision-making success rates and excess returns."
-                        : '该工具旨在帮助投资者追踪个股及行业历史至今资金流动态和技术面形态。我们认为，聪明资金的流动动能往往是其在复杂决策下最终行动的体现。追踪稀疏但有价值的资金和技术面信号往往能有效提高个人投资者的决策成功率和超额回报。'
-                  }
-                  <br />
+    {language === 'en'
+      ? "Our platform bridges internal upskilling and external talent onboarding for the automotive sector. By modeling role-skill-course relationships and leveraging AI to personalize learning paths, we help individuals and teams navigate rapidly evolving manufacturing roles—from the shop floor to EV systems."
+      : '本平台致力于打通汽车制造业内部员工技能提升与外部人才培养之间的路径，通过角色-技能-课程的知识图谱建模，结合AI驱动的个性化推荐，帮助从产线到智能系统的岗位人员适应快速变化的制造环境。'}
+    <br />
                   <br />
                  {language === 'en'
-                        ? 'As senior practitioners from global hedge fund & IBD from Wall Street & HK and senior data/AI experts from Silicon Valley,  providing trustworthy and effective products is how we build our trust with customers.'
-                        : '作为来自华尔街和香港的全球对冲基金和IBD的资深从业者，以及来自硅谷的资深数据/人工智能从业者，提供值得信赖和有效的产品是我们与客户建立信任的方式。'
-                 }
-                </p>
+      ? 'Features include task-triggered microlearning embedded into enterprise workflows, preservation of tacit frontline knowledge, integration with public certifications, and an interactive asynchronous learning experience with peer engagement.'
+      : '平台特色包括嵌入工作流程的任务驱动微学习、资深技师经验的结构化沉淀、与行业公开课程与认证体系的对接、以及支持协同互动的异步学习体验。'}
+  </p>
               </div>
             </div>
 
@@ -1871,7 +1868,7 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                         }
                       </span>
                       <span className="block text-5xl font-extrabold text-white">
-                        9
+                        7
                       </span>
                       <span
                         className="block text-base font-medium text-white text-opacity-70"
@@ -2014,8 +2011,8 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                   className="mb-2.5 text-3xl font-bold text-white md:text-[38px] md:leading-[1.44]"
                 >
                   <span>{language === 'en'
-                        ? 'How Does the Tool Provide Value for You?'
-                        : '工具如何提供价值和服务?'
+                        ? 'How Does the Platform Provide Value for You?'
+                        : '平台如何提供价值和体验?'
                         }
                         </span>
                 </h2>
@@ -2023,8 +2020,8 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                   className="mx-auto mb-6 max-w-[515px] text-base leading-[1.5] text-white"
                 >
                   {language === 'en'
-                        ? 'Below will walk you through how you can realistically leverage on this powerful tool.'
-                        : '如下将引导您了解如何实际利用这个强大的工具。'
+                        ? 'Below will walk you through how you can realistically leverage on this powerful platform.'
+                        : '如下将引导您了解如何实际利用这个强大的平台。'
                   }
                 </p>
                 <a
@@ -2138,22 +2135,21 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
             className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]"
           >
             {language === "en"
-              ? "Historical Capital Flow Records for Stocks"
-              : "个股历史资金记录"}
+              ? "AI-Powered Career Pathways in Auto"
+              : "汽车行业AI智能职业成长路径"}
           </h2>
-          <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
-            {language === "en"
-              ? "We monitor the capital history of individual stocks every day, track the dynamics of smart money buying/selling individual stocks for investors, timely reflect low-frequency but high-value market signals, and provide effective reference for investors to make buying/selling decisions on individual stocks."
-              : "我们每天监控个股的资金历史记录，为投资者追踪聪明资金买卖个股的动态，及时反映低频但高价值的市场信号，为投资者个股的买入/卖出决策提供有效参考。"}
-          </p>
+<p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
+  {language === "en"
+    ? "We analyze your resume, skills, and training history to recommend high-growth roles in the automotive sector—ranging from EV systems to smart production. Based on our job-skill-course knowledge graph, the platform suggests the specific skills you need to acquire and offers tailored online courses, certification programs, and internal or external training to help you reach your target role efficiently."
+    : "我们通过分析你的简历、技能背景和学习记录，智能推荐汽车制造领域中高增长岗位（如电动车系统、智能制造等）。基于岗位-技能-课程的知识图谱，平台识别你需补充的关键能力，并匹配个性化的在线课程、认证项目及企业内外部培训，帮助你高效达成目标岗位。"}
+</p>
           <button
               type="button"
             className="mt-auto flex w-full rounded-md bg-primary py-3 px-9 justify-center font-medium text-white transition hover:bg-opacity-90"
-              onClick={() => navigate('/tutorialCapitalFlowHistory')}
             >
           {language === 'en'
-            ? 'How to Make Buy/Sell Decisions Timely from Capital Flow Signals?'
-            : '如何通过资金流信号及时做出买入/卖出决策?'}
+            ? 'How to know which AI Roles Are Easiest for Me to Transition Into?'
+            : '如何探索哪些AI岗位最适合我快速转型？'}
           </button>
         </div>
       </div>
@@ -2169,22 +2165,21 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
         <div className="text-center max-w-[600px]">
           <h2 className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]">
             {language === 'en'
-              ? 'Industry Capital-flow Heatmap'
-              : '行业资金热力图'}
+              ? 'Custom Microlearning, Built on Experience with AI'
+              : '基于经验的任务定制微培训'}
           </h2>
-          <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
-            {language === 'en'
-              ? 'The capital heat map displays the dynamics of capital flow direction and flow scale in different historical time dimensions of industry sectors and individual stocks up to now. Provide investors with a top-down approach to focus on industries and individual stocks of interest.'
-              : '资金热力图展示了行业板块及个股截止目前不同历史时间维度下资金流动方向和流动规模的动态。以从上至下的方式为投资者提供全局视角来锁定感兴趣的行业和个股。'}
-          </p>
+<p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
+  {language === 'en'
+    ? 'When AI-enabled workflows, automated systems, or experience-heavy tasks are introduced on the shop floor, our platform triggers targeted microlearning. These sessions are built from structured insights—captured from technician voice notes, repair walk-throughs, and tribal knowledge—transforming what was once passed by word of mouth into searchable, just-in-time learning.'
+    : '当车间上线AI流程、自动化系统或依赖口口相传经验的关键任务时，平台自动推送定制化微培训。这些课程由语音笔记、维修演示、经验记录转化而来，将曾经依靠“老人带新人”的知识沉淀为可搜索、可复用的即时学习资源。'}
+</p>
           <button
             type="button"
             className="mt-auto flex w-full rounded-md bg-primary py-3 px-9 justify-center font-medium text-white transition hover:bg-opacity-90"
-            onClick={() => navigate('/tutorialCapitalHeatMap')}
           >
             {language === 'en'
-              ? 'How to Discover Industries and Stocks that Capitals Favor?'
-              : '如何发现资金青睐的行业及其突出个股?'}
+              ? 'How unstructured content is transformed into structured courses?'
+              : '非结构化内容是如何转化成结构化课程的'}
           </button>
         </div>
       </div>
@@ -2201,6 +2196,8 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
     </div>
   </div>
 </div>
+
+
 
 <div className="container mb-20">
   <div className="wow fadeInUp" data-wow-delay=".2s">
@@ -2224,23 +2221,23 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
         <div className="text-center max-w-[600px]">
           <h2 className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]">
             {language === "en"
-              ? "Diversified Stock Strategies"
-              : "多元选股策略"}
+              ? "Trusted Public Learning & Certifications"
+              : "行业认可的通用课程与认证"}
           </h2>
-          <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
-            {language === "en"
-              ? "Through various financial and technical optional strategies such as capital flow patterns, stock turnover related index, and individual stock price gap signals for individual stocks, investors can timely screen out individual stocks that are favored by funds and have strong technical trends."
-              : "可通过个股资金流动模式，换手率相关指数，价格跳空信号等多种资金面和技术面的可选策略， 帮助投资者及时筛选出受到资金青睐和技术走势强势的个股。"}
-          </p>
+    <p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
+      {language === "en"
+        ? "We connect learners with public learning paths and certifications aligned with real manufacturing job requirements. Whether you’re targeting EV systems, mechatronics, or AI-assisted quality control, our platform maps you to curated training content from top education partners and OEM-approved standards."
+        : "平台连接公开学习路径与认证课程，帮助用户匹配真实制造业岗位所需能力。无论是电动车系统、机电一体化，还是AI质控岗位，我们都提供来自行业头部教育机构与主机厂标准对齐的精选课程资源。"}
+    </p>
         </div>
         <button
           type="button"
           className="mt-9 flex block w-full rounded-md bg-primary py-3 px-9 justify-center font-medium text-white transition hover:bg-opacity-90"
-          onClick={() => navigate('/tutorialCapitalStrategy')}
+
         >
           {language === 'en'
-            ? 'How to Screen out Stocks with High Trading Potential via Strategies?'
-            : '如何通过提供的策略筛选出存在高潜交易机会的标的？'
+            ? 'How Companies Accredit Public Courses and Certificates on the Platform'
+            : '企业如何认证平台的通用课程和证书？'
             }
         </button>
       </div>
@@ -2248,6 +2245,45 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
   </div>
 </div>
 
+      <div className="container mb-20">
+  <div className="wow fadeInUp" data-wow-delay=".2s">
+    <div className="-mx-4 flex flex-wrap items-center">
+      {/* Text Container */}
+      <div className="w-full px-4 lg:w-1/2 flex justify-center items-center order-2 lg:order-1">
+        <div className="text-center max-w-[600px]">
+          <h2 className="mb-5 text-3xl font-bold leading-tight text-dark dark:text-white sm:text-[40px] sm:leading-[1.2]">
+            {language === 'en'
+              ? 'Asynchronous Learning with Interaction'
+              : '沉浸式异步互动学习'}
+          </h2>
+<p className="mb-10 text-base leading-relaxed text-body-color dark:text-dark-6">
+    {language === 'en'
+      ? 'Instructors can enrich lessons with voice notes, video explanations, and in-slide annotations. Learners can highlight key concepts, leave questions, and interact through comments—creating a collaborative and flexible learning experience that fits real manufacturing workflows.'
+      : '教师可在课程中嵌入语音讲解、视频说明和关键批注，学习者可标记重点、提出问题、互相评论，打造贴合制造工作节奏的沉浸式互动学习体验。'}
+  </p>
+          <button
+            type="button"
+            className="mt-auto flex w-full rounded-md bg-primary py-3 px-9 justify-center font-medium text-white transition hover:bg-opacity-90"
+          >
+    {language === 'en'
+      ? 'See How Interactive Learning Works on Our Platform'
+      : '了解我们平台上的互动式学习体验'}
+          </button>
+        </div>
+      </div>
+      {/* Image Container */}
+      <div className="w-full px-4 lg:w-1/2 flex justify-center items-center order-1 lg:order-2">
+        <div className="overflow-hidden rounded-xl">
+          <img
+            src={language === 'en' ? engagementEN : engagementCN}
+            alt="about image"
+            className="max-w-full h-auto"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     </section>
 
     <section
@@ -2293,14 +2329,14 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]"
               >
                {language === 'en'
-                        ? 'What our Customers Say'
+                        ? 'What our Learners Say'
                         : '用户反馈'
                }
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
                 {language === 'en'
-                        ? 'We collected the true voices from our customers about their product experience. We also humbly welcome any suggestions for improvement!'
-                        : '我们收集了客户关于产品体验的真实反馈。我们也虚心欢迎任何改进建议！'
+                        ? 'We collected the true voices from our users about their platform experience. We also humbly welcome any suggestions for improvement!'
+                        : '我们收集了客户关于平台体验的真实反馈。我们也虚心欢迎任何改进建议！'
                 }
               </p>
             </div>
@@ -2337,12 +2373,12 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                     />
                   </div>
 
-                  <p className="mb-6 text-base text-body-color dark:text-dark-6">
-                    {language === 'en'
-                        ? '"Even I have my own fundamental analysis on target stocks, this tool gives a better P/L ratio for my trading decisions by indicating better times to buy/sell a stock, making me more confident in my decisions."'
-                        : '“即使我对目标股票有自己的基本面分析，这个工具也可以通过指示更好的买入/卖出股票时机，这让我的交易决策有更好的盈亏比，也让我对自己的决策更有信心。”'
-                        }
-                  </p>
+<p className="mb-6 text-base text-body-color dark:text-dark-6">
+{language === 'en'
+  ? '"I used to manually review root cause tickets across multiple systems. Since our company rolled out agent-based workflows, this platform’s AI Agent tutorials helped me quickly get up to speed. Now I can run data queries and perform analysis directly through agents—identifying root causes with context and shifting from reactive fixes to proactive decisions."'
+  : '“过去我需要在多个系统中人工审查 root cause 工单。最近公司上线了 Agent 工作流，通过这个平台的 AI Agent 辅导课程，我快速掌握了使用方式。现在我可以通过 Agent 执行数据查询和分析，更有上下文地定位根因，从被动救火转向主动决策。”'}
+</p>
+
 
                   <a href="#" className="flex items-center gap-4">
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
@@ -2361,8 +2397,8 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                       </h3>
                       <p className="text-xs text-body-secondary">
                       {language === 'en'
-                        ? 'from Hillhouse Capital'
-                        : '来自高瓴资本'
+                        ? 'from Tesla'
+                        : '来自特斯拉'
                         }
                         </p>
                     </div>
@@ -2393,12 +2429,12 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                     />
                   </div>
 
-                  <p className="mb-6 text-base text-body-color dark:text-dark-6">
-                    {language === 'en'
-                        ? '"A simple but useful tool. I now check this tool in on daily basis to see buying opportunity of stocks in my watch list. It also helps me to discover new buying opportunities of other stocks that I have no time to explore."'
-                        : '“算是一个简洁但有用的工具。我现在基本每天都会查看这个工具，看看我的观察列表中股票的买入机会。它还有帮助我发现其他我没有时间去发现的股票的买入机会。”'
-                        }
-                  </p>
+<p className="mb-6 text-base text-body-color dark:text-dark-6">
+  {language === 'en'
+    ? '"Before using this platform, I was unsure how to approach validation tasks for AI-based auto-parking systems. With its role-skill-course roadmap and targeted training, I quickly understood the testing workflow, safety standards, and real-world case insights—making my work more systematic and confident."'
+    : '“在使用这个平台之前，我并不清楚该如何系统地展开针对 AI 自动泊车系统的验证工作。通过平台提供的岗位-技能-课程路径和针对性培训，我快速理解了测试流程、安全标准和实战案例，现在工作更有体系感，也更有信心。”'}
+</p>
+
 
                   <a href="#" className="flex items-center gap-4">
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
@@ -2417,8 +2453,8 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                       </h3>
                       <p className="text-xs text-body-secondary">
                         {language === 'en'
-                        ? 'from one of the Mega 7 companies'
-                        : '来自7大美股高科技公司之一'
+                        ? 'from Ford'
+                        : '来自福特'
                         }
                       </p>
                     </div>
@@ -2453,12 +2489,12 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                     />
                   </div>
 
-                  <p className="mb-6 text-base text-body-color dark:text-dark-6">
-                  {language === 'en'
-                        ? '"Only have 2 years of stock investing experience, but thanks to this tool, I recently made 37% profit from two stocks by referring to the strategies in the tool. Love it!! "'
-                        : '“我也只有2年的股票投资经验，来来回回其实不亏不赚（心累）。不过我最近通过工具策略最后决定交易的两只股票里获利了37％，目前还留有少量仓位分批止盈。爱了这个工具！！”'
-                        }
-                  </p>
+<p className="mb-6 text-base text-body-color dark:text-dark-6">
+  {language === 'en'
+    ? '"As a computer science student with limited exposure to real manufacturing workflows, this platform helped me understand vision-based control use cases, pain points, and practical system architectures. The courses and industry-aligned training helped me land a vision team internship where I can now apply AI models directly to smart manufacturing scenarios."'
+    : '“作为一名计算机专业学生，我对真实制造流程了解有限。这个平台帮助我掌握了基于视觉控制的场景应用、核心痛点和实际系统架构。通过课程学习和面向制造的训练，我拿到了视觉算法团队的实习机会，现在能够把AI模型真正应用到智能制造场景中。”'}
+</p>
+
                   {language === 'en' ? <br /> : null}
 
                   <a href="#" className="flex items-center gap-4">
@@ -2474,12 +2510,12 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                       <h3
                         className="text-sm font-semibold text-dark dark:text-white"
                       >
-                        Sharon Q.
+                        Anish K.
                       </h3>
                       <p className="text-xs text-body-secondary">
                         {language === 'en'
-                        ? 'Finance student @NYU'
-                        : '纽约大学金融专业学生'
+                        ? 'Computer Science Student @USC'
+                        : '来自南加州大学'
                         }
                       </p>
                     </div>
@@ -2510,12 +2546,12 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                     />
                   </div>
 
-                  <p className="mb-6 text-base text-body-color dark:text-dark-6">
-                    {language === 'en'
-                        ? '"Interesting. I have not seen some similar products like this and it does provide some key signals I looked for. I am getting love to use it more often than the beginning. Also look forward to seeing the AI strategy. "'
-                        : '“挺有意思的，是个我之前没见过的产品，它确实直接提供了我之前不得不去花大量时间做分析才得到的一些重要分析结果。用了一段时间觉得挺方便的，也很期待开始用上AI版本的策略。”'
-                        }
-                  </p>
+<p className="mb-6 text-base text-body-color dark:text-dark-6">
+  {language === 'en'
+    ? '“I started by exploring data-related skills on this platform and found myself drawn to human-machine interaction topics. After completing a few learning paths on HMI analytics and UX evaluation, I realized I could combine my interest in behavior analysis with automotive. I’m now working with a team to study how users interact with EV interfaces—something I never thought I could do as a student from a community college.”'
+    : '“我最初只是探索平台上与数据分析相关的技能，却意外被人机交互的话题吸引。学完几个关于HMI分析与用户体验评估的课程后，我意识到我可以将对行为分析的兴趣和汽车行业结合起来。现在我参与一个团队项目，分析用户与电动车交互界面的使用行为——作为社区学院的学生，我从没想过能做到这一步。”'}
+</p>
+
 
                   <a href="#" className="flex items-center gap-4">
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-full">
@@ -2534,8 +2570,8 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                       </h3>
                       <p className="text-xs text-body-secondary">
                       {language === 'en'
-                        ? 'Individual investor with 6 years of experience'
-                        : '6年经验的个人全职投资者'
+                        ? 'Student @Evergreen Valley College '
+                        : '长青谷学院'
                       }
                       </p>
                     </div>
@@ -2599,7 +2635,7 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                 className="mx-auto max-w-[500px] text-base text-body-color dark:text-dark-6"
               >
                 {language === 'en'
-                        ? 'Below lists some frequently asked questions form our customers. We would love to answer other questions through contact.'
+                        ? 'Below lists some frequently asked questions form our users. We would love to answer other questions through contact.'
                         : '以下列出了我们客户的一些常见问题。我们也很乐意通过您的联系来回答其他问题'
                 }
               </p>
@@ -2633,13 +2669,12 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                 <h3
                   className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                 >
-                  {language === 'en'? 'How is this analysis & strategy tool different from others?': '这个分析&策略工具相比其他有什么不同？'}
-                </h3>
+{language === 'en' ? 'Who is this platform designed for?' : '这个平台主要面向哪些人群？'}                </h3>
                 <p className="text-base text-body-color dark:text-dark-6">
-                  {language === 'en'
-                  ? "This tool provides multi-perspective visualization of historical capital flows of industries/individual stocks that are not currently provided by commonly used stock trading applications on the market, algorithm analysis and strategy tools for pattern recognition such as capital flows, turnover rates, price gaps, etc. As a key leading indicator of stock price changes (rather than a delayed indicator), capital flow dynamics can provide effective reference for investors' actual buying and selling decisions."
-                  : '该工具提供目前市面上常用股票交易应用所未提供的行业/个股历史资金流相关的多维度可视化，资金流，换手率，价格跳空等模式识别的算法分析和策略工具。资金流动态作为一个关键的股价变化领先指标（而非延迟指标），能为投资者的实际买卖决策提供有效的参考。'
-                  }
+{language === 'en'
+  ? 'This platform is built for both aspiring and current professionals in the automotive manufacturing industry—including technicians, engineers, quality analysts, and operators—who want to transition into AI-assisted or cross-domain roles like EV systems, mechatronics, and HMI.'
+  : '该平台面向希望进入或已经在汽车制造行业工作的专业人士，包括技术员、工程师、质量分析师和操作员等，尤其适用于希望转型进入AI辅助或跨职能岗位（如电动系统、机电一体化、人因分析等）的用户。'}
+
                 </p>
               </div>
             </div>
@@ -2668,13 +2703,12 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                 <h3
                   className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                 >
-                  {language === 'en'? 'Is this tool suitable for a non-pro stock investors?': '非专业的股票投资者适合使用这个工具吗?'}
-                </h3>
+ {language === 'en' ? 'Can I earn certifications through this platform?' : '我可以通过这个平台获得认证吗？'}                </h3>
                 <p className="text-base text-body-color dark:text-dark-6">
-                  {language === 'en'
-                  ? 'This tool has no hard requirements for users’ investment experience. We encourage investors who have just entered the industry or have less than one year to join and get started through practical operations. We are also certain that this tool can significantly improve the success rate of decision-making and excess returns for those investors who have basic company fundamental analysis capabilities or continue to pay attention to company trends.'
-                  : '该工具对使用者的投资经验没有硬性要求，我们鼓励刚进入或1年以下投资者的加入并通过实操上手。更加肯定的是，该工具对于那些有基本面分析能力或持续关注公司动向的投资者来说，能够显著提升决策成功率和超额回报。'
-                  }
+{language === 'en'
+  ? 'Yes. We partner with top-tier institutions and automotive OEMs to offer certifications aligned with industry needs, covering domains such as EV battery systems, AI-assisted quality control, robotics, and HMI testing.'
+  : '可以。我们与顶级教育机构和汽车整车厂合作，提供符合行业需求的认证，覆盖电池系统、AI质量控制、机器人操作、人机界面测试等多个领域。'}
+
                 </p>
               </div>
             </div>
@@ -2705,13 +2739,12 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                 <h3
                   className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                 >
-                  {language === 'en'? 'Can I make buy/sell decisions based on signals immediately after joining the subscription?': '加入订阅后是否可以立即根据信号进行买卖决策？'}
-                </h3>
+{language === 'en' ? 'Can individuals contribute content?' : '导师或管理者可以上传内容吗？'}                </h3>
                 <p className="text-base text-body-color dark:text-dark-6">
-                  {language === 'en'
-                  ? 'We recommend that users try to take advantage of the free trial period provided to get familiar with the use of tools and the methodology behind before actual trading operations. Our tool is very suited for investors who prefer swing investments or long-term investments. A complete swing investment takes about 2-4 months. Therefore, investors need to wait patiently but timely identify the buy/sell signals of the investment target with their own independent thinking and analysis. With the support of tools, the goal is to get the maximum potential profit with the minimum number of trading operations.'
-                  : '我们建议用户在开始进行实际的买卖操作前尽可能利用我们提供的免费试用期悉知工具的使用方法和其背后的方法论。我们的工具很适合偏好波段投资或者长线短做的投资者。一段完整的波段投资大概需要2-4个月，所以需要投资者在自己的独立思考和分析下耐心等待且及时识别投资标的的买卖信号。在工具的支持下，用最少次数的交易操作获得最大的潜在收益。'
-                  }
+{language === 'en'
+  ? 'Yes. Instructors and team leads can create lesson plans, annotate slides, upload video/voice guidance, and monitor learner engagement. This supports enterprise-level knowledge transfer and workforce upskilling.'
+  : '可以。导师和管理者可以创建课程、标注PPT、上传语音/视频指导，并查看学习数据。这有助于企业内部知识传承和人才能力升级。'}
+
                 </p>
               </div>
             </div>
@@ -2740,13 +2773,13 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                 <h3
                   className="mb-6 text-xl font-semibold text-dark dark:text-white sm:text-2xl lg:text-xl xl:text-2xl"
                 >
-                  {language === 'en'? 'What is the average annual ROI I can expect by using this strategy tool?': '使用该工具平均可以带来多少年化投资回报率？'}
-                </h3>
+                {language === 'en' ? 'How is this platform different from MOOC?' : '这个平台和Coursera或LinkedIn Learning有什么不同？'}
+                 </h3>
                 <p className="text-base text-body-color dark:text-dark-6">
-                  {language === 'en'
-                  ? "It varies from person to person. New/junior investors often operate too frequently or rely too much on tool indicator signals without thinking and analyzing the fundamentals, and blindly buy/sell. We strongly recommend that users observe the correlation between the relevant signals and the stock price performance of the targeted stocks to determine the degree of reliance on signals for a single target. For users with strong learning ability or solid fundamental analysis, after becoming familiar with the functions of our tools, we won't be surprised that they can achieve an annualized return on investment of at least 50%."
-                  : '因人而异。新晋年轻的投资者往往会因为操作过频繁或者过分依赖工具指标信号对基本面不加思考和分析盲目进行标的的买卖操作。我们强烈建议用户对于投资的股票观察其相关信号和股价表现的相关性来决定在单个标的上对工具信号的依赖程度。对于学习能力较强或者有扎实的基本面分析的用户，在熟悉了我们的工具之后，我们并不会惊讶他能实现至少50%的年化投资回报率。'
-                  }
+{language === 'en'
+  ? 'Unlike general MOOC platforms, our platform is purpose-built for AI-powered manufacturing. We integrate real job tasks, production workflows, and skill ontologies specific to the auto sector—delivering learning that’s actionable and directly tied to industry performance.'
+  : '不同于通用的MOOC平台，我们专注于AI赋能下的制造业。平台内容与实际工作任务、生产流程、技能本体紧密结合，帮助用户实现可转化的学习成果，提升行业表现。'}
+
                 </p>
               </div>
             </div>
@@ -3361,7 +3394,7 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                   className="max-w-[260px] text-[35px] font-semibold leading-[1.14] text-dark dark:text-white"
                 >
                   {language === 'en'
-                        ? "Let's talk about your problem."
+                        ? "Let's talk about your concerns or questions."
                         : "让我们知道您的疑惑和问题。"
                   }
                 </h2>
@@ -3393,7 +3426,7 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                         }
                     </h5>
                     <p className="text-base text-body-color dark:text-dark-6">
-                      401 Broadway, 1st Floor, Los Angeles, the United States
+                      312 Gates Dr，Milpitas, CA95035, the United States
                     </p>
                   </div>
                 </div>
@@ -3420,10 +3453,10 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                         }
                     </h5>
                     <p className="text-base text-body-color dark:text-dark-6">
-                      info@alphahood.com
+                      info@smartmanulearn.ai
                     </p>
                     <p className="mt-1 text-base text-body-color dark:text-dark-6">
-                      contact@alphahood.com
+                      contact@smartmanulearn.ai
                     </p>
                   </div>
                 </div>
@@ -3704,21 +3737,21 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
                   <a
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
-                    {language === 'en'? "Capital Flow":"个股资金流记录"}
+                    {language === 'en'? "AI-Powered Career Pathways in Auto":"汽车行业AI智能职业成长路径"}
                   </a>
                 </li>
                 <li>
                   <a
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
-                    {language === 'en'? "Capital Heatmap":"行业资金热力图"}
+                    {language === 'en'? "Custom Microlearning":"基于经验的任务定制微培训"}
                   </a>
                 </li>
                 <li>
                   <a
                     className="mb-3 inline-block text-base text-gray-7 hover:text-primary"
                   >
-                    {language === 'en'? "Stock Strategy":"混合选股策略"}
+                    {language === 'en'? "Trusted Public Learning & Certifications":"行业认可的通用课程与认证"}
                   </a>
                 </li>
               </ul>
