@@ -58,7 +58,7 @@ const HomeHeader: React.FC = ({ isHomePage }) => {
               }`}
             >
               <ul className="block lg:flex 2xl:ml-25">
-                {['home', 'about', 'features', 'pricing', 'team', 'contact'].map((item) => (
+                {['home', 'about', 'features', 'team', 'contact'].map((item) => (
                   <li key={item} className="group relative">
                     <a
                       href={isHomePage?`#${item}`:`/`}

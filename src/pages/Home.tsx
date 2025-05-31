@@ -2286,36 +2286,6 @@ className="mb-9 text-xl font-medium text-white lg:text-xl sm:text-sm sm:leading-
 </div>
     </section>
 
-    <section
-      id="pricing"
-      className="relative z-20 overflow-hidden pb-12 pt-20 bg-wholeblack lg:pb-[90px] lg:pt-[120px]"
-    >
-      <div className="container mx-auto">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4">
-            <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-              <h2
-                className="mb-3 text-3xl font-bold text-white sm:text-4xl md:text-[40px] md:leading-[1.2]"
-              >
-                {language === 'en'
-                        ? 'Pricing Plan'
-                        : '工具套餐定价'
-                }
-              </h2>
-              <p className="text-base text-dark-6">
-                {language === 'en'
-                        ? "We're excited to offer all first-time users a free 7-day trial of the tool, as well as one-time or monthly subscription plans for users with different potential needs."
-                        : '我们很开心为所有首次用户提供免费7天试用工具的机会， 同时为不同潜在需求的用户提供一次性或按月订阅式的套餐计划。'
-                }
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <PricingTableOne language={language}/>
-
-      </div>
-    </section>
 
     <section
       id="testimonials"
